@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Lykke.Common.Api.Contract.Responses;
 using Lykke.Common.ApiLibrary.Contract;
 using Lykke.Service.IcoCommon.Core.Services;
@@ -16,17 +13,20 @@ namespace Lykke.Service.IcoCommon.Controllers
     {
         private ITransactionService _transactionService;
 
+        public TxController(ITransactionService transactionService)
+        {
+            _transactionService = transactionService;
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public async Task<IActionResult> HandleTransactions(HandleTransactionsRequest request)
+        public async Task<IActionResult> HandleTransactions([FromBody]TransactionModel[] transactions)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ErrorResponseFactory.Create(ModelState));
-            }
-
-            return Ok(await _transactionService.HandleTransactions());
+            else
+                return Ok(await _transactionService.HandleTransactions(transactions));
         }
     }
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Lykke.Service.IcoCommon.Core.Domain;
+﻿using System.ComponentModel.DataAnnotations;
+using Lykke.Service.IcoCommon.Core;
 
 namespace Lykke.Service.IcoCommon.Models.Addresses
 {
@@ -11,10 +8,10 @@ namespace Lykke.Service.IcoCommon.Models.Addresses
         [Required]
         public string Address { get; set; }
 
+        public CurrencyType Currency { get; set; }
+
         [Required]
         public string CampaignId { get; set; }
-
-        public CurrencyType CurrencyType { get; set; }
 
         [Required]
         [EmailAddress]

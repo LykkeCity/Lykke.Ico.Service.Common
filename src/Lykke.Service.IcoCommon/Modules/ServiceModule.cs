@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Common.Log;
+using Lykke.Service.IcoCommon.AzureRepositories;
+using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
 using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Core.Settings.ServiceSettings;
 using Lykke.Service.IcoCommon.Services;
@@ -45,6 +47,14 @@ namespace Lykke.Service.IcoCommon.Modules
 
             builder.RegisterType<ShutdownManager>()
                 .As<IShutdownManager>();
+
+            builder.RegisterType<PayInAddressRepository>()
+                .As<IPayInAddressRepository>()
+                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)));
+
+            builder.RegisterType<TransactionService>()
+                .As<ITransactionService>()
+                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Queue)));
 
             // TODO: Add your dependencies here
 

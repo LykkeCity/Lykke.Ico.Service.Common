@@ -3,5 +3,6 @@
     public class IcoCommonSettings
     {
         public DbSettings Db { get; set; }
+        public QueueSettings Queue { get; set; }
     }
 }
