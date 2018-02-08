@@ -1,8 +1,8 @@
 ﻿using System;
+using Autofac;
 using Common.Log;
-using Lykke.Service.IcoCommon.Client;
 
-namespace Autofac
+namespace Lykke.Service.IcoCommon.Client
 {
     public static class AutofacExtension
     {
