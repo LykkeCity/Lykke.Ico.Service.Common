@@ -7,4 +7,4 @@
 # Autorest version >= 1.2.2 - https://www.npmjs.com/package/autorest
 
 # Run this file if your use Execute as Script command of Visual Studio's PowerShell Tools extension
-autorest --input-file=http://localhost:5000/swagger/v1/swagger.json --csharp --output-folder=./client/Lykke.Service.IcoCommon.Client/AutorestClient --namespace=Lykke.Service.IcoCommon.Client.AutorestClient
+autorest --input-file=http://localhost:5000/swagger/v1/swagger.json --csharp --output-folder=./client/Lykke.Service.IcoCommon.Client --namespace=Lykke.Service.IcoCommon.Client

@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Lykke.Service.IcoCommon.Core;
+using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
 
 namespace Lykke.Service.IcoCommon.Models.Addresses
 {
-    public class CreateRequest
+    public class PayInAddressModel : IPayInAddressInfo
     {
         [Required]
         public string Address { get; set; }

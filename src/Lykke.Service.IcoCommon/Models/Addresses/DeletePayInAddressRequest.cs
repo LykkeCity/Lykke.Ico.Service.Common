@@ -3,7 +3,7 @@ using Lykke.Service.IcoCommon.Core;
 
 namespace Lykke.Service.IcoCommon.Models.Addresses
 {
-    public class DeleteRequest
+    public class DeletePayInAddressRequest
     {
         [Required]
         public string Address { get; set; }

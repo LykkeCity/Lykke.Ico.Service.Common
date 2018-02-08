@@ -54,7 +54,7 @@ namespace Lykke.Service.IcoCommon.Modules
 
             builder.RegisterType<TransactionService>()
                 .As<ITransactionService>()
-                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Queue)));
+                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Campaigns)));
 
             // TODO: Add your dependencies here
 

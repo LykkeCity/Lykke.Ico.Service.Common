@@ -5,6 +5,7 @@ using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Models.Tx;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Lykke.Service.IcoCommon.Controllers
 {
@@ -20,7 +21,7 @@ namespace Lykke.Service.IcoCommon.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
+        [SwaggerOperation(nameof(HandleTransactions))]
         public async Task<IActionResult> HandleTransactions([FromBody]TransactionModel[] transactions)
         {
             if (!ModelState.IsValid)

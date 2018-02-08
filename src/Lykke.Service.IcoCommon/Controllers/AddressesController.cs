@@ -8,6 +8,7 @@ using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
 using Lykke.Service.IcoCommon.Models.Addresses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Lykke.Service.IcoCommon.Controllers
 {
@@ -22,31 +23,35 @@ namespace Lykke.Service.IcoCommon.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public async Task<IActionResult> Create([FromBody]CreateRequest request)
+        [SwaggerOperation(nameof(AddPayInAddress))]
+        public async Task<IActionResult> AddPayInAddress([FromBody]PayInAddressModel address)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ErrorResponseFactory.Create(ModelState));
             }
 
-            await _addressRepository.UpsertAsync(request.Address, request.Currency, request.CampaignId, request.Email);
+            await _addressRepository.UpsertAsync(
+                address.Address, 
+                address.Currency, 
+                address.CampaignId, 
+                address.Email);
 
             return Ok();
         }
 
-        [HttpDelete()]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]
-        public async Task<IActionResult> Delete([FromBody]DeleteRequest request)
+        [HttpDelete]
+        [SwaggerOperation(nameof(DeletePayInAddress))]
+        public async Task<IActionResult> DeletePayInAddress([FromBody]DeletePayInAddressRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ErrorResponseFactory.Create(ModelState));
             }
 
-            await _addressRepository.DeleteAsync(request.Address, request.Currency);
+            await _addressRepository.DeleteAsync(
+                request.Address,
+                request.Currency);
 
             return Ok();
         }

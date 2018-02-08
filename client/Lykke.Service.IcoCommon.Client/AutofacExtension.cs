@@ -1,8 +1,8 @@
 ﻿using System;
-using Autofac;
 using Common.Log;
+using Lykke.Service.IcoCommon.Client;
 
-namespace Lykke.Service.IcoCommon.Client
+namespace Autofac
 {
     public static class AutofacExtension
     {
@@ -14,9 +14,13 @@ namespace Lykke.Service.IcoCommon.Client
             if (string.IsNullOrWhiteSpace(serviceUrl))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(serviceUrl));
 
-            builder.RegisterType<IcoCommonClient>()
-                .WithParameter("serviceUrl", serviceUrl)
-                .As<IIcoCommonClient>()
+            builder.RegisterType<IcoCommonAPI>()
+                .WithParameter(TypedParameter.From(new Uri(serviceUrl)))
+                .As<IIcoCommonAPI>()
+                .SingleInstance();
+
+            builder.RegisterType<IcoCommonServiceClient>()
+                .As<IIcoCommonServiceClient>()
                 .SingleInstance();
         }
 

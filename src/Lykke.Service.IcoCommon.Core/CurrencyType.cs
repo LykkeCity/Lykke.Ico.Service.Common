@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Lykke.Service.IcoCommon.Core
+namespace Lykke.Service.IcoCommon
 {
     public enum CurrencyType
     {
