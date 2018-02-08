@@ -35,9 +35,9 @@ namespace Lykke.Service.IcoCommon.Client
             await _api.AddPayInAddressAsync(address, cancellationToken);
         }
 
-        public async Task<int?> HandleTransactionsAsync(IList<TransactionModel> transactions, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<int> HandleTransactionsAsync(IList<TransactionModel> transactions, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await _api.HandleTransactionsAsync(transactions, cancellationToken);
+            return (await _api.HandleTransactionsAsync(transactions, cancellationToken)) ?? 0;
         }
     }
 }
