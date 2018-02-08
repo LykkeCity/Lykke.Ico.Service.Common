@@ -690,7 +690,7 @@
             Initializes a new instance of the TransactionModel class.
             </summary>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.Models.TransactionModel.#ctor(System.DateTime,Lykke.Service.IcoCommon.Client.Models.CurrencyType,System.Double,System.String,System.String,System.String,System.String)">
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.TransactionModel.#ctor(System.DateTime,Lykke.Service.IcoCommon.Client.Models.CurrencyType,System.Decimal,System.String,System.String,System.String,System.String)">
             <summary>
             Initializes a new instance of the TransactionModel class.
             </summary>
