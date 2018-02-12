@@ -52,7 +52,7 @@ namespace Lykke.Service.IcoCommon.Services
                 }
 
                 var queue = AzureQueueExt.Create(ConstantReloadingManager.From(campaignSettings.ConnectionString),
-                    $"{info.CampaignId.ToLowerInvariant()}-transactions");
+                    $"{info.CampaignId.ToLowerInvariant()}-transaction");
 
                 var rawMessage = tx
                     .AsQueueMessage(info.Email)
