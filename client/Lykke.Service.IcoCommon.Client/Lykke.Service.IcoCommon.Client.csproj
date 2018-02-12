@@ -28,4 +28,8 @@
     <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

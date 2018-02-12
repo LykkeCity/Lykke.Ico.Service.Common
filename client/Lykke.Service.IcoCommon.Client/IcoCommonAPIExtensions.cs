@@ -86,12 +86,40 @@ namespace Lykke.Service.IcoCommon.Client
                 (await operations.DeleteCampaignWithHttpMessagesAsync(campaignId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <summary>
+            /// Checks service is alive
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void GetSentEmails(this IIcoCommonAPI operations)
+            public static object IsAlive(this IIcoCommonAPI operations)
             {
-                operations.GetSentEmailsAsync().GetAwaiter().GetResult();
+                return operations.IsAliveAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Checks service is alive
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> IsAliveAsync(this IIcoCommonAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.IsAliveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static void GetSent(this IIcoCommonAPI operations)
+            {
+                operations.GetSentAsync().GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -100,70 +128,55 @@ namespace Lykke.Service.IcoCommon.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetSentEmailsAsync(this IIcoCommonAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetSentAsync(this IIcoCommonAPI operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.GetSentEmailsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.GetSentWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void SendEmail(this IIcoCommonAPI operations)
+            /// <param name='email'>
+            /// </param>
+            public static void Send(this IIcoCommonAPI operations, EmailModel email = default(EmailModel))
             {
-                operations.SendEmailAsync().GetAwaiter().GetResult();
+                operations.SendAsync(email).GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='email'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task SendEmailAsync(this IIcoCommonAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task SendAsync(this IIcoCommonAPI operations, EmailModel email = default(EmailModel), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.SendEmailWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.SendWithHttpMessagesAsync(email, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static void AddEmailTemplate(this IIcoCommonAPI operations)
+            /// <param name='emailTemplate'>
+            /// </param>
+            public static void AddOrUpdateTemplate(this IIcoCommonAPI operations, EmailTemplateModel emailTemplate = default(EmailTemplateModel))
             {
-                operations.AddEmailTemplateAsync().GetAwaiter().GetResult();
+                operations.AddOrUpdateTemplateAsync(emailTemplate).GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='emailTemplate'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task AddEmailTemplateAsync(this IIcoCommonAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task AddOrUpdateTemplateAsync(this IIcoCommonAPI operations, EmailTemplateModel emailTemplate = default(EmailTemplateModel), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.AddEmailTemplateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='campaignId'>
-            /// </param>
-            public static void GetCampaignTemplates(this IIcoCommonAPI operations, string campaignId)
-            {
-                operations.GetCampaignTemplatesAsync(campaignId).GetAwaiter().GetResult();
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='campaignId'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task GetCampaignTemplatesAsync(this IIcoCommonAPI operations, string campaignId, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.GetCampaignTemplatesWithHttpMessagesAsync(campaignId, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.AddOrUpdateTemplateWithHttpMessagesAsync(emailTemplate, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <param name='operations'>
@@ -193,32 +206,27 @@ namespace Lykke.Service.IcoCommon.Client
                 (await operations.GetTemplateWithHttpMessagesAsync(campaignId, templateId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
-            /// <summary>
-            /// Checks service is alive
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static object IsAlive(this IIcoCommonAPI operations)
+            /// <param name='campaignId'>
+            /// </param>
+            public static void GetCampaignTemplates(this IIcoCommonAPI operations, string campaignId)
             {
-                return operations.IsAliveAsync().GetAwaiter().GetResult();
+                operations.GetCampaignTemplatesAsync(campaignId).GetAwaiter().GetResult();
             }
 
-            /// <summary>
-            /// Checks service is alive
-            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='campaignId'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> IsAliveAsync(this IIcoCommonAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetCampaignTemplatesAsync(this IIcoCommonAPI operations, string campaignId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.IsAliveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
+                (await operations.GetCampaignTemplatesWithHttpMessagesAsync(campaignId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <param name='operations'>

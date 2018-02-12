@@ -2,9 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using Lykke.Service.IcoCommon.Core;
 using Lykke.Service.IcoCommon.Core.Domain.Transactions;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Lykke.Service.IcoCommon.Models.Tx
 {
+    [BindRequired]
     public class TransactionModel : ITransaction
     {
         [Required]

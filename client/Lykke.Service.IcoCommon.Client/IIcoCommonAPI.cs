@@ -64,13 +64,16 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse> DeleteCampaignWithHttpMessagesAsync(string campaignId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Checks service is alive
+        /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> GetSentEmailsWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<object>> IsAliveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -78,17 +81,9 @@ namespace Lykke.Service.IcoCommon.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> SendEmailWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> GetSentWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<HttpOperationResponse> AddEmailTemplateWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-
-        /// <param name='campaignId'>
+        /// <param name='email'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -96,7 +91,17 @@ namespace Lykke.Service.IcoCommon.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> GetCampaignTemplatesWithHttpMessagesAsync(string campaignId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> SendWithHttpMessagesAsync(EmailModel email = default(EmailModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <param name='emailTemplate'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> AddOrUpdateTemplateWithHttpMessagesAsync(EmailTemplateModel emailTemplate = default(EmailTemplateModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='campaignId'>
         /// </param>
@@ -110,16 +115,15 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse> GetTemplateWithHttpMessagesAsync(string campaignId, string templateId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
-        /// <summary>
-        /// Checks service is alive
-        /// </summary>
+        /// <param name='campaignId'>
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<object>> IsAliveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> GetCampaignTemplatesWithHttpMessagesAsync(string campaignId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='transactions'>
         /// </param>

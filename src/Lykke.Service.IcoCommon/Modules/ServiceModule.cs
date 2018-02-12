@@ -1,7 +1,11 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Common.Log;
+using Lykke.JobTriggers.Extenstions;
 using Lykke.Service.IcoCommon.AzureRepositories;
+using Lykke.Service.IcoCommon.AzureRepositories.Mail;
+using Lykke.Service.IcoCommon.AzureRepositories.PayInAddresses;
+using Lykke.Service.IcoCommon.Core.Domain.Mail;
 using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
 using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Core.Settings.ServiceSettings;
@@ -52,13 +56,34 @@ namespace Lykke.Service.IcoCommon.Modules
                 .As<IPayInAddressRepository>()
                 .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)));
 
+            builder.RegisterType<EmailTemplateRepository>()
+                .As<IEmailTemplateRepository>()
+                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)));
+
             builder.RegisterType<TransactionService>()
                 .As<ITransactionService>()
                 .WithParameter(TypedParameter.From(_settings.Nested(x => x.Campaigns)));
 
+            builder.RegisterType<RazorRenderService>()
+                .As<IRazorRenderService>();
+
+            builder.RegisterType<EmailService>()
+                .As<IEmailService>();
+
+            RegisterAzureQueueHandlers(builder);
+
             // TODO: Add your dependencies here
 
             builder.Populate(_services);
+        }
+
+        private void RegisterAzureQueueHandlers(ContainerBuilder builder)
+        {
+            builder.AddTriggers(
+                pool =>
+                {
+                    pool.AddDefaultConnection(_settings.Nested(x => x.Db.DataConnString));
+                });
         }
     }
 }

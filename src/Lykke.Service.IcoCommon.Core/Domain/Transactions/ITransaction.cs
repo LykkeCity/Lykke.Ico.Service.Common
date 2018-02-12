@@ -9,7 +9,7 @@ namespace Lykke.Service.IcoCommon.Core.Domain.Transactions
         string TransactionId { get; }
         string PayInAddress { get; }
         DateTime CreatedUtc { get; }
-        CurrencyType Currency { get;}
+        CurrencyType Currency { get; }
         decimal Amount { get; }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Lykke.Service.IcoCommon.Models.Addresses
 {
+    [BindRequired]
     public class PayInAddressModel : IPayInAddressInfo
     {
         [Required]

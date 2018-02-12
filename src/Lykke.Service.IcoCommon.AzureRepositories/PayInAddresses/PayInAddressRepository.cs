@@ -7,7 +7,7 @@ using Lykke.Service.IcoCommon.Core;
 using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
 using Lykke.SettingsReader;
 
-namespace Lykke.Service.IcoCommon.AzureRepositories
+namespace Lykke.Service.IcoCommon.AzureRepositories.PayInAddresses
 {
     public class PayInAddressRepository : IPayInAddressRepository
     {

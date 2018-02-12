@@ -6,6 +6,7 @@
     <Version>1.0.1</Version>
     <AssemblyName>Lykke.Service.IcoCommon</AssemblyName>
     <RootNamespace>Lykke.Service.IcoCommon</RootNamespace>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -29,6 +30,7 @@
   <ItemGroup>
     <PackageReference Include="Lykke.Common" Version="4.4.2" />
     <PackageReference Include="Lykke.Common.ApiLibrary" Version="1.3.1" />
+    <PackageReference Include="Lykke.JobTriggers" Version="1.2.0" />
     <PackageReference Include="Lykke.Logs" Version="3.6.0" />
     <PackageReference Include="Lykke.Service.Session" Version="1.0.33" />
     <PackageReference Include="Lykke.SettingsReader" Version="1.1.4" />

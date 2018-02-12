@@ -6,6 +6,8 @@ namespace Lykke.Service.IcoCommon.Core.Domain.PayInAddresses
 {
     public interface IPayInAddressInfo
     {
+        CurrencyType Currency { get; }
+        string Address { get; }
         string CampaignId { get; }
         string Email { get; }
     }
