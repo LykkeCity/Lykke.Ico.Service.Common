@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
+using Common.Log;
 using Lykke.Service.IcoCommon.Core.Domain.Mail;
 using Lykke.Service.IcoCommon.Core.Services;
 using RazorLight;
@@ -10,30 +12,40 @@ namespace Lykke.Service.IcoCommon.Services
 {
     public class EmailService : IEmailService
     {
-        private readonly ISmtpService _smtpService;
-        private readonly IEmailTemplateRepository _emailTemplateRepository;
-        private readonly IRazorRenderService _razorRenderService;
+        private readonly ILog _log;
+        private readonly IEmailTemplateService _emailTemplateService;
+        private readonly IEmailRepository _emailRepository;
 
-        public EmailService(/*ISmtpService smtpService,*/ IEmailTemplateRepository emailTemplateRepository, IRazorRenderService razorRenderService)
+        public EmailService(IEmailTemplateService emailTemplateService, IEmailRepository emailRepository)
         {
-            _emailTemplateRepository = emailTemplateRepository;
-            _razorRenderService = razorRenderService;
+            _emailTemplateService = emailTemplateService;
+            _emailRepository = emailRepository;
         }
 
-        public async Task EnqueueEmail(IEmail email)
+        public async Task PushEmailToQueueAsync(IEmailData emailData)
         {
-            await SendEmail(email);
+            await _emailRepository.EnqueueAsync(emailData);
+        }
+
+        public async Task SendEmailAsync(IEmailData emailData)
+        {
+            await SendEmail(await _emailTemplateService.RenderEmailAsync(emailData));           
         }
 
         public async Task SendEmail(IEmail email)
         {
-            var body = await _razorRenderService.Render(email.CampaignId, email.TemplateId, email.Params);
+            // TODO: smtp send
+
+            await _emailRepository.InsertAsync(email);
+
+            await _log.WriteInfoAsync(nameof(SendEmailAsync),
+                $"Campaign: {email.CampaignId}, Template: {email.TemplateId}, To: {email.To}",
+                $"Email sent to {email.To}");
         }
 
-        public async Task SaveEmailTemplate(IEmailTemplate emailTemplate)
+        public Task<IEmail[]> GetSentEmailsAsync(string to, string campaignId)
         {
-            await _emailTemplateRepository.Upsert(emailTemplate.CampaignId, emailTemplate.TemplateId, emailTemplate.Subject, emailTemplate.Body);
-            await _razorRenderService.UpdateCache(emailTemplate.CampaignId, emailTemplate.TemplateId);
+            throw new NotImplementedException();
         }
     }
 }

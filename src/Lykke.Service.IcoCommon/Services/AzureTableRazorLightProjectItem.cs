@@ -5,11 +5,11 @@ using RazorLight.Razor;
 
 namespace Lykke.Service.IcoCommon.Services
 {
-    public class AzureRazorLightProjectItem : RazorLightProjectItem
+    public class AzureTableRazorLightProjectItem : RazorLightProjectItem
     {
         private IEmailTemplate _template;
 
-        public AzureRazorLightProjectItem(IEmailTemplate template)
+        public AzureTableRazorLightProjectItem(IEmailTemplate template)
         {
             _template = template;
         }

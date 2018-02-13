@@ -6,12 +6,12 @@ using RazorLight.Razor;
 
 namespace Lykke.Service.IcoCommon.Services
 {
-    public class AzureRazorLightProject : RazorLightProject
+    public class AzureTableRazorLightProject : RazorLightProject
     {
         private readonly string _campaignId;
         private readonly IEmailTemplateRepository _templateRepository;
 
-        public AzureRazorLightProject(string campaignId, IEmailTemplateRepository templateRepository)
+        public AzureTableRazorLightProject(string campaignId, IEmailTemplateRepository templateRepository)
         {
             _campaignId = campaignId;
             _templateRepository = templateRepository;
@@ -24,7 +24,7 @@ namespace Lykke.Service.IcoCommon.Services
 
         public async override Task<RazorLightProjectItem> GetItemAsync(string templateId)
         {
-            return new AzureRazorLightProjectItem(await _templateRepository.Get(_campaignId, templateId));
+            return new AzureTableRazorLightProjectItem(await _templateRepository.GetAsync(_campaignId, templateId));
         }
     }
 }

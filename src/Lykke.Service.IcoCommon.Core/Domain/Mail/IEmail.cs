@@ -6,9 +6,12 @@ namespace Lykke.Service.IcoCommon.Core.Domain.Mail
 {
     public interface IEmail
     {
-        string EmailTo { get; }
+        DateTime SentUtc { get; }
+        string To { get; }
+        string Subject { get; }
+        string Body { get; }
         string CampaignId { get; }
         string TemplateId { get; }
-        object Params { get; }
+        Dictionary<string, byte[]> Attachments { get; set; }
     }
 }

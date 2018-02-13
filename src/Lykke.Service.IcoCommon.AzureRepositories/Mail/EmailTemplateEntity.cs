@@ -12,13 +12,45 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
     [ValueTypeMergingStrategyAttribute(ValueTypeMergingStrategy.UpdateAlways)]
     public class EmailTemplateEntity : AzureTableEntity, IEmailTemplate
     {
-        [IgnoreProperty]
-        public string CampaignId { get => PartitionKey; }
+        public static string GetPartitionKey(string campaignId) => campaignId;
+        public static string GetRowKey(string templateId) => templateId;
+
+        public EmailTemplateEntity()
+        {
+        }
+
+        public EmailTemplateEntity(IEmailTemplate emailTemplate)
+        {
+            CampaignId = emailTemplate.CampaignId;
+            TemplateId = emailTemplate.TemplateId;
+            Body = emailTemplate.Body;
+            Subject = emailTemplate.Subject;
+        }
 
         [IgnoreProperty]
-        public string TemplateId { get => RowKey; }
+        public string CampaignId
+        {
+            get => PartitionKey;
+            set => PartitionKey = GetPartitionKey(value);
+        }
 
-        public string Subject { get; set; }
-        public string Body { get; set; }
+        [IgnoreProperty]
+        public string TemplateId
+        {
+            get => RowKey;
+            set => RowKey = GetRowKey(value);
+        }
+
+        public string Body
+        {
+            get;
+            set;
+        }
+
+        public string Subject
+        {
+            get;
+            set;
+        }
     }
 }

@@ -64,8 +64,9 @@ namespace Lykke.Service.IcoCommon.Modules
                 .As<ITransactionService>()
                 .WithParameter(TypedParameter.From(_settings.Nested(x => x.Campaigns)));
 
-            builder.RegisterType<RazorRenderService>()
-                .As<IRazorRenderService>();
+            builder.RegisterType<EmailTemplateService>()
+                .As<IEmailTemplateService>()
+                .SingleInstance();
 
             builder.RegisterType<EmailService>()
                 .As<IEmailService>();

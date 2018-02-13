@@ -25,9 +25,13 @@ namespace Lykke.Service.IcoCommon.Controllers
         public async Task<IActionResult> HandleTransactions([FromBody]TransactionModel[] transactions)
         {
             if (!ModelState.IsValid)
+            {
                 return BadRequest(ErrorResponseFactory.Create(ModelState));
-            else
-                return Ok(await _transactionService.HandleTransactions(transactions));
+            }
+
+            var payInCount = await _transactionService.HandleTransactionsAsync(transactions);
+
+            return Ok(payInCount);
         }
     }
 }

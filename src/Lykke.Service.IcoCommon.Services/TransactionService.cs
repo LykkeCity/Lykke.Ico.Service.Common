@@ -26,7 +26,7 @@ namespace Lykke.Service.IcoCommon.Services
             _settings = settings;
         }
 
-        public async Task<int> HandleTransactions(ITransaction[] transactions)
+        public async Task<int> HandleTransactionsAsync(ITransaction[] transactions)
         {
             var count = 0;
 
@@ -48,7 +48,8 @@ namespace Lykke.Service.IcoCommon.Services
 
                 if (!_settings.CurrentValue.TryGetValue(info.CampaignId, out campaignSettings))
                 {
-                    throw new InvalidOperationException($"Configuration for campaign \"{info.CampaignId}\" not found");
+                    throw new InvalidOperationException(
+                        $"Configuration for campaign \"{info.CampaignId}\" not found");
                 }
 
                 var queue = AzureQueueExt.Create(ConstantReloadingManager.From(campaignSettings.ConnectionString),

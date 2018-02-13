@@ -1,11 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Lykke.Service.IcoCommon.Core.Domain.Mail;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Lykke.Service.IcoCommon.Models.Mail
 {
     public class EmailTemplateModel : IEmailTemplate
     {
+        public EmailTemplateModel()
+        {
+        }
+
+        public EmailTemplateModel(IEmailTemplate emailTemplate)
+        {
+            CampaignId = emailTemplate.CampaignId;
+            TemplateId = emailTemplate.TemplateId;
+            Body = emailTemplate.Body;
+            Subject = emailTemplate.Subject;
+        }
+
         [Required]
         public string CampaignId { get; set; }
 

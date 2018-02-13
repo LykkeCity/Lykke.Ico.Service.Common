@@ -5,6 +5,6 @@ namespace Lykke.Service.IcoCommon.Core.Services
 {
     public interface ITransactionService
     {
-        Task<int> HandleTransactions(ITransaction[] transactions);
+        Task<int> HandleTransactionsAsync(ITransaction[] transactions);
     }
 }

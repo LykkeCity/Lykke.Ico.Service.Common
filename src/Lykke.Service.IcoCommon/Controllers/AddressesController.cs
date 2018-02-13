@@ -24,34 +24,30 @@ namespace Lykke.Service.IcoCommon.Controllers
 
         [HttpPost]
         [SwaggerOperation(nameof(AddPayInAddress))]
-        public async Task<IActionResult> AddPayInAddress([FromBody]PayInAddressModel address)
+        public async Task<IActionResult> AddPayInAddress([FromBody]PayInAddressModel payInAddress)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ErrorResponseFactory.Create(ModelState));
             }
 
-            await _addressRepository.UpsertAsync(
-                address.Address, 
-                address.Currency, 
-                address.CampaignId, 
-                address.Email);
+            await _addressRepository.UpsertAsync(payInAddress);
 
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("{address}/{currency}")]
         [SwaggerOperation(nameof(DeletePayInAddress))]
-        public async Task<IActionResult> DeletePayInAddress([FromBody]DeletePayInAddressRequest request)
+        public async Task<IActionResult> DeletePayInAddress(
+            [FromRoute]string address, 
+            [FromRoute]CurrencyType currency)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ErrorResponseFactory.Create(ModelState));
             }
 
-            await _addressRepository.DeleteAsync(
-                request.Address,
-                request.Currency);
+            await _addressRepository.DeleteAsync(address, currency);
 
             return Ok();
         }

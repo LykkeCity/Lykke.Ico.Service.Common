@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace Lykke.Service.IcoCommon.Models.Addresses
 {
     [BindRequired]
-    public class PayInAddressModel : IPayInAddressInfo
+    public class PayInAddressModel : IPayInAddress
     {
         [Required]
         public string Address { get; set; }
