@@ -5,8 +5,10 @@ using Lykke.JobTriggers.Extenstions;
 using Lykke.Service.IcoCommon.AzureRepositories;
 using Lykke.Service.IcoCommon.AzureRepositories.Mail;
 using Lykke.Service.IcoCommon.AzureRepositories.PayInAddresses;
+using Lykke.Service.IcoCommon.AzureRepositories.Transactions;
 using Lykke.Service.IcoCommon.Core.Domain.Mail;
 using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
+using Lykke.Service.IcoCommon.Core.Domain.Transactions;
 using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Core.Settings.ServiceSettings;
 using Lykke.Service.IcoCommon.Services;
@@ -56,20 +58,33 @@ namespace Lykke.Service.IcoCommon.Modules
                 .As<IPayInAddressRepository>()
                 .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)));
 
+            builder.RegisterType<EmailRepository>()
+                .As<IEmailRepository>()
+                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)));
+
             builder.RegisterType<EmailTemplateRepository>()
                 .As<IEmailTemplateRepository>()
                 .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)));
 
-            builder.RegisterType<TransactionService>()
-                .As<ITransactionService>()
-                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Campaigns)));
+            builder.RegisterType<TransactionRepository>()
+                .As<ITransactionRepository>()
+                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)));
+
+            builder.RegisterType<SmtpService>()
+                .As<ISmtpService>()
+                .WithParameter(TypedParameter.From(_settings.CurrentValue.DefaultSmtp));
 
             builder.RegisterType<EmailTemplateService>()
                 .As<IEmailTemplateService>()
                 .SingleInstance();
 
             builder.RegisterType<EmailService>()
-                .As<IEmailService>();
+                .As<IEmailService>()
+                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Campaigns)));
+
+            builder.RegisterType<TransactionService>()
+                .As<ITransactionService>()
+                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Campaigns)));
 
             RegisterAzureQueueHandlers(builder);
 

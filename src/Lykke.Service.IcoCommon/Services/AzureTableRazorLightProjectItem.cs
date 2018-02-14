@@ -11,7 +11,7 @@ namespace Lykke.Service.IcoCommon.Services
 
         public AzureTableRazorLightProjectItem(IEmailTemplate template)
         {
-            _template = template;
+            _template = template ?? throw new System.ArgumentNullException(nameof(template));
         }
 
         public override string Key { get => _template.TemplateId; }

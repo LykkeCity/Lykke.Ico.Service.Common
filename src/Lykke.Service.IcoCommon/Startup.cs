@@ -8,7 +8,9 @@ using Lykke.AzureStorage.Tables.Entity.Metamodel;
 using Lykke.AzureStorage.Tables.Entity.Metamodel.Providers;
 using Lykke.Common.ApiLibrary.Middleware;
 using Lykke.Common.ApiLibrary.Swagger;
+using Lykke.JobTriggers.Triggers;
 using Lykke.Logs;
+using Lykke.Logs.Slack;
 using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Core.Settings;
 using Lykke.Service.IcoCommon.Modules;
@@ -23,6 +25,9 @@ namespace Lykke.Service.IcoCommon
 {
     public class Startup
     {
+        private TriggerHost _triggerHost;
+        private Task _triggerHostTask;
+
         public IHostingEnvironment Environment { get; }
         public IContainer ApplicationContainer { get; private set; }
         public IConfigurationRoot Configuration { get; }
@@ -33,8 +38,8 @@ namespace Lykke.Service.IcoCommon
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddEnvironmentVariables();
-            Configuration = builder.Build();
 
+            Configuration = builder.Build();
             Environment = env;
         }
 
@@ -117,6 +122,10 @@ namespace Lykke.Service.IcoCommon
 
                 await ApplicationContainer.Resolve<IStartupManager>().StartAsync();
 
+                _triggerHost = new TriggerHost(new AutofacServiceProvider(ApplicationContainer));
+
+                _triggerHostTask = _triggerHost.Start();
+
                 await Log.WriteMonitorAsync("", $"Env: {Program.EnvInfo}", "Started");
             }
             catch (Exception ex)
@@ -133,6 +142,10 @@ namespace Lykke.Service.IcoCommon
                 // NOTE: Service still can recieve and process requests here, so take care about it if you add logic here.
 
                 await ApplicationContainer.Resolve<IShutdownManager>().StopAsync();
+
+                _triggerHost?.Cancel();
+
+                await _triggerHostTask;
             }
             catch (Exception ex)
             {
@@ -209,6 +222,8 @@ namespace Lykke.Service.IcoCommon
             azureStorageLogger.Start();
 
             aggregateLogger.AddLog(azureStorageLogger);
+
+            aggregateLogger.AddLog(LykkeLogToSlack.Create(slackService, "Ico", LogLevel.Error | LogLevel.FatalError));
 
             return aggregateLogger;
         }

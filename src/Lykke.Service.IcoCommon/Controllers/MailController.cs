@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using AzureStorage.Queue;
-using Common;
-using Common.Log;
-using Lykke.Common.Api.Contract.Responses;
 using Lykke.Common.ApiLibrary.Contract;
-using Lykke.JobTriggers.Triggers.Attributes;
-using Lykke.JobTriggers.Triggers.Bindings;
 using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Models.Mail;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Lykke.Service.IcoCommon.Controllers
@@ -58,8 +46,8 @@ namespace Lykke.Service.IcoCommon.Controllers
         }
 
         [HttpPost("templates")]
-        [SwaggerOperation(nameof(AddOrUpdateTemplate))]
-        public async Task<IActionResult> AddOrUpdateTemplate([FromBody]EmailTemplateModel emailTemplate)
+        [SwaggerOperation(nameof(AddOrUpdateEmailTemplate))]
+        public async Task<IActionResult> AddOrUpdateEmailTemplate([FromBody]EmailTemplateModel emailTemplate)
         {
             if (!ModelState.IsValid)
             {
@@ -72,8 +60,8 @@ namespace Lykke.Service.IcoCommon.Controllers
         }
 
         [HttpGet("templates/{campaignId}/{templateId}")]
-        [SwaggerOperation(nameof(GetTemplate))]
-        public async Task<EmailTemplateModel> GetTemplate(
+        [SwaggerOperation(nameof(GetEmailTemplate))]
+        public async Task<EmailTemplateModel> GetEmailTemplate(
             [FromRoute]string campaignId,
             [FromRoute]string templateId)
         {
@@ -81,8 +69,8 @@ namespace Lykke.Service.IcoCommon.Controllers
         }
 
         [HttpGet("templates/{campaignId}")]
-        [SwaggerOperation(nameof(GetCampaignTemplates))]
-        public async Task<EmailTemplateModel[]> GetCampaignTemplates(
+        [SwaggerOperation(nameof(GetCampaignEmailTemplates))]
+        public async Task<EmailTemplateModel[]> GetCampaignEmailTemplates(
             [FromRoute]string campaignId)
         {
             return (await _emailTemplateService.GetCampaignTemplatesAsync(campaignId))

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
-using Common;
 using Common.Log;
 using Lykke.Service.IcoCommon.Core.Domain.Mail;
 using Lykke.Service.IcoCommon.Core.Services;
-using RazorLight;
+using Lykke.Service.IcoCommon.Core.Settings.ServiceSettings;
+using Lykke.SettingsReader;
 
 namespace Lykke.Service.IcoCommon.Services
 {
@@ -15,26 +15,55 @@ namespace Lykke.Service.IcoCommon.Services
         private readonly ILog _log;
         private readonly IEmailTemplateService _emailTemplateService;
         private readonly IEmailRepository _emailRepository;
+        private readonly ISmtpService _smtpService;
+        private readonly IReloadingManager<Dictionary<string, CampaignSettings>> _settings;
+        private readonly SmtpSettings _defaultSmtpSettings;
 
-        public EmailService(IEmailTemplateService emailTemplateService, IEmailRepository emailRepository)
+        public EmailService(
+            ILog log, 
+            IEmailTemplateService emailTemplateService,
+            IEmailRepository emailRepository,
+            ISmtpService smtpService,
+            IReloadingManager<Dictionary<string, CampaignSettings>> settings)
         {
+            _log = log;
             _emailTemplateService = emailTemplateService;
             _emailRepository = emailRepository;
+            _smtpService = smtpService;
+            _settings = settings;
         }
 
         public async Task PushEmailToQueueAsync(IEmailData emailData)
         {
-            await _emailRepository.EnqueueAsync(emailData);
+            await _emailRepository.PushToQueueAsync(emailData);
+
+            await _log.WriteInfoAsync(nameof(PushEmailToQueueAsync),
+                $"Campaign: {emailData.CampaignId}, Template: {emailData.TemplateId}, To: {emailData.To}",
+                $"Email enqueued");
         }
 
         public async Task SendEmailAsync(IEmailData emailData)
         {
-            await SendEmail(await _emailTemplateService.RenderEmailAsync(emailData));           
+            await SendEmailAsync(await _emailTemplateService.RenderEmailAsync(emailData));           
         }
 
-        public async Task SendEmail(IEmail email)
+        public async Task SendEmailAsync(IEmail email)
         {
-            // TODO: smtp send
+            CampaignSettings campaignSettings = null;
+
+            if (!_settings.CurrentValue.TryGetValue(email.CampaignId, out campaignSettings))
+            {
+                await _settings.Reload();
+            }
+
+            if (!_settings.CurrentValue.TryGetValue(email.CampaignId, out campaignSettings))
+            {
+                await _log.WriteWarningAsync(nameof(SendEmailAsync),
+                    $"Campaign: {email.CampaignId}, Template: {email.TemplateId}, To: {email.To}",
+                    $"Configuration for campaign \"{email.CampaignId}\" not found. Default SMTP settings are used to send the email.");
+            }
+
+            await _smtpService.SendAsync(email, campaignSettings?.Smtp);
 
             await _emailRepository.InsertAsync(email);
 
@@ -43,9 +72,9 @@ namespace Lykke.Service.IcoCommon.Services
                 $"Email sent to {email.To}");
         }
 
-        public Task<IEmail[]> GetSentEmailsAsync(string to, string campaignId)
+        public async Task<IEmail[]> GetSentEmailsAsync(string to, string campaignId = null)
         {
-            throw new NotImplementedException();
+            return (await _emailRepository.GetAsync(to, campaignId)).ToArray();
         }
     }
 }

@@ -7,7 +7,8 @@ namespace Lykke.Service.IcoCommon.Core.Domain.Mail
 {
     public interface IEmailRepository
     {
+        Task PushToQueueAsync(IEmailData emailData);
         Task InsertAsync(IEmail email);
-        Task EnqueueAsync(IEmailData emailData);
+        Task<IEnumerable<IEmail>> GetAsync(string to, string campaignId);
     }
 }
