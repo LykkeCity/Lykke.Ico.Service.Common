@@ -31,7 +31,15 @@ namespace Lykke.Service.IcoCommon.Controllers
                 return BadRequest(ErrorResponseFactory.Create(ModelState));
             }
 
-            await _addressRepository.UpsertAsync(payInAddress);
+            var entity = await _addressRepository.GetAsync(payInAddress.Address, payInAddress.Currency);
+
+            if (entity != null)
+            {
+                return StatusCode(StatusCodes.Status409Conflict, 
+                    ErrorResponse.Create($"Pay-in address {payInAddress.Address} is already in use"));
+            }
+
+            await _addressRepository.InsertAsync(payInAddress);
 
             return Ok();
         }

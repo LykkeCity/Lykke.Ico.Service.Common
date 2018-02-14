@@ -22,12 +22,12 @@ namespace Lykke.Service.IcoCommon.Client.Models
         /// <summary>
         /// Initializes a new instance of the EmailTemplateModel class.
         /// </summary>
-        public EmailTemplateModel(string campaignId = default(string), string templateId = default(string), string subject = default(string), string body = default(string))
+        public EmailTemplateModel(string campaignId = default(string), string templateId = default(string), string body = default(string), string subject = default(string))
         {
             CampaignId = campaignId;
             TemplateId = templateId;
-            Subject = subject;
             Body = body;
+            Subject = subject;
             CustomInit();
         }
 
@@ -48,13 +48,13 @@ namespace Lykke.Service.IcoCommon.Client.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Subject")]
-        public string Subject { get; set; }
+        [JsonProperty(PropertyName = "Body")]
+        public string Body { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Body")]
-        public string Body { get; set; }
+        [JsonProperty(PropertyName = "Subject")]
+        public string Subject { get; set; }
 
     }
 }

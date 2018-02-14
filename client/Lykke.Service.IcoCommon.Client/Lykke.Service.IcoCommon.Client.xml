@@ -75,7 +75,7 @@
             </summary>
         </member>
         <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.AddPayInAddressWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.PayInAddressModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
-            <param name='address'>
+            <param name='payInAddress'>
             </param>
             <param name='customHeaders'>
             Headers that will be added to request.
@@ -90,8 +90,11 @@
             A response object containing the response body and response headers.
             </return>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.DeletePayInAddressWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.DeletePayInAddressRequest,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
-            <param name='request'>
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.DeletePayInAddressWithHttpMessagesAsync(System.String,Lykke.Service.IcoCommon.Client.Models.CurrencyType,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='address'>
+            </param>
+            <param name='currency'>
+            Possible values include: 'BTC', 'ETH', 'USD'
             </param>
             <param name='customHeaders'>
             Headers that will be added to request.
@@ -101,6 +104,12 @@
             </param>
             <exception cref="T:Microsoft.Rest.HttpOperationException">
             Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown when a required parameter is null
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when a required parameter is null
             </exception>
             <return>
             A response object containing the response body and response headers.
@@ -148,22 +157,8 @@
             A response object containing the response body and response headers.
             </return>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.GetSentWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
-            <param name='customHeaders'>
-            Headers that will be added to request.
-            </param>
-            <param name='cancellationToken'>
-            The cancellation token.
-            </param>
-            <exception cref="T:Microsoft.Rest.HttpOperationException">
-            Thrown when the operation returned an invalid status code
-            </exception>
-            <return>
-            A response object containing the response body and response headers.
-            </return>
-        </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.SendWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.EmailModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
-            <param name='email'>
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.SendEmailWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.EmailDataModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='emailData'>
             </param>
             <param name='customHeaders'>
             Headers that will be added to request.
@@ -178,7 +173,34 @@
             A response object containing the response body and response headers.
             </return>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.AddOrUpdateTemplateWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.GetSentEmailsWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='to'>
+            </param>
+            <param name='campaignId'>
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown when a required parameter is null
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when a required parameter is null
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.AddOrUpdateEmailTemplateWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <param name='emailTemplate'>
             </param>
             <param name='customHeaders'>
@@ -194,7 +216,7 @@
             A response object containing the response body and response headers.
             </return>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.GetTemplateWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.GetEmailTemplateWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <param name='campaignId'>
             </param>
             <param name='templateId'>
@@ -208,6 +230,9 @@
             <exception cref="T:Microsoft.Rest.HttpOperationException">
             Thrown when the operation returned an invalid status code
             </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
             <exception cref="T:Microsoft.Rest.ValidationException">
             Thrown when a required parameter is null
             </exception>
@@ -218,7 +243,7 @@
             A response object containing the response body and response headers.
             </return>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.GetCampaignTemplatesWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.GetCampaignEmailTemplatesWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <param name='campaignId'>
             </param>
             <param name='customHeaders'>
@@ -229,6 +254,9 @@
             </param>
             <exception cref="T:Microsoft.Rest.HttpOperationException">
             Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
             </exception>
             <exception cref="T:Microsoft.Rest.ValidationException">
             Thrown when a required parameter is null
@@ -268,31 +296,37 @@
             <param name='operations'>
             The operations group for this extension method.
             </param>
-            <param name='address'>
+            <param name='payInAddress'>
             </param>
         </member>
         <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.AddPayInAddressAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.PayInAddressModel,System.Threading.CancellationToken)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
-            <param name='address'>
+            <param name='payInAddress'>
             </param>
             <param name='cancellationToken'>
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.DeletePayInAddress(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.DeletePayInAddressRequest)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.DeletePayInAddress(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,Lykke.Service.IcoCommon.Client.Models.CurrencyType)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
-            <param name='request'>
+            <param name='address'>
+            </param>
+            <param name='currency'>
+            Possible values include: 'BTC', 'ETH', 'USD'
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.DeletePayInAddressAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.DeletePayInAddressRequest,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.DeletePayInAddressAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,Lykke.Service.IcoCommon.Client.Models.CurrencyType,System.Threading.CancellationToken)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
-            <param name='request'>
+            <param name='address'>
+            </param>
+            <param name='currency'>
+            Possible values include: 'BTC', 'ETH', 'USD'
             </param>
             <param name='cancellationToken'>
             The cancellation token.
@@ -334,44 +368,52 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetSent(Lykke.Service.IcoCommon.Client.IIcoCommonAPI)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.SendEmail(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.EmailDataModel)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
+            <param name='emailData'>
+            </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetSentAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.SendEmailAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.EmailDataModel,System.Threading.CancellationToken)">
             <param name='operations'>
             The operations group for this extension method.
+            </param>
+            <param name='emailData'>
             </param>
             <param name='cancellationToken'>
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.Send(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.EmailModel)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetSentEmails(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,System.String)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
-            <param name='email'>
+            <param name='to'>
+            </param>
+            <param name='campaignId'>
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.SendAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.EmailModel,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetSentEmailsAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,System.String,System.Threading.CancellationToken)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
-            <param name='email'>
+            <param name='to'>
+            </param>
+            <param name='campaignId'>
             </param>
             <param name='cancellationToken'>
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.AddOrUpdateTemplate(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.AddOrUpdateEmailTemplate(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
             <param name='emailTemplate'>
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.AddOrUpdateTemplateAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.AddOrUpdateEmailTemplateAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel,System.Threading.CancellationToken)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
@@ -381,7 +423,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetTemplate(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,System.String)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetEmailTemplate(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,System.String)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
@@ -390,7 +432,7 @@
             <param name='templateId'>
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetTemplateAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetEmailTemplateAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,System.String,System.Threading.CancellationToken)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
@@ -402,14 +444,14 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetCampaignTemplates(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetCampaignEmailTemplates(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
             <param name='campaignId'>
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetCampaignTemplatesAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetCampaignEmailTemplatesAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,System.Threading.CancellationToken)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
@@ -456,7 +498,7 @@
             </summary>
         </member>
         <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.AddPayInAddressWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.PayInAddressModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
-            <param name='address'>
+            <param name='payInAddress'>
             </param>
             <param name='customHeaders'>
             The headers that will be added to request.
@@ -465,8 +507,11 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.DeletePayInAddressWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.DeletePayInAddressRequest,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
-            <param name='request'>
+        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.DeletePayInAddressWithHttpMessagesAsync(System.String,Lykke.Service.IcoCommon.Client.Models.CurrencyType,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='address'>
+            </param>
+            <param name='currency'>
+            Possible values include: 'BTC', 'ETH', 'USD'
             </param>
             <param name='customHeaders'>
             The headers that will be added to request.
@@ -496,16 +541,8 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.GetSentWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
-            <param name='customHeaders'>
-            The headers that will be added to request.
-            </param>
-            <param name='cancellationToken'>
-            The cancellation token.
-            </param>
-        </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.SendWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.EmailModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
-            <param name='email'>
+        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.SendEmailWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.EmailDataModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='emailData'>
             </param>
             <param name='customHeaders'>
             The headers that will be added to request.
@@ -514,7 +551,19 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.AddOrUpdateTemplateWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.GetSentEmailsWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='to'>
+            </param>
+            <param name='campaignId'>
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.AddOrUpdateEmailTemplateWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <param name='emailTemplate'>
             </param>
             <param name='customHeaders'>
@@ -524,7 +573,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.GetTemplateWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.GetEmailTemplateWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <param name='campaignId'>
             </param>
             <param name='templateId'>
@@ -536,7 +585,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.GetCampaignTemplatesWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.GetCampaignEmailTemplatesWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <param name='campaignId'>
             </param>
             <param name='customHeaders'>
@@ -590,18 +639,48 @@
             Thrown if validation fails
             </exception>
         </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailDataModel.#ctor">
+            <summary>
+            Initializes a new instance of the EmailDataModel class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailDataModel.#ctor(System.String,System.String,System.String,System.String,System.Object,System.Collections.Generic.IDictionary{System.String,System.Byte[]})">
+            <summary>
+            Initializes a new instance of the EmailDataModel class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailDataModel.CampaignId">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailDataModel.TemplateId">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailDataModel.To">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailDataModel.Subject">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailDataModel.Data">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailDataModel.Attachments">
+            <summary>
+            </summary>
+        </member>
         <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailModel.#ctor">
             <summary>
             Initializes a new instance of the EmailModel class.
             </summary>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailModel.#ctor(System.String,System.String,System.String,System.Object)">
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailModel.#ctor(System.DateTime,System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Byte[]})">
             <summary>
             Initializes a new instance of the EmailModel class.
-            </summary>
-        </member>
-        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailModel.EmailTo">
-            <summary>
             </summary>
         </member>
         <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailModel.CampaignId">
@@ -612,9 +691,33 @@
             <summary>
             </summary>
         </member>
-        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailModel.ParamsProperty">
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailModel.To">
             <summary>
             </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailModel.Subject">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailModel.Body">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailModel.Attachments">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailModel.SentUtc">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailModel.Validate">
+            <summary>
+            Validate the object.
+            </summary>
+            <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown if validation fails
+            </exception>
         </member>
         <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel.#ctor">
             <summary>
@@ -634,11 +737,11 @@
             <summary>
             </summary>
         </member>
-        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel.Subject">
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel.Body">
             <summary>
             </summary>
         </member>
-        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel.Body">
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel.Subject">
             <summary>
             </summary>
         </member>

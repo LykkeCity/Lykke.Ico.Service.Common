@@ -17,9 +17,9 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.PayInAddresses
             _tableStorage = AzureTableStorage<PayInAddressEntity>.Create(connectionStringManager, "PayInAddresses", log);
         }
 
-        public async Task UpsertAsync(IPayInAddress payInAddress)
+        public async Task InsertAsync(IPayInAddress payInAddress)
         {
-            await _tableStorage.InsertOrReplaceAsync(new PayInAddressEntity(payInAddress));
+            await _tableStorage.InsertAsync(new PayInAddressEntity(payInAddress));
         }
 
         public async Task DeleteAsync(string address, CurrencyType currency)

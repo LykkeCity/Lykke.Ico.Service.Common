@@ -11,28 +11,27 @@ namespace Lykke.Service.IcoCommon.Client.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class EmailModel
+    public partial class EmailDataModel
     {
         /// <summary>
-        /// Initializes a new instance of the EmailModel class.
+        /// Initializes a new instance of the EmailDataModel class.
         /// </summary>
-        public EmailModel()
+        public EmailDataModel()
         {
             CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the EmailModel class.
+        /// Initializes a new instance of the EmailDataModel class.
         /// </summary>
-        public EmailModel(System.DateTime sentUtc, string campaignId = default(string), string templateId = default(string), string to = default(string), string subject = default(string), string body = default(string), IDictionary<string, byte[]> attachments = default(IDictionary<string, byte[]>))
+        public EmailDataModel(string campaignId = default(string), string templateId = default(string), string to = default(string), string subject = default(string), object data = default(object), IDictionary<string, byte[]> attachments = default(IDictionary<string, byte[]>))
         {
             CampaignId = campaignId;
             TemplateId = templateId;
             To = to;
             Subject = subject;
-            Body = body;
+            Data = data;
             Attachments = attachments;
-            SentUtc = sentUtc;
             CustomInit();
         }
 
@@ -63,27 +62,13 @@ namespace Lykke.Service.IcoCommon.Client.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Body")]
-        public string Body { get; set; }
+        [JsonProperty(PropertyName = "Data")]
+        public object Data { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Attachments")]
         public IDictionary<string, byte[]> Attachments { get; set; }
 
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "SentUtc")]
-        public System.DateTime SentUtc { get; set; }
-
-        /// <summary>
-        /// Validate the object.
-        /// </summary>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown if validation fails
-        /// </exception>
-        public virtual void Validate()
-        {
-        }
     }
 }
