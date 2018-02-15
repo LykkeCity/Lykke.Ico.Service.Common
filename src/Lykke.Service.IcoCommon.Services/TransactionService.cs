@@ -6,20 +6,24 @@ using Lykke.Service.IcoCommon.Core.Domain.Transactions;
 using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Core.Settings.ServiceSettings;
 using Lykke.SettingsReader;
+using Common.Log;
 
 namespace Lykke.Service.IcoCommon.Services
 {
     public class TransactionService : ITransactionService
     {
+        private readonly ILog _log;
         private IPayInAddressRepository _payInAddressRepository;
         private ITransactionRepository _transactionRepository;
         private IReloadingManager<Dictionary<string, CampaignSettings>> _settings;
 
         public TransactionService(
+            ILog log,
             IPayInAddressRepository payInAddressRepository, 
             ITransactionRepository transactionRepository,
             IReloadingManager<Dictionary<string, CampaignSettings>> settings)
         {
+            _log = log;
             _payInAddressRepository = payInAddressRepository;
             _transactionRepository = transactionRepository;
             _settings = settings;
@@ -38,10 +42,11 @@ namespace Lykke.Service.IcoCommon.Services
                     continue;
                 }
 
-                CampaignSettings campaignSettings = null;
-
-                if (!_settings.CurrentValue.TryGetValue(payInAddress.CampaignId, out campaignSettings))
+                if (!_settings.CurrentValue.TryGetValue(payInAddress.CampaignId, out var campaignSettings))
                 {
+                    await _log.WriteInfoAsync(nameof(TransactionService), nameof(HandleTransactionsAsync),
+                        $"campaignId={payInAddress.CampaignId}", "Campaign settings not found. Reload whole settings");
+
                     await _settings.Reload();
                 }
 
