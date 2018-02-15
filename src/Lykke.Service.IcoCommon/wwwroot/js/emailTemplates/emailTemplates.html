@@ -1,0 +1,15 @@
+﻿<div class="sidenav">
+    <a href="" ng-repeat="t in vm.templates">{{t.campaignId}}/{{t.templateId}}</a>
+</div>
+<div class="content">
+    <section class="properties">
+        <label>CampaignId</label>
+        <input type="text" ng-model="vm.currentTemplate.campaignId" />
+        <label>TemplateId</label>
+        <input type="text" ng-model="vm.currentTemplate.templateId" />
+        <label>Subject</label>
+        <input type="text" ng-model="vm.currentTemplate.subject" />
+        <button class="button button-outline" ng-click="vm.save()">Save</button>
+    </section>
+    <section class="editor" id="editor"></section>
+</div>

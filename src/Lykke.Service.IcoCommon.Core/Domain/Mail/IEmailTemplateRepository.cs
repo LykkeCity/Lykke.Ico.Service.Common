@@ -9,5 +9,7 @@ namespace Lykke.Service.IcoCommon.Core.Domain.Mail
     {
         Task UpsertAsync(IEmailTemplate emailTemplate);
         Task<IEmailTemplate> GetAsync(string campaignId, string templateId);
+        Task<IEnumerable<IEmailTemplate>> GetCampaignTemplatesAsync(string campaignId);
+        Task<IEnumerable<IEmailTemplate>> GetAllTemplatesAsync();
     }
 }

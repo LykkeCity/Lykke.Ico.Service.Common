@@ -59,13 +59,13 @@ namespace Lykke.Service.IcoCommon.Controllers
             return Ok();
         }
 
-        [HttpGet("templates/{campaignId}/{templateId}")]
-        [SwaggerOperation(nameof(GetEmailTemplate))]
-        public async Task<EmailTemplateModel> GetEmailTemplate(
-            [FromRoute]string campaignId,
-            [FromRoute]string templateId)
+        [HttpGet("templates")]
+        [SwaggerOperation(nameof(GetCampaignEmailTemplates))]
+        public async Task<EmailTemplateModel[]> GetAllEmailTemplates()
         {
-            return new EmailTemplateModel(await _emailTemplateService.GetTemplateAsync(campaignId, templateId));
+            return (await _emailTemplateService.GetAllTemplatesAsync())
+                .Select(t => new EmailTemplateModel(t))
+                .ToArray();
         }
 
         [HttpGet("templates/{campaignId}")]
@@ -76,6 +76,15 @@ namespace Lykke.Service.IcoCommon.Controllers
             return (await _emailTemplateService.GetCampaignTemplatesAsync(campaignId))
                 .Select(t => new EmailTemplateModel(t))
                 .ToArray();
+        }
+
+        [HttpGet("templates/{campaignId}/{templateId}")]
+        [SwaggerOperation(nameof(GetEmailTemplate))]
+        public async Task<EmailTemplateModel> GetEmailTemplate(
+            [FromRoute]string campaignId,
+            [FromRoute]string templateId)
+        {
+            return new EmailTemplateModel(await _emailTemplateService.GetTemplateAsync(campaignId, templateId));
         }
     }
 }

@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="lib/monaco-editor/min/vs/editor/editor.main.css" data-name="vs/editor/editor.main">
+    <link rel="stylesheet" href="css/milligram.min.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body ng-app="app">
+
+    <email-templates></email-templates>
+
+    <script>
+        var require = { paths: { 'vs': 'lib/monaco-editor/min/vs' } };
+    </script>
+
+    <script src="lib/monaco-editor/min/vs/loader.js"></script>
+    <script src="lib/monaco-editor/min/vs/editor/editor.main.nls.js"></script>
+    <script src="lib/monaco-editor/min/vs/editor/editor.main.js"></script>
+    <script src="lib/angularjs/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/emailTemplates/emailTemplates.js"></script>
+
+</body>
+</html>

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AzureStorage;
 using AzureStorage.Blob;
 using AzureStorage.Tables;
@@ -29,6 +30,16 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
             var rowKey = GetRowKey(templateId);
 
             return await _tableStorage.GetDataAsync(partitionKey, rowKey);
+        }
+
+        public async Task<IEnumerable<IEmailTemplate>> GetCampaignTemplatesAsync(string campaignId)
+        {
+            return await _tableStorage.GetDataAsync(GetPartitionKey(campaignId));
+        }
+
+        public async Task<IEnumerable<IEmailTemplate>> GetAllTemplatesAsync()
+        {
+            return await _tableStorage.GetDataAsync();
         }
     }
 }
