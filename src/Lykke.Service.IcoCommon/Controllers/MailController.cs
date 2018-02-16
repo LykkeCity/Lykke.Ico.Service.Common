@@ -29,7 +29,7 @@ namespace Lykke.Service.IcoCommon.Controllers
                 return BadRequest(ErrorResponseFactory.Create(ModelState));
             }
 
-            await _emailService.PushEmailToQueueAsync(emailData);
+            await _emailService.EnqueueEmailAsync(emailData);
 
             return Ok();
         }

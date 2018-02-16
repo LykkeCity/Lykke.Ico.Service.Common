@@ -42,7 +42,9 @@ namespace Lykke.Service.IcoCommon.Services
                     continue;
                 }
 
-                if (!_settings.CurrentValue.TryGetValue(payInAddress.CampaignId, out var campaignSettings))
+                CampaignSettings campaignSettings;
+
+                if (!_settings.CurrentValue.TryGetValue(payInAddress.CampaignId, out campaignSettings))
                 {
                     await _log.WriteInfoAsync(nameof(TransactionService), nameof(HandleTransactionsAsync),
                         $"campaignId={payInAddress.CampaignId}", "Campaign settings not found. Reload whole settings");

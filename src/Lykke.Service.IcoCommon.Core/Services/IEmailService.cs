@@ -8,7 +8,7 @@ namespace Lykke.Service.IcoCommon.Core.Services
 {
     public interface IEmailService
     {
-        Task PushEmailToQueueAsync(IEmailData emailData);
+        Task EnqueueEmailAsync(IEmailData emailData);
         Task SendEmailAsync(IEmailData emailData);
         Task<IEmail[]> GetSentEmailsAsync(string to, string campaignId);
     }

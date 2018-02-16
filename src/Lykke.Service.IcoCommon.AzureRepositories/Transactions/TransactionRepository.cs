@@ -26,10 +26,10 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Transactions
                 .AsQueueMessage(payInAddress.Email)
                 .ToJson();
 
-            await _log.WriteInfoAsync(nameof(TransactionRepository), nameof(EnqueueTransactionAsync),
-                $"queue={queueName}, message={message}", "Send transaction message to queue");
-
             await queue.PutRawMessageAsync(message);
+
+            await _log.WriteInfoAsync(nameof(EnqueueTransactionAsync),
+                $"queue={queueName}, message={message}", "Transaction message sent to queue");
         }
     }
 }

@@ -33,11 +33,11 @@ namespace Lykke.Service.IcoCommon.Services
             _settings = settings;
         }
 
-        public async Task PushEmailToQueueAsync(IEmailData emailData)
+        public async Task EnqueueEmailAsync(IEmailData emailData)
         {
             await _emailRepository.PushToQueueAsync(emailData);
 
-            await _log.WriteInfoAsync(nameof(PushEmailToQueueAsync),
+            await _log.WriteInfoAsync(nameof(EnqueueEmailAsync),
                 $"Campaign: {emailData.CampaignId}, Template: {emailData.TemplateId}, To: {emailData.To}",
                 $"Email enqueued");
         }
