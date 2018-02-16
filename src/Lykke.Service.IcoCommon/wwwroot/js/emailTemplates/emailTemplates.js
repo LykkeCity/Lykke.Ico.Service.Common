@@ -53,7 +53,7 @@ function emailTemplatesController($http) {
             }
         }
 
-        vm.template = template;
+        vm.template = template || { _isNew: true };
         editor.setValue(vm.template && vm.template.body ? vm.template.body : "");
     };
 
