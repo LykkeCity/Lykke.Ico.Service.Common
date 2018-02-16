@@ -113,93 +113,261 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\css\milligram.min.css" />
-    <Content Include="wwwroot\css\site.css" />
-    <Content Include="wwwroot\index.html" />
-    <Content Include="wwwroot\js\app.js" />
-    <Content Include="wwwroot\js\emailTemplates\emailTemplates.html" />
-    <Content Include="wwwroot\js\emailTemplates\emailTemplates.js" />
-    <Content Include="wwwroot\lib\angularjs\angular.min.js" />
+    <Content Include="wwwroot\css\milligram.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\css\site.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\js\app.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\js\emailTemplates\emailTemplates.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\js\emailTemplates\emailTemplates.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\angularjs\angular.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="wwwroot\lib\angularjs\types\index.d.ts" />
     <Content Include="wwwroot\lib\angularjs\types\jqlite.d.ts" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\base\worker\workerMain.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.de.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.es.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.fr.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.hu.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.it.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.ja.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.ko.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.pt-br.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.ru.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.tr.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.zh-cn.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.zh-tw.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\loader.js.map" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\base\worker\workerMain.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\bat.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\coffee.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\cpp.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\csharp.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\css.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\dockerfile.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\fsharp.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\go.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\handlebars.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\html.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\ini.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\java.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\less.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\lua.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\markdown.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\msdax.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\objective-c.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\php.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\postiats.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\powershell.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\pug.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\python.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\r.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\razor.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\ruby.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\sb.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\scss.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\solidity.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\sql.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\swift.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\vb.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\xml.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\yaml.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\contrib\suggest\browser\media\String_16x.svg" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\contrib\suggest\browser\media\String_inverse_16x.svg" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.css" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.de.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.es.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.fr.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.hu.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.it.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.ja.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.ko.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.pt-br.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.ru.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.tr.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.zh-cn.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.zh-tw.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\base\worker\workerMain.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.de.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.es.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.fr.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.hu.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.it.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.ja.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.ko.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.pt-br.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.ru.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.tr.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.zh-cn.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.zh-tw.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\loader.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\base\worker\workerMain.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\bat.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\coffee.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\cpp.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\csharp.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\css.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\dockerfile.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\fsharp.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\go.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\handlebars.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\html.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\ini.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\java.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\less.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\lua.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\markdown.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\msdax.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\objective-c.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\php.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\postiats.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\powershell.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\pug.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\python.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\r.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\razor.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\ruby.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\sb.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\scss.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\solidity.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\sql.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\swift.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\vb.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\xml.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\yaml.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\contrib\suggest\browser\media\String_16x.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\contrib\suggest\browser\media\String_inverse_16x.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.de.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.es.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.fr.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.hu.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.it.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.ja.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.ko.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.pt-br.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.ru.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.tr.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.zh-cn.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.zh-tw.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\standalone\browser\quickOpen\symbol-sprite.svg" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\css\cssMode.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\css\cssWorker.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\html\htmlMode.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\html\htmlWorker.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\json\jsonMode.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\json\jsonWorker.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\typescript\lib\typescriptServices.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\typescript\src\mode.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\typescript\src\worker.js" />
-    <Content Include="wwwroot\lib\monaco-editor\min\vs\loader.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\css\cssMode.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\css\cssWorker.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\html\htmlMode.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\html\htmlWorker.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\json\jsonMode.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\json\jsonWorker.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\typescript\lib\typescriptServices.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\typescript\src\mode.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\typescript\src\worker.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\loader.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="wwwroot\lib\monaco-editor\types\monaco.d.ts" />
   </ItemGroup>
   
