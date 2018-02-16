@@ -40,9 +40,13 @@ email-templates {
             }
 
             email-templates .sidenav a.selected {
-                background-color: #ddd;
-                color: #000;
+                background-color: #4682b4;
             }
+
+        email-templates .sidenav .button {
+            margin-left: 12px;
+            margin-top: 12px;
+        }
 
     email-templates .content {
         display: flex;
