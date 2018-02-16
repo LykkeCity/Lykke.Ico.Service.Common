@@ -34,7 +34,7 @@ function emailTemplatesController($http) {
 
     function initEditor() {
         editor = monaco.editor.create(document.getElementById('editor'), {
-            language: 'html',
+            language: 'razor',
             minimap: {
                 enabled: false
             },

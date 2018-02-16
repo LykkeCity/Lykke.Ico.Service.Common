@@ -22,7 +22,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="wwwroot\css\milligram.min.css" />
+    <None Remove="wwwroot\css\site.css" />
     <None Remove="wwwroot\index.html" />
+    <None Remove="wwwroot\js\app.js" />
+    <None Remove="wwwroot\js\emailTemplates\emailTemplates.html" />
+    <None Remove="wwwroot\js\emailTemplates\emailTemplates.js" />
+    <None Remove="wwwroot\lib\angularjs\angular.min.js" />
+    <None Remove="wwwroot\lib\angularjs\types\index.d.ts" />
+    <None Remove="wwwroot\lib\angularjs\types\jqlite.d.ts" />
     <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\base\worker\workerMain.js.map" />
     <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.js.map" />
     <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.de.js.map" />
@@ -101,10 +109,19 @@
     <None Remove="wwwroot\lib\monaco-editor\min\vs\language\typescript\src\mode.js" />
     <None Remove="wwwroot\lib\monaco-editor\min\vs\language\typescript\src\worker.js" />
     <None Remove="wwwroot\lib\monaco-editor\min\vs\loader.js" />
+    <None Remove="wwwroot\lib\monaco-editor\types\monaco.d.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\css\milligram.min.css" />
+    <Content Include="wwwroot\css\site.css" />
     <Content Include="wwwroot\index.html" />
+    <Content Include="wwwroot\js\app.js" />
+    <Content Include="wwwroot\js\emailTemplates\emailTemplates.html" />
+    <Content Include="wwwroot\js\emailTemplates\emailTemplates.js" />
+    <Content Include="wwwroot\lib\angularjs\angular.min.js" />
+    <Content Include="wwwroot\lib\angularjs\types\index.d.ts" />
+    <Content Include="wwwroot\lib\angularjs\types\jqlite.d.ts" />
     <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\base\worker\workerMain.js.map" />
     <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.js.map" />
     <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.de.js.map" />
@@ -183,6 +200,7 @@
     <Content Include="wwwroot\lib\monaco-editor\min\vs\language\typescript\src\mode.js" />
     <Content Include="wwwroot\lib\monaco-editor\min\vs\language\typescript\src\worker.js" />
     <Content Include="wwwroot\lib\monaco-editor\min\vs\loader.js" />
+    <Content Include="wwwroot\lib\monaco-editor\types\monaco.d.ts" />
   </ItemGroup>
   
   <ItemGroup>
