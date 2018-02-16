@@ -108,7 +108,6 @@ namespace Lykke.Service.IcoCommon
                 });
                 app.UseDefaultFiles();
                 app.UseStaticFiles();
-                app.UseDirectoryBrowser();
 
                 appLifetime.ApplicationStarted.Register(() => StartApplication().GetAwaiter().GetResult());
                 appLifetime.ApplicationStopping.Register(() => StopApplication().GetAwaiter().GetResult());
