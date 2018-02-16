@@ -20,6 +20,170 @@
     <NoWarn>1701;1702;1705;1591</NoWarn>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="wwwroot\index.html" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\base\worker\workerMain.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.de.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.es.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.fr.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.hu.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.it.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.ja.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.ko.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.pt-br.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.ru.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.tr.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.zh-cn.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.zh-tw.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min-maps\vs\loader.js.map" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\base\worker\workerMain.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\bat.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\coffee.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\cpp.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\csharp.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\css.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\dockerfile.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\fsharp.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\go.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\handlebars.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\html.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\ini.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\java.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\less.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\lua.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\markdown.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\msdax.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\objective-c.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\php.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\postiats.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\powershell.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\pug.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\python.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\r.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\razor.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\ruby.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\sb.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\scss.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\solidity.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\sql.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\swift.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\vb.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\xml.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\yaml.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\contrib\suggest\browser\media\String_16x.svg" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\contrib\suggest\browser\media\String_inverse_16x.svg" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.css" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.de.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.es.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.fr.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.hu.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.it.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.ja.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.ko.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.pt-br.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.ru.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.tr.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.zh-cn.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.zh-tw.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\editor\standalone\browser\quickOpen\symbol-sprite.svg" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\language\css\cssMode.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\language\css\cssWorker.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\language\html\htmlMode.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\language\html\htmlWorker.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\language\json\jsonMode.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\language\json\jsonWorker.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\language\typescript\lib\typescriptServices.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\language\typescript\src\mode.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\language\typescript\src\worker.js" />
+    <None Remove="wwwroot\lib\monaco-editor\min\vs\loader.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\index.html" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\base\worker\workerMain.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.de.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.es.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.fr.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.hu.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.it.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.ja.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.ko.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.pt-br.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.ru.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.tr.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.zh-cn.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\editor\editor.main.nls.zh-tw.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min-maps\vs\loader.js.map" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\base\worker\workerMain.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\bat.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\coffee.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\cpp.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\csharp.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\css.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\dockerfile.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\fsharp.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\go.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\handlebars.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\html.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\ini.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\java.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\less.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\lua.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\markdown.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\msdax.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\objective-c.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\php.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\postiats.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\powershell.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\pug.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\python.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\r.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\razor.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\ruby.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\sb.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\scss.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\solidity.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\sql.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\swift.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\vb.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\xml.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\basic-languages\src\yaml.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\contrib\suggest\browser\media\String_16x.svg" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\contrib\suggest\browser\media\String_inverse_16x.svg" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.css" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.de.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.es.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.fr.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.hu.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.it.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.ja.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.ko.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.pt-br.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.ru.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.tr.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.zh-cn.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\editor.main.nls.zh-tw.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\editor\standalone\browser\quickOpen\symbol-sprite.svg" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\css\cssMode.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\css\cssWorker.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\html\htmlMode.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\html\htmlWorker.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\json\jsonMode.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\json\jsonWorker.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\typescript\lib\typescriptServices.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\typescript\src\mode.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\language\typescript\src\worker.js" />
+    <Content Include="wwwroot\lib\monaco-editor\min\vs\loader.js" />
+  </ItemGroup>
   
   <ItemGroup>
     <None Update="Dockerfile">
@@ -52,6 +216,10 @@
     <ProjectReference Include="..\Lykke.Service.IcoCommon.AzureRepositories\Lykke.Service.IcoCommon.AzureRepositories.csproj" />
     <ProjectReference Include="..\Lykke.Service.IcoCommon.Core\Lykke.Service.IcoCommon.Core.csproj" />
     <ProjectReference Include="..\Lykke.Service.IcoCommon.Services\Lykke.Service.IcoCommon.Services.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">

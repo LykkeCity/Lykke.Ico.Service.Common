@@ -12,5 +12,6 @@ namespace Lykke.Service.IcoCommon.Core.Services
         Task<IEmail> RenderEmailAsync(IEmailData emailData);
         Task<IEmailTemplate> GetTemplateAsync(string campaignId, string templateId);
         Task<IEmailTemplate[]> GetCampaignTemplatesAsync(string campaignId);
+        Task<IEmailTemplate[]> GetAllTemplatesAsync();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Linq;
 using System.Threading.Tasks;
 using Lykke.Service.IcoCommon.Core.Domain.Mail;
 using Lykke.Service.IcoCommon.Core.Services;
@@ -57,14 +58,19 @@ namespace Lykke.Service.IcoCommon.Services
             return emailModel;
         }
 
-        public Task<IEmailTemplate> GetTemplateAsync(string campaignId, string templateId)
+        public async Task<IEmailTemplate> GetTemplateAsync(string campaignId, string templateId)
         {
-            throw new System.NotImplementedException();
+            return await _templateRepository.GetAsync(campaignId, templateId);
         }
 
-        public Task<IEmailTemplate[]> GetCampaignTemplatesAsync(string campaignId)
+        public async Task<IEmailTemplate[]> GetCampaignTemplatesAsync(string campaignId)
         {
-            throw new System.NotImplementedException();
+            return (await _templateRepository.GetCampaignTemplatesAsync(campaignId)).ToArray();
+        }
+
+        public async Task<IEmailTemplate[]> GetAllTemplatesAsync()
+        {
+            return (await _templateRepository.GetAllTemplatesAsync()).ToArray();
         }
     }
 }

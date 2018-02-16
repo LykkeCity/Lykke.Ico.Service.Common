@@ -1,0 +1,8 @@
+﻿{
+  "compilerOptions": {
+    "allowJs": true
+  },
+  "typeAcquisition": {
+    "enable": true
+  }
+}
