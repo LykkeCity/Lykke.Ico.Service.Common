@@ -30,11 +30,7 @@ namespace Lykke.Service.IcoCommon.Services
         {
             await _templateRepository.UpsertAsync(emailTemplate);
 
-            var engine = _razorCache.GetOrAdd(emailTemplate.CampaignId, BuildEngine);
-
-            if (engine.TemplateCache.Contains(emailTemplate.TemplateId)) engine.TemplateCache.Remove(emailTemplate.TemplateId);
-
-            await engine.CompileTemplateAsync(emailTemplate.TemplateId);
+            _razorCache[emailTemplate.CampaignId] = BuildEngine(emailTemplate.CampaignId);
         }
 
         public async Task<IEmail> RenderEmailAsync(IEmailData emailData)
