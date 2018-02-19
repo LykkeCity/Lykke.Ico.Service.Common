@@ -8,7 +8,7 @@ using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Lykke.Service.IcoCommon.AzureRepositories.PayInAddresses
 {
-    [ValueTypeMergingStrategyAttribute(ValueTypeMergingStrategy.UpdateAlways)]
+    [ValueTypeMergingStrategy(ValueTypeMergingStrategy.UpdateAlways)]
     public class PayInAddressEntity : AzureTableEntity, IPayInAddress
     {
         public static string GetPartitionKey(string address) => address;

@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
 {
-    [ValueTypeMergingStrategyAttribute(ValueTypeMergingStrategy.UpdateAlways)]
+    [ValueTypeMergingStrategy(ValueTypeMergingStrategy.UpdateAlways)]
     public class EmailEntity : AzureTableEntity, IEmail
     {
         public static string GetPartitionKey(string to) => to;

@@ -9,7 +9,7 @@ using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
 {
-    [ValueTypeMergingStrategyAttribute(ValueTypeMergingStrategy.UpdateAlways)]
+    [ValueTypeMergingStrategy(ValueTypeMergingStrategy.UpdateAlways)]
     public class EmailTemplateEntity : AzureTableEntity, IEmailTemplate
     {
         public static string GetPartitionKey(string campaignId) => campaignId;

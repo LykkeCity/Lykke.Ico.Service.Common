@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AzureStorage;
 using AzureStorage.Blob;
@@ -12,16 +13,40 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
 {
     public class EmailTemplateRepository : IEmailTemplateRepository
     {
-        private readonly INoSQLTableStorage<EmailTemplateEntity> _tableStorage;
+        private readonly INoSQLTableStorage<EmailTemplateEntity> _templateStorage;
+        private readonly INoSQLTableStorage<EmailTemplateHistoryEntity> _templateHistoryStorage;
+
+        private static string GetHistoryPartitionKey(string campaignId, string templateId) => $"{campaignId}_{templateId}";
+        private static string GetHistoryRowKey(DateTime changedUtc) => changedUtc.ToString("O");
 
         public EmailTemplateRepository(IReloadingManager<string> connectionStringManager, ILog log)
         {
-            _tableStorage = AzureTableStorage<EmailTemplateEntity>.Create(connectionStringManager, "EmailTemplates", log);
+            _templateStorage = AzureTableStorage<EmailTemplateEntity>.Create(connectionStringManager, "EmailTemplates", log);
+            _templateHistoryStorage = AzureTableStorage<EmailTemplateHistoryEntity>.Create(connectionStringManager, "EmailTemplateHistory", log);
         }
 
         public async Task UpsertAsync(IEmailTemplate emailTemplate)
         {
-            await _tableStorage.InsertOrReplaceAsync(new EmailTemplateEntity(emailTemplate));
+            var partitionKey = GetPartitionKey(emailTemplate.CampaignId);
+            var rowKey = GetRowKey(emailTemplate.TemplateId);
+            var entity = await _templateStorage.GetDataAsync(partitionKey, rowKey);
+
+            if (entity == null ||
+                entity.Subject != emailTemplate.Subject ||
+                entity.Body != emailTemplate.Body)
+            {
+                await _templateStorage.InsertOrReplaceAsync(new EmailTemplateEntity(emailTemplate));
+
+                var historyPartitionKey = GetHistoryPartitionKey(emailTemplate.CampaignId, emailTemplate.TemplateId);
+                var historyRowKey = GetHistoryRowKey(DateTime.UtcNow);
+                var historyEntity = new EmailTemplateHistoryEntity(emailTemplate)
+                {
+                    PartitionKey = historyPartitionKey,
+                    RowKey = historyRowKey
+                };
+
+                await _templateHistoryStorage.InsertAsync(historyEntity);
+            }
         }
 
         public async Task<IEmailTemplate> GetAsync(string campaignId, string templateId)
@@ -29,17 +54,17 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
             var partitionKey = GetPartitionKey(campaignId);
             var rowKey = GetRowKey(templateId);
 
-            return await _tableStorage.GetDataAsync(partitionKey, rowKey);
+            return await _templateStorage.GetDataAsync(partitionKey, rowKey);
         }
 
         public async Task<IEnumerable<IEmailTemplate>> GetCampaignTemplatesAsync(string campaignId)
         {
-            return await _tableStorage.GetDataAsync(GetPartitionKey(campaignId));
+            return await _templateStorage.GetDataAsync(GetPartitionKey(campaignId));
         }
 
         public async Task<IEnumerable<IEmailTemplate>> GetAllTemplatesAsync()
         {
-            return await _tableStorage.GetDataAsync();
+            return await _templateStorage.GetDataAsync();
         }
     }
 }
