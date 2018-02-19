@@ -30,39 +30,39 @@ namespace Lykke.Service.IcoCommon.Client
             }
         }
 
-        public async Task AddPayInAddressAsync(PayInAddressModel address, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task AddPayInAddressAsync(PayInAddressModel address)
         {
-            await _api.AddPayInAddressAsync(address, cancellationToken);
+            await _api.AddPayInAddressAsync(address);
         }
 
-        public async Task SendEmailAsync(EmailDataModel emailData, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task SendEmailAsync(EmailDataModel emailData)
         {
-            await _api.SendEmailAsync(emailData, cancellationToken);
+            await _api.SendEmailAsync(emailData);
         }
 
-        public async Task<IList<EmailModel>> GetSentEmailsAsync(string to, string campaignId = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<IList<EmailModel>> GetSentEmailsAsync(string to, string campaignId = null)
         {
-            return await _api.GetSentEmailsAsync(to, campaignId, cancellationToken);
+            return await _api.GetSentEmailsAsync(to, campaignId);
         }
 
-        public async Task AddOrUpdateEmailTemplateAsync(EmailTemplateModel emailTemplate, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task AddOrUpdateEmailTemplateAsync(EmailTemplateModel emailTemplate)
         {
-            await _api.AddOrUpdateEmailTemplateAsync(emailTemplate, cancellationToken);
+            await _api.AddOrUpdateEmailTemplateAsync(emailTemplate);
         }
 
-        public async Task<IList<EmailTemplateModel>> GetCampaignEmailTemplatesAsync(string campaignId, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<IList<EmailTemplateModel>> GetCampaignEmailTemplatesAsync(string campaignId)
         {
-            return await _api.GetCampaignEmailTemplatesAsync(campaignId, cancellationToken);
+            return await _api.GetCampaignEmailTemplatesAsync(campaignId);
         }
 
-        public async Task<EmailTemplateModel> GetEmailTemplateAsync(string campaignId, string templateId, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<EmailTemplateModel> GetEmailTemplateAsync(string campaignId, string templateId)
         {
-            return await _api.GetEmailTemplateAsync(campaignId, templateId, cancellationToken);
+            return await _api.GetEmailTemplateAsync(campaignId, templateId);
         }
 
-        public async Task<int> HandleTransactionsAsync(IList<TransactionModel> transactions, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<int> HandleTransactionsAsync(IList<TransactionModel> transactions)
         {
-            return (await _api.HandleTransactionsAsync(transactions, cancellationToken)) ?? 0;
+            return (await _api.HandleTransactionsAsync(transactions)) ?? 0;
         }
     }
 }
