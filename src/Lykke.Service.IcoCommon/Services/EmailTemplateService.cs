@@ -26,11 +26,16 @@ namespace Lykke.Service.IcoCommon.Services
                 .Build();
         }
 
+        public void ResetCache(string campaignId)
+        {
+            _razorCache.TryRemove(campaignId, out var _);
+        }
+
         public async Task AddOrUpdateTemplateAsync(IEmailTemplate emailTemplate)
         {
             await _templateRepository.UpsertAsync(emailTemplate);
 
-            _razorCache[emailTemplate.CampaignId] = BuildEngine(emailTemplate.CampaignId);
+            ResetCache(emailTemplate.CampaignId);
         }
 
         public async Task<IEmail> RenderEmailAsync(IEmailData emailData)
@@ -67,6 +72,13 @@ namespace Lykke.Service.IcoCommon.Services
         public async Task<IEmailTemplate[]> GetAllTemplatesAsync()
         {
             return (await _templateRepository.GetAllTemplatesAsync()).ToArray();
+        }
+
+        public async Task DeleteTemplateAsync(string campaignId, string templateId)
+        {
+            await _templateRepository.DeleteAsync(campaignId, templateId);
+
+            ResetCache(campaignId);
         }
     }
 }

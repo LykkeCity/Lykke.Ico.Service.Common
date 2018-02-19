@@ -9,8 +9,9 @@
         <input type="text" ng-model="vm.template.templateId" />
         <label>Subject</label>
         <input type="text" ng-model="vm.template.subject" />
-        <button class="button button-outline" ng-click="vm.selectTemplate({_isNew: true})">Create New</button>
+        <button class="button button-outline" ng-click="vm.selectTemplate({})">Create New</button>
         <button class="button button-outline" ng-click="vm.save()">Save</button>
+        <button class="button button-outline" ng-click="vm.deleteTemplate()">Delete</button>
     </section>
     <section class="editor" id="editor"></section>
 </div>

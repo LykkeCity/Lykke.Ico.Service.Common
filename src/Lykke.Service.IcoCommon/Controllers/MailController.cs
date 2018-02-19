@@ -46,6 +46,16 @@ namespace Lykke.Service.IcoCommon.Controllers
                 .ToArray();
         }
 
+        [HttpDelete("{to}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+        [SwaggerOperation(nameof(DeleteSentEmails))]
+        public async Task<IActionResult> DeleteSentEmails(
+            [FromRoute]string to,
+            [FromQuery]string campaignId)
+        {
+            return Ok(await _emailService.DeleteEmailsAsync(to, campaignId));
+        }
+
         [HttpPost("templates")]
         [SwaggerOperation(nameof(AddOrUpdateEmailTemplate))]
         public async Task<IActionResult> AddOrUpdateEmailTemplate([FromBody]EmailTemplateModel emailTemplate)
@@ -88,14 +98,13 @@ namespace Lykke.Service.IcoCommon.Controllers
             return new EmailTemplateModel(await _emailTemplateService.GetTemplateAsync(campaignId, templateId));
         }
 
-        [HttpDelete("{to}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
-        [SwaggerOperation(nameof(DeleteSentEmails))]
-        public async Task<IActionResult> DeleteSentEmails(
-            [FromRoute]string to,
-            [FromQuery]string campaignId)
+        [HttpDelete("templates/{campaignId}/{templateId}")]
+        [SwaggerOperation(nameof(GetEmailTemplate))]
+        public async Task DeleteEmailTemplate(
+            [FromRoute]string campaignId,
+            [FromRoute]string templateId)
         {
-            return Ok(await _emailService.DeleteEmailsAsync(to, campaignId));
+            await _emailTemplateService.DeleteTemplateAsync(campaignId, templateId);
         }
     }
 }

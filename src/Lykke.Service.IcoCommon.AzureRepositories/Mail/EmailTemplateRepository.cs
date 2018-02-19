@@ -66,5 +66,13 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
         {
             return await _templateStorage.GetDataAsync();
         }
+
+        public async Task DeleteAsync(string campaignId, string templateId)
+        {
+            var partitionKey = GetPartitionKey(campaignId);
+            var rowKey = GetRowKey(templateId);
+
+            await _templateStorage.DeleteIfExistAsync(partitionKey, rowKey);
+        }
     }
 }
