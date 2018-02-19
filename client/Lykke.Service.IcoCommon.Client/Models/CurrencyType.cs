@@ -17,12 +17,12 @@ namespace Lykke.Service.IcoCommon.Client.Models
     [JsonConverter(typeof(StringEnumConverter))]
     public enum CurrencyType
     {
-        [EnumMember(Value = "BTC")]
-        BTC,
-        [EnumMember(Value = "ETH")]
-        ETH,
-        [EnumMember(Value = "USD")]
-        USD
+        [EnumMember(Value = "btc")]
+        Btc,
+        [EnumMember(Value = "eth")]
+        Eth,
+        [EnumMember(Value = "usd")]
+        Usd
     }
     internal static class CurrencyTypeEnumExtension
     {
@@ -35,12 +35,12 @@ namespace Lykke.Service.IcoCommon.Client.Models
         {
             switch( value )
             {
-                case CurrencyType.BTC:
-                    return "BTC";
-                case CurrencyType.ETH:
-                    return "ETH";
-                case CurrencyType.USD:
-                    return "USD";
+                case CurrencyType.Btc:
+                    return "btc";
+                case CurrencyType.Eth:
+                    return "eth";
+                case CurrencyType.Usd:
+                    return "usd";
             }
             return null;
         }
@@ -49,12 +49,12 @@ namespace Lykke.Service.IcoCommon.Client.Models
         {
             switch( value )
             {
-                case "BTC":
-                    return CurrencyType.BTC;
-                case "ETH":
-                    return CurrencyType.ETH;
-                case "USD":
-                    return CurrencyType.USD;
+                case "btc":
+                    return CurrencyType.Btc;
+                case "eth":
+                    return CurrencyType.Eth;
+                case "usd":
+                    return CurrencyType.Usd;
             }
             return null;
         }

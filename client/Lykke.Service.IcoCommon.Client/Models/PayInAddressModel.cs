@@ -22,8 +22,8 @@ namespace Lykke.Service.IcoCommon.Client.Models
         /// <summary>
         /// Initializes a new instance of the PayInAddressModel class.
         /// </summary>
-        /// <param name="currency">Possible values include: 'BTC', 'ETH',
-        /// 'USD'</param>
+        /// <param name="currency">Possible values include: 'btc', 'eth',
+        /// 'usd'</param>
         public PayInAddressModel(CurrencyType currency, string address = default(string), string campaignId = default(string), string email = default(string))
         {
             Address = address;
@@ -40,23 +40,23 @@ namespace Lykke.Service.IcoCommon.Client.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Address")]
+        [JsonProperty(PropertyName = "address")]
         public string Address { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'BTC', 'ETH', 'USD'
+        /// Gets or sets possible values include: 'btc', 'eth', 'usd'
         /// </summary>
-        [JsonProperty(PropertyName = "Currency")]
+        [JsonProperty(PropertyName = "currency")]
         public CurrencyType Currency { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "CampaignId")]
+        [JsonProperty(PropertyName = "campaignId")]
         public string CampaignId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Email")]
+        [JsonProperty(PropertyName = "email")]
         public string Email { get; set; }
 
         /// <summary>

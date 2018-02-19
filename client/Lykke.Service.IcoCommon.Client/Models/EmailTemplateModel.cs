@@ -38,22 +38,22 @@ namespace Lykke.Service.IcoCommon.Client.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "CampaignId")]
+        [JsonProperty(PropertyName = "campaignId")]
         public string CampaignId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "TemplateId")]
+        [JsonProperty(PropertyName = "templateId")]
         public string TemplateId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Body")]
+        [JsonProperty(PropertyName = "body")]
         public string Body { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Subject")]
+        [JsonProperty(PropertyName = "subject")]
         public string Subject { get; set; }
 
     }

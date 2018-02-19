@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Lykke.Common.ApiLibrary.Contract;
 using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Models.Mail;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -60,7 +61,7 @@ namespace Lykke.Service.IcoCommon.Controllers
         }
 
         [HttpGet("templates")]
-        [SwaggerOperation(nameof(GetCampaignEmailTemplates))]
+        [SwaggerOperation(nameof(GetAllEmailTemplates))]
         public async Task<EmailTemplateModel[]> GetAllEmailTemplates()
         {
             return (await _emailTemplateService.GetAllTemplatesAsync())
@@ -85,6 +86,16 @@ namespace Lykke.Service.IcoCommon.Controllers
             [FromRoute]string templateId)
         {
             return new EmailTemplateModel(await _emailTemplateService.GetTemplateAsync(campaignId, templateId));
+        }
+
+        [HttpDelete("{to}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
+        [SwaggerOperation(nameof(DeleteSentEmails))]
+        public async Task<IActionResult> DeleteSentEmails(
+            [FromRoute]string to,
+            [FromQuery]string campaignId)
+        {
+            return Ok(await _emailService.DeleteEmailsAsync(to, campaignId));
         }
     }
 }

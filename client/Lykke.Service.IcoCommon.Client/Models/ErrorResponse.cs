@@ -38,12 +38,12 @@ namespace Lykke.Service.IcoCommon.Client.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ErrorMessage")]
+        [JsonProperty(PropertyName = "errorMessage")]
         public string ErrorMessage { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "ModelErrors")]
+        [JsonProperty(PropertyName = "modelErrors")]
         public IDictionary<string, IList<string>> ModelErrors { get; set; }
 
     }

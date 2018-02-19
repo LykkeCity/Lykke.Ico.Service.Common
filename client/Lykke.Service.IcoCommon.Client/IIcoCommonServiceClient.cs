@@ -13,6 +13,8 @@ namespace Lykke.Service.IcoCommon.Client
 
         Task<IList<EmailModel>> GetSentEmailsAsync(string to, string campaignId = null);
 
+        Task<int> DeleteSentEmailsAsync(string to, string campaignId = null);
+
         Task AddOrUpdateEmailTemplateAsync(EmailTemplateModel emailTemplate);
 
         Task<IList<EmailTemplateModel>> GetCampaignEmailTemplatesAsync(string campaignId);

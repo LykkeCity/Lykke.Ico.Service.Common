@@ -46,6 +46,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
             get => DateTime.ParseExact(RowKey, "O", CultureInfo.InvariantCulture);
             set => RowKey = GetRowKey(value);
         }
+
         public string CampaignId { get; set; }
         public string TemplateId { get; set; }
         public string Subject { get; set; }

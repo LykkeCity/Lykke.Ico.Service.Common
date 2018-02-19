@@ -6,8 +6,8 @@ namespace Lykke.Service.IcoCommon
 {
     public enum CurrencyType
     {
-        BTC,
-        ETH,
-        USD
+        Btc,
+        Eth,
+        Usd
     }
 }

@@ -42,32 +42,32 @@ namespace Lykke.Service.IcoCommon.Client.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "CampaignId")]
+        [JsonProperty(PropertyName = "campaignId")]
         public string CampaignId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "TemplateId")]
+        [JsonProperty(PropertyName = "templateId")]
         public string TemplateId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "To")]
+        [JsonProperty(PropertyName = "to")]
         public string To { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Subject")]
+        [JsonProperty(PropertyName = "subject")]
         public string Subject { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Data")]
+        [JsonProperty(PropertyName = "data")]
         public object Data { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Attachments")]
+        [JsonProperty(PropertyName = "attachments")]
         public IDictionary<string, byte[]> Attachments { get; set; }
 
     }

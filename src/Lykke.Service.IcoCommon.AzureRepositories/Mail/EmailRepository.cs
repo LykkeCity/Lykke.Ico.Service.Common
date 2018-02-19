@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AzureStorage;
 using AzureStorage.Queue;
@@ -52,6 +53,17 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
             };
 
             await _tableStorage.InsertAsync(entity);
+        }
+
+        public async Task<int> DeleteAsync(string to, string campaignId = null)
+        {
+            var emails = string.IsNullOrEmpty(campaignId) 
+                ? await _tableStorage.GetDataAsync(GetPartitionKey(to))
+                : await _tableStorage.GetDataAsync(GetPartitionKey(to), email => email.CampaignId == campaignId);
+
+            await _tableStorage.DeleteAsync(emails);
+
+            return emails.Count();
         }
     }
 }

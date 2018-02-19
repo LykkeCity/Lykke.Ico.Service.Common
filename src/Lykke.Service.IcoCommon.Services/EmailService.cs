@@ -63,7 +63,7 @@ namespace Lykke.Service.IcoCommon.Services
                     $"Configuration for campaign \"{email.CampaignId}\" not found. Default SMTP settings are used to send the email.");
             }
 
-            await _smtpService.SendAsync(email, campaignSettings?.Smtp);
+            //await _smtpService.SendAsync(email, campaignSettings?.Smtp);
 
             await _emailRepository.InsertAsync(email);
 
@@ -75,6 +75,11 @@ namespace Lykke.Service.IcoCommon.Services
         public async Task<IEmail[]> GetSentEmailsAsync(string to, string campaignId = null)
         {
             return (await _emailRepository.GetAsync(to, campaignId)).ToArray();
+        }
+
+        public async Task<int> DeleteEmailsAsync(string to, string campaignId = null)
+        {
+            return await _emailRepository.DeleteAsync(to, campaignId);
         }
     }
 }

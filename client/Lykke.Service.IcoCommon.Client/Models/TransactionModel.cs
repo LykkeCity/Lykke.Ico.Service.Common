@@ -23,8 +23,8 @@ namespace Lykke.Service.IcoCommon.Client.Models
         /// <summary>
         /// Initializes a new instance of the TransactionModel class.
         /// </summary>
-        /// <param name="currency">Possible values include: 'BTC', 'ETH',
-        /// 'USD'</param>
+        /// <param name="currency">Possible values include: 'btc', 'eth',
+        /// 'usd'</param>
         public TransactionModel(System.DateTime createdUtc, CurrencyType currency, double amount, string blockId = default(string), string uniqueId = default(string), string transactionId = default(string), string payInAddress = default(string))
         {
             BlockId = blockId;
@@ -44,38 +44,38 @@ namespace Lykke.Service.IcoCommon.Client.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "BlockId")]
+        [JsonProperty(PropertyName = "blockId")]
         public string BlockId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "CreatedUtc")]
+        [JsonProperty(PropertyName = "createdUtc")]
         public System.DateTime CreatedUtc { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "UniqueId")]
+        [JsonProperty(PropertyName = "uniqueId")]
         public string UniqueId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "TransactionId")]
+        [JsonProperty(PropertyName = "transactionId")]
         public string TransactionId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "PayInAddress")]
+        [JsonProperty(PropertyName = "payInAddress")]
         public string PayInAddress { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'BTC', 'ETH', 'USD'
+        /// Gets or sets possible values include: 'btc', 'eth', 'usd'
         /// </summary>
-        [JsonProperty(PropertyName = "Currency")]
+        [JsonProperty(PropertyName = "currency")]
         public CurrencyType Currency { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "Amount")]
+        [JsonProperty(PropertyName = "amount")]
         public double Amount { get; set; }
 
         /// <summary>
