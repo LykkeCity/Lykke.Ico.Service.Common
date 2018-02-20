@@ -80,5 +80,12 @@ namespace Lykke.Service.IcoCommon.Services
 
             ResetCache(campaignId);
         }
+
+        public async Task DeleteCampaignTemplatesAsync(string campaignId)
+        {
+            await _templateRepository.DeleteAsync(campaignId);
+
+            ResetCache(campaignId);
+        }
     }
 }

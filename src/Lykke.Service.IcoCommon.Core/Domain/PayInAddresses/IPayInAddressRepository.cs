@@ -8,7 +8,8 @@ namespace Lykke.Service.IcoCommon.Core.Domain.PayInAddresses
     public interface IPayInAddressRepository
     {
         Task InsertAsync(IPayInAddress payInAddress);
-        Task DeleteAsync(string address, CurrencyType currency);
         Task<IPayInAddress> GetAsync(string address, CurrencyType currency);
+        Task DeleteAsync(string address, CurrencyType currency);
+        Task DeleteAsync(string campaignId);
     }
 }

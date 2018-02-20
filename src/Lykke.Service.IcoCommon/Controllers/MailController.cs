@@ -47,13 +47,12 @@ namespace Lykke.Service.IcoCommon.Controllers
         }
 
         [HttpDelete("{to}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
         [SwaggerOperation(nameof(DeleteSentEmails))]
-        public async Task<IActionResult> DeleteSentEmails(
+        public async Task DeleteSentEmails(
             [FromRoute]string to,
             [FromQuery]string campaignId)
         {
-            return Ok(await _emailService.DeleteEmailsAsync(to, campaignId));
+            await _emailService.DeleteEmailsAsync(to, campaignId);
         }
 
         [HttpPost("templates")]
@@ -99,7 +98,7 @@ namespace Lykke.Service.IcoCommon.Controllers
         }
 
         [HttpDelete("templates/{campaignId}/{templateId}")]
-        [SwaggerOperation(nameof(GetEmailTemplate))]
+        [SwaggerOperation(nameof(DeleteEmailTemplate))]
         public async Task DeleteEmailTemplate(
             [FromRoute]string campaignId,
             [FromRoute]string templateId)

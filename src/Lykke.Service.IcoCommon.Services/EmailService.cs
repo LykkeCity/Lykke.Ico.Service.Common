@@ -77,9 +77,14 @@ namespace Lykke.Service.IcoCommon.Services
             return (await _emailRepository.GetAsync(to, campaignId)).ToArray();
         }
 
-        public async Task<int> DeleteEmailsAsync(string to, string campaignId = null)
+        public async Task DeleteEmailsAsync(string to, string campaignId = null)
         {
-            return await _emailRepository.DeleteAsync(to, campaignId);
+            await _emailRepository.DeleteAsync(to, campaignId);
+        }
+
+        public async Task DeleteCampaignEmailsAsync(string campaignId)
+        {
+            await _emailRepository.DeleteAsync(campaignId);
         }
     }
 }

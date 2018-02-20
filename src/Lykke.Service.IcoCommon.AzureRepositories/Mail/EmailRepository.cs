@@ -10,6 +10,7 @@ using Common.Log;
 using Lykke.Service.IcoCommon.Core;
 using Lykke.Service.IcoCommon.Core.Domain.Mail;
 using Lykke.SettingsReader;
+using Microsoft.WindowsAzure.Storage.Table;
 using static Lykke.Service.IcoCommon.AzureRepositories.Mail.EmailEntity;
 
 namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
@@ -32,14 +33,9 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
 
         public async Task<IEnumerable<IEmail>> GetAsync(string to, string campaignId = null)
         {
-            if (string.IsNullOrEmpty(campaignId))
-            {
-                return await _tableStorage.GetDataAsync(GetPartitionKey(to));
-            }
-            else
-            {
-                return await _tableStorage.GetDataAsync(GetPartitionKey(to), email => email.CampaignId == campaignId);
-            }
+            return string.IsNullOrEmpty(campaignId) 
+                ? await _tableStorage.GetDataAsync(GetPartitionKey(to))
+                : await _tableStorage.GetDataAsync(GetPartitionKey(to), email => email.CampaignId == campaignId);
         }
 
         public async Task InsertAsync(IEmail email)
@@ -55,15 +51,31 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
             await _tableStorage.InsertAsync(entity);
         }
 
-        public async Task<int> DeleteAsync(string to, string campaignId = null)
+        public async Task DeleteAsync(string to, string campaignId = null)
         {
             var emails = string.IsNullOrEmpty(campaignId) 
                 ? await _tableStorage.GetDataAsync(GetPartitionKey(to))
                 : await _tableStorage.GetDataAsync(GetPartitionKey(to), email => email.CampaignId == campaignId);
 
-            await _tableStorage.DeleteAsync(emails);
+            if (emails.Any())
+            {
+                await _tableStorage.DeleteAsync(emails);
+            }
+        }
 
-            return emails.Count();
+        public async Task DeleteAsync(string campaignId)
+        {
+            var query = new TableQuery<EmailEntity>()
+                .Where(TableQuery.GenerateFilterCondition(nameof(EmailEntity.CampaignId), QueryComparisons.Equal, campaignId));
+
+            var entities = new List<EmailEntity>();
+
+            await _tableStorage.ExecuteAsync(query, chunk => entities.AddRange(chunk));
+
+            if (entities.Any())
+            {
+                await _tableStorage.DeleteAsync(entities);
+            }
         }
     }
 }

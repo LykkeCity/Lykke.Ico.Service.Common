@@ -10,7 +10,8 @@ namespace Lykke.Service.IcoCommon.Core.Services
     {
         Task EnqueueEmailAsync(IEmailData emailData);
         Task SendEmailAsync(IEmailData emailData);
-        Task<IEmail[]> GetSentEmailsAsync(string to, string campaignId);
-        Task<int> DeleteEmailsAsync(string email, string campaignId);
+        Task<IEmail[]> GetSentEmailsAsync(string to, string campaignId = null);
+        Task DeleteEmailsAsync(string to, string campaignId = null);
+        Task DeleteCampaignEmailsAsync(string campaignId);
     }
 }

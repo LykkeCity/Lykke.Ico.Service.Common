@@ -14,5 +14,6 @@ namespace Lykke.Service.IcoCommon.Core.Services
         Task<IEmailTemplate[]> GetCampaignTemplatesAsync(string campaignId);
         Task<IEmailTemplate[]> GetAllTemplatesAsync();
         Task DeleteTemplateAsync(string campaignId, string templateId);
+        Task DeleteCampaignTemplatesAsync(string campaignId);
     }
 }

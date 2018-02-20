@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AzureStorage;
 using AzureStorage.Blob;
@@ -7,6 +8,7 @@ using AzureStorage.Tables;
 using Common.Log;
 using Lykke.Service.IcoCommon.Core.Domain.Mail;
 using Lykke.SettingsReader;
+using Microsoft.WindowsAzure.Storage.Table;
 using static Lykke.Service.IcoCommon.AzureRepositories.Mail.EmailTemplateEntity;
 
 namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
@@ -67,12 +69,33 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
             return await _templateStorage.GetDataAsync();
         }
 
-        public async Task DeleteAsync(string campaignId, string templateId)
+        public async Task DeleteAsync(string campaignId, string templateId = null)
         {
-            var partitionKey = GetPartitionKey(campaignId);
-            var rowKey = GetRowKey(templateId);
+            var templates = string.IsNullOrEmpty(templateId)
+                ? await _templateStorage.GetDataAsync(GetPartitionKey(campaignId))
+                : await _templateStorage.GetDataAsync(GetPartitionKey(campaignId), t => t.TemplateId == templateId);
 
-            await _templateStorage.DeleteIfExistAsync(partitionKey, rowKey);
+            if (templates.Any())
+            {
+                await _templateStorage.DeleteAsync(templates);
+            }
+
+            // if it's a campaign deletion then delete history too
+
+            if (string.IsNullOrEmpty(templateId))
+            {
+                var query = new TableQuery<EmailTemplateHistoryEntity>()
+                    .Where(TableQuery.GenerateFilterCondition(nameof(EmailTemplateHistoryEntity.CampaignId), QueryComparisons.Equal, campaignId));
+
+                var entities = new List<EmailTemplateHistoryEntity>();
+
+                await _templateHistoryStorage.ExecuteAsync(query, chunk => entities.AddRange(chunk));
+
+                if (entities.Any())
+                {
+                    await _templateHistoryStorage.DeleteAsync(entities);
+                }
+            }
         }
     }
 }

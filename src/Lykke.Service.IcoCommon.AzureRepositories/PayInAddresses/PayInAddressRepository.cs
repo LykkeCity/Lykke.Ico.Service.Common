@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AzureStorage;
 using AzureStorage.Tables;
 using Common.Log;
 using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
 using Lykke.SettingsReader;
+using Microsoft.WindowsAzure.Storage.Table;
 using static Lykke.Service.IcoCommon.AzureRepositories.PayInAddresses.PayInAddressEntity;
 
 namespace Lykke.Service.IcoCommon.AzureRepositories.PayInAddresses
@@ -22,6 +25,14 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.PayInAddresses
             await _tableStorage.InsertAsync(new PayInAddressEntity(payInAddress));
         }
 
+        public async Task<IPayInAddress> GetAsync(string address, CurrencyType currency)
+        {
+            var partitionKey = GetPartitionKey(address);
+            var rowKey = GetRowKey(currency);
+
+            return await _tableStorage.GetDataAsync(partitionKey, rowKey);
+        }
+
         public async Task DeleteAsync(string address, CurrencyType currency)
         {
             var partitionKey = GetPartitionKey(address);
@@ -30,12 +41,19 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.PayInAddresses
             await _tableStorage.DeleteIfExistAsync(partitionKey, rowKey);
         }
 
-        public async Task<IPayInAddress> GetAsync(string address, CurrencyType currency)
+        public async Task DeleteAsync(string campaignId)
         {
-            var partitionKey = GetPartitionKey(address);
-            var rowKey = GetRowKey(currency);
+            var query = new TableQuery<PayInAddressEntity>()
+                .Where(TableQuery.GenerateFilterCondition(nameof(PayInAddressEntity.CampaignId), QueryComparisons.Equal, campaignId));
 
-            return await _tableStorage.GetDataAsync(partitionKey, rowKey);
+            var entities = new List<PayInAddressEntity>();
+
+            await _tableStorage.ExecuteAsync(query, chunk => entities.AddRange(chunk));
+
+            if (entities.Any())
+            {
+                await _tableStorage.DeleteAsync(entities);
+            }
         }
     }
 }
