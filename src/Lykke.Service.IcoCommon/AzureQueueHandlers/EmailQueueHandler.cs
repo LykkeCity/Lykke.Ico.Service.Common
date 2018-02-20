@@ -20,7 +20,7 @@ namespace Lykke.Service.IcoCommon.AzureQueueHandlers
             _emailService = emailService;
         }
 
-        [QueueTrigger(Constants.EmailQueue)]
+        [QueueTrigger(Constants.EmailQueue, maxPollingIntervalMs: 30000)]
         public async Task HandleEmailQueueMessage(EmailDataModel emailData)
         {
             try
