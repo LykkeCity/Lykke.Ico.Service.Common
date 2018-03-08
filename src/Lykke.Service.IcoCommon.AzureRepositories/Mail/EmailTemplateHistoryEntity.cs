@@ -23,11 +23,13 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
             TemplateId = emailTemplate.TemplateId;
             Body = emailTemplate.Body;
             Subject = emailTemplate.Subject;
+            IsLayout = emailTemplate.IsLayout;
         }
 
         public string CampaignId { get; set; }
         public string TemplateId { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
+        public bool IsLayout { get; set; }
     }
 }

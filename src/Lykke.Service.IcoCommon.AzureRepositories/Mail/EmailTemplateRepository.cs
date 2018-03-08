@@ -35,7 +35,8 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
 
             if (entity == null ||
                 entity.Subject != emailTemplate.Subject ||
-                entity.Body != emailTemplate.Body)
+                entity.Body != emailTemplate.Body ||
+                entity.IsLayout != emailTemplate.IsLayout)
             {
                 await _templateStorage.InsertOrReplaceAsync(new EmailTemplateEntity(emailTemplate));
 

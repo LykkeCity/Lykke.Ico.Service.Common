@@ -7,8 +7,11 @@
         <input type="text" ng-model="vm.template.campaignId" />
         <label>TemplateId</label>
         <input type="text" ng-model="vm.template.templateId" />
-        <label>Subject</label>
-        <input type="text" ng-model="vm.template.subject" />
+        <label ng-if="!vm.template.isLayout">Subject</label>
+        <input ng-if="!vm.template.isLayout" type="text" ng-model="vm.template.subject" />
+        <label>Is Layout</label>
+        <input type="checkbox" ng-model="vm.template.isLayout" />
+        <br />
         <button class="button button-outline" ng-click="vm.save()">Save</button>
         <button class="button button-outline" ng-click="vm.deleteTemplate()">Delete</button>
         <hr />

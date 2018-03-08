@@ -22,12 +22,13 @@ namespace Lykke.Service.IcoCommon.Client.Models
         /// <summary>
         /// Initializes a new instance of the EmailTemplateModel class.
         /// </summary>
-        public EmailTemplateModel(string campaignId = default(string), string templateId = default(string), string body = default(string), string subject = default(string))
+        public EmailTemplateModel(bool isLayout, string campaignId = default(string), string templateId = default(string), string body = default(string), string subject = default(string))
         {
             CampaignId = campaignId;
             TemplateId = templateId;
             Body = body;
             Subject = subject;
+            IsLayout = isLayout;
             CustomInit();
         }
 
@@ -56,5 +57,20 @@ namespace Lykke.Service.IcoCommon.Client.Models
         [JsonProperty(PropertyName = "subject")]
         public string Subject { get; set; }
 
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "isLayout")]
+        public bool IsLayout { get; set; }
+
+        /// <summary>
+        /// Validate the object.
+        /// </summary>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown if validation fails
+        /// </exception>
+        public virtual void Validate()
+        {
+            //Nothing to validate
+        }
     }
 }

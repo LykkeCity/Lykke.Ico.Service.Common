@@ -25,6 +25,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
             TemplateId = emailTemplate.TemplateId;
             Body = emailTemplate.Body;
             Subject = emailTemplate.Subject;
+            IsLayout = emailTemplate.IsLayout;
         }
 
         [IgnoreProperty]
@@ -48,6 +49,12 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
         }
 
         public string Subject
+        {
+            get;
+            set;
+        }
+
+        public bool IsLayout
         {
             get;
             set;

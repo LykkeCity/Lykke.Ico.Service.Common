@@ -180,9 +180,9 @@ namespace Lykke.Service.IcoCommon.Client
             /// </param>
             /// <param name='campaignId'>
             /// </param>
-            public static int? DeleteSentEmails(this IIcoCommonAPI operations, string to, string campaignId = default(string))
+            public static void DeleteSentEmails(this IIcoCommonAPI operations, string to, string campaignId = default(string))
             {
-                return operations.DeleteSentEmailsAsync(to, campaignId).GetAwaiter().GetResult();
+                operations.DeleteSentEmailsAsync(to, campaignId).GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -195,12 +195,9 @@ namespace Lykke.Service.IcoCommon.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<int?> DeleteSentEmailsAsync(this IIcoCommonAPI operations, string to, string campaignId = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteSentEmailsAsync(this IIcoCommonAPI operations, string to, string campaignId = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.DeleteSentEmailsWithHttpMessagesAsync(to, campaignId, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
+                (await operations.DeleteSentEmailsWithHttpMessagesAsync(to, campaignId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <param name='operations'>
@@ -302,6 +299,33 @@ namespace Lykke.Service.IcoCommon.Client
                 {
                     return _result.Body;
                 }
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='campaignId'>
+            /// </param>
+            /// <param name='templateId'>
+            /// </param>
+            public static void DeleteEmailTemplate(this IIcoCommonAPI operations, string campaignId, string templateId)
+            {
+                operations.DeleteEmailTemplateAsync(campaignId, templateId).GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='campaignId'>
+            /// </param>
+            /// <param name='templateId'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task DeleteEmailTemplateAsync(this IIcoCommonAPI operations, string campaignId, string templateId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.DeleteEmailTemplateWithHttpMessagesAsync(campaignId, templateId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <param name='operations'>

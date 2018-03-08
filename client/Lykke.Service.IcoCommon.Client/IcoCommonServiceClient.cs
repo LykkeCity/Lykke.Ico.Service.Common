@@ -45,9 +45,9 @@ namespace Lykke.Service.IcoCommon.Client
             return await _api.GetSentEmailsAsync(to, campaignId);
         }
 
-        public async Task<int> DeleteSentEmailsAsync(string to, string campaignId = null)
+        public async Task DeleteSentEmailsAsync(string to, string campaignId = null)
         {
-            return (await _api.DeleteSentEmailsAsync(to, campaignId)) ?? 0;
+            await _api.DeleteSentEmailsAsync(to, campaignId);
         }
 
         public async Task AddOrUpdateEmailTemplateAsync(EmailTemplateModel emailTemplate)

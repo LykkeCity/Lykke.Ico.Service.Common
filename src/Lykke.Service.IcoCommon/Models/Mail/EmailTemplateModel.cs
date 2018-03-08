@@ -16,6 +16,7 @@ namespace Lykke.Service.IcoCommon.Models.Mail
             TemplateId = emailTemplate.TemplateId;
             Body = emailTemplate.Body;
             Subject = emailTemplate.Subject;
+            IsLayout = emailTemplate.IsLayout;
         }
 
         [Required]
@@ -28,5 +29,7 @@ namespace Lykke.Service.IcoCommon.Models.Mail
         public string Body { get; set; }
 
         public string Subject { get; set; }
+
+        public bool IsLayout { get; set; }
     }
 }

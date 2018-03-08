@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Lykke.Service.IcoCommon.Core.Domain.Mail
+﻿namespace Lykke.Service.IcoCommon.Core.Domain.Mail
 {
     public interface IEmailTemplate
     {
@@ -10,5 +6,6 @@ namespace Lykke.Service.IcoCommon.Core.Domain.Mail
         string TemplateId { get; }
         string Subject { get; }
         string Body { get; }
+        bool IsLayout { get; }
     }
 }

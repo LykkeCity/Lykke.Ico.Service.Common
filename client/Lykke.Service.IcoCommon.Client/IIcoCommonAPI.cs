@@ -110,7 +110,7 @@ namespace Lykke.Service.IcoCommon.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<int?>> DeleteSentEmailsWithHttpMessagesAsync(string to, string campaignId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> DeleteSentEmailsWithHttpMessagesAsync(string to, string campaignId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -151,6 +151,18 @@ namespace Lykke.Service.IcoCommon.Client
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<EmailTemplateModel>> GetEmailTemplateWithHttpMessagesAsync(string campaignId, string templateId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <param name='campaignId'>
+        /// </param>
+        /// <param name='templateId'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> DeleteEmailTemplateWithHttpMessagesAsync(string campaignId, string templateId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='transactions'>
         /// </param>
