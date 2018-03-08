@@ -18,6 +18,29 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
         public static string GetPartitionKey(string to) => to;
         public static string GetRowKey(DateTime sentUtc) => sentUtc.ToString("O");
 
+        // See: https://blogs.msdn.microsoft.com/avkashchauhan/2011/11/30/how-the-size-of-an-entity-is-caclulated-in-windows-azure-table-storage/
+        // String – # of Characters * 2 bytes + 4 bytes for length of string
+        // Max coumn size is 64 Kb, so max string len is (65536 - 4) / 2 = 32766
+        public const int MaxStringLength = 32766;
+
+        public static string Truncate(string str)
+        {
+            if (str == null)
+            {
+                return null;
+            }
+
+            // 3 - is for "..."
+            const int maxLength = MaxStringLength - 3;
+
+            if (str.Length > maxLength)
+            {
+                return string.Concat(str.Substring(0, maxLength), "...");
+            }
+
+            return str;
+        }
+
         public EmailEntity()
         {
         }
@@ -27,7 +50,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
             SentUtc = email.SentUtc;
             To = email.To;
             Subject = email.Subject;
-            Body = email.Body;
+            Body = Truncate(email.Body);
             CampaignId = email.CampaignId;
             TemplateId = email.TemplateId;
             Attachments = email.Attachments;
@@ -57,8 +80,33 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
 
         public class AttachmentsSerializer : IStorageValueSerializer
         {
-            public object Deserialize(string serialized) => JsonConvert.DeserializeObject<Dictionary<string, byte[]>>(serialized);
-            public string Serialize(object value) => JsonConvert.SerializeObject(value);
+            public const string StubMessage = "too_long_to_save";
+
+            public object Deserialize(string serialized)
+            {
+                if (serialized != StubMessage)
+                {
+                    return JsonConvert.DeserializeObject<Dictionary<string, byte[]>>(serialized);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            public string Serialize(object value)
+            {
+                var json = JsonConvert.SerializeObject(value);
+                if (json.Length <= MaxStringLength)
+                {
+                    return json;
+                }
+                else
+                {
+                    // don't save attachments at all to prevent errors on deserializing
+                    return StubMessage;
+                }
+            }
         }
     }
 }
