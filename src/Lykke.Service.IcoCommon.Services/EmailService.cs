@@ -49,16 +49,18 @@ namespace Lykke.Service.IcoCommon.Services
 
         public async Task SendEmailAsync(IEmail email)
         {
-            if (!_settings.CurrentValue.TryGetValue(email.CampaignId, out var campaignSettings))
+            if (!_settings.CurrentValue.TryGetValue(email.CampaignId, out var campaignSettings) ||
+                campaignSettings.Smtp == null)
             {
                 await _settings.Reload();
             }
 
-            if (!_settings.CurrentValue.TryGetValue(email.CampaignId, out campaignSettings))
+            if (!_settings.CurrentValue.TryGetValue(email.CampaignId, out campaignSettings) ||
+                campaignSettings.Smtp == null)
             {
                 await _log.WriteWarningAsync(nameof(SendEmailAsync),
                     $"Campaign: {email.CampaignId}, Template: {email.TemplateId}, To: {email.To}",
-                    $"Configuration for campaign \"{email.CampaignId}\" not found. Default SMTP settings are used to send the email.");
+                    $"SMTP settings for campaign \"{email.CampaignId}\" not found. Default SMTP settings are used to send the email.");
             }
 
             await _smtpService.SendAsync(email, campaignSettings?.Smtp);
