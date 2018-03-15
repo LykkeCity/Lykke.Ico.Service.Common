@@ -17,7 +17,6 @@ namespace Lykke.Service.IcoCommon.Services
         private readonly IEmailRepository _emailRepository;
         private readonly ISmtpService _smtpService;
         private readonly IReloadingManager<Dictionary<string, CampaignSettings>> _settings;
-        private readonly SmtpSettings _defaultSmtpSettings;
 
         public EmailService(
             ILog log, 

@@ -67,7 +67,7 @@ namespace Lykke.Service.IcoCommon.Services
             await SendViaDefaultSmtp(settings, emailMessage);
         }
 
-        private static async Task SendViaDefaultSmtp(SmtpSettings settings, MimeMessage emailMessage)
+        private async Task SendViaDefaultSmtp(SmtpSettings settings, MimeMessage emailMessage)
         {
             using (var client = new SmtpClient())
             {
@@ -88,7 +88,7 @@ namespace Lykke.Service.IcoCommon.Services
             }
         }
 
-        private static async Task SendViaOffice365Smtp(SmtpSettings settings, MimeMessage emailMessage)
+        private async Task SendViaOffice365Smtp(SmtpSettings settings, MimeMessage emailMessage)
         {
             using (var client = new SmtpClient())
             {

@@ -19,6 +19,8 @@ namespace Lykke.Service.IcoCommon.Services
 
         public async override Task<IEnumerable<RazorLightProjectItem>> GetImportsAsync(string templateKey)
         {
+            await Task.Yield();
+
             return Enumerable.Empty<RazorLightProjectItem>();
         }
 
