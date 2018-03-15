@@ -57,18 +57,52 @@ namespace Lykke.Service.IcoCommon.Services
             emailMessage.Subject = email.Subject;
             emailMessage.Body = messageBody;
 
+            if (settings.Host.ToLower().Contains("smtp.office365.com"))
+            {
+                await SendViaOffice365Smtp(settings, emailMessage);
+
+                return;
+            }
+
+            await SendViaDefaultSmtp(settings, emailMessage);
+        }
+
+        private static async Task SendViaDefaultSmtp(SmtpSettings settings, MimeMessage emailMessage)
+        {
             using (var client = new SmtpClient())
             {
-                client.LocalDomain = settings.LocalDomain;
-
                 try
                 {
+                    client.LocalDomain = settings.LocalDomain;
+
                     await client.ConnectAsync(settings.Host, settings.Port, SecureSocketOptions.None).ConfigureAwait(false);
                     await client.AuthenticateAsync(settings.Login, settings.Password).ConfigureAwait(false);
                     await client.SendAsync(emailMessage).ConfigureAwait(false);
                     await client.DisconnectAsync(true).ConfigureAwait(false);
                 }
-                catch (Exception ex)
+                catch
+                {
+                    await Task.Delay(500);
+                    throw;
+                }
+            }
+        }
+
+        private static async Task SendViaOffice365Smtp(SmtpSettings settings, MimeMessage emailMessage)
+        {
+            using (var client = new SmtpClient())
+            {
+                try
+                {
+                    client.LocalDomain = settings.LocalDomain;
+                    client.AuthenticationMechanisms.Remove("XOAUTH2");
+
+                    await client.ConnectAsync(settings.Host, settings.Port, SecureSocketOptions.StartTls).ConfigureAwait(false);
+                    await client.AuthenticateAsync(settings.Login, settings.Password).ConfigureAwait(false);
+                    await client.SendAsync(emailMessage).ConfigureAwait(false);
+                    await client.DisconnectAsync(true).ConfigureAwait(false);
+                }
+                catch
                 {
                     await Task.Delay(500);
                     throw;
