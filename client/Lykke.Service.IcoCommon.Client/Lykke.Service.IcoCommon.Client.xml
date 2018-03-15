@@ -241,8 +241,8 @@
             A response object containing the response body and response headers.
             </return>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.AddOrUpdateEmailTemplateWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
-            <param name='emailTemplate'>
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.AddOrUpdateEmailTemplateWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.EmailTemplateAddOrUpdateRequest,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='request'>
             </param>
             <param name='customHeaders'>
             Headers that will be added to request.
@@ -322,6 +322,33 @@
             </param>
             <exception cref="T:Microsoft.Rest.HttpOperationException">
             Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown when a required parameter is null
+            </exception>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when a required parameter is null
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.GetEmailTemplateHistoryWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='campaignId'>
+            </param>
+            <param name='templateId'>
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
             </exception>
             <exception cref="T:Microsoft.Rest.ValidationException">
             Thrown when a required parameter is null
@@ -505,18 +532,18 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.AddOrUpdateEmailTemplate(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.AddOrUpdateEmailTemplate(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.EmailTemplateAddOrUpdateRequest)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
-            <param name='emailTemplate'>
+            <param name='request'>
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.AddOrUpdateEmailTemplateAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.AddOrUpdateEmailTemplateAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,Lykke.Service.IcoCommon.Client.Models.EmailTemplateAddOrUpdateRequest,System.Threading.CancellationToken)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
-            <param name='emailTemplate'>
+            <param name='request'>
             </param>
             <param name='cancellationToken'>
             The cancellation token.
@@ -570,6 +597,27 @@
             </param>
         </member>
         <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.DeleteEmailTemplateAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,System.String,System.Threading.CancellationToken)">
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='campaignId'>
+            </param>
+            <param name='templateId'>
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetEmailTemplateHistory(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,System.String)">
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='campaignId'>
+            </param>
+            <param name='templateId'>
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.GetEmailTemplateHistoryAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,System.String,System.Threading.CancellationToken)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
@@ -703,8 +751,8 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.AddOrUpdateEmailTemplateWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
-            <param name='emailTemplate'>
+        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.AddOrUpdateEmailTemplateWithHttpMessagesAsync(Lykke.Service.IcoCommon.Client.Models.EmailTemplateAddOrUpdateRequest,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='request'>
             </param>
             <param name='customHeaders'>
             The headers that will be added to request.
@@ -736,6 +784,18 @@
             </param>
         </member>
         <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.DeleteEmailTemplateWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='campaignId'>
+            </param>
+            <param name='templateId'>
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.GetEmailTemplateHistoryWithHttpMessagesAsync(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <param name='campaignId'>
             </param>
             <param name='templateId'>
@@ -864,6 +924,82 @@
             </summary>
         </member>
         <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailModel.Validate">
+            <summary>
+            Validate the object.
+            </summary>
+            <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown if validation fails
+            </exception>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailTemplateAddOrUpdateRequest.#ctor">
+            <summary>
+            Initializes a new instance of the EmailTemplateAddOrUpdateRequest
+            class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailTemplateAddOrUpdateRequest.#ctor(Lykke.Service.IcoCommon.Client.Models.EmailTemplateModel,System.String)">
+            <summary>
+            Initializes a new instance of the EmailTemplateAddOrUpdateRequest
+            class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailTemplateAddOrUpdateRequest.EmailTemplate">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailTemplateAddOrUpdateRequest.Username">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailTemplateAddOrUpdateRequest.Validate">
+            <summary>
+            Validate the object.
+            </summary>
+            <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown if validation fails
+            </exception>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailTemplateHistoryItemModel.#ctor">
+            <summary>
+            Initializes a new instance of the EmailTemplateHistoryItemModel
+            class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailTemplateHistoryItemModel.#ctor(System.Boolean,System.Nullable{System.DateTime},System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the EmailTemplateHistoryItemModel
+            class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailTemplateHistoryItemModel.ChangedUtc">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailTemplateHistoryItemModel.Username">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailTemplateHistoryItemModel.CampaignId">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailTemplateHistoryItemModel.TemplateId">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailTemplateHistoryItemModel.Body">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailTemplateHistoryItemModel.Subject">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.EmailTemplateHistoryItemModel.IsLayout">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.EmailTemplateHistoryItemModel.Validate">
             <summary>
             Validate the object.
             </summary>

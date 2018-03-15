@@ -108,7 +108,10 @@ function emailTemplatesController($http) {
         }
 
         $http
-            .post(templatesUrl, vm.template)
+            .post(templatesUrl, {
+                emailTemplate: vm.template,
+                username: "common"
+            })
             .then(
                 function (response) {
                     var index = vm.templateList.indexOf(vm.template);

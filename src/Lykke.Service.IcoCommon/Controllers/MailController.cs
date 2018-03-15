@@ -57,14 +57,14 @@ namespace Lykke.Service.IcoCommon.Controllers
 
         [HttpPost("templates")]
         [SwaggerOperation(nameof(AddOrUpdateEmailTemplate))]
-        public async Task<IActionResult> AddOrUpdateEmailTemplate([FromBody]EmailTemplateModel emailTemplate)
+        public async Task<IActionResult> AddOrUpdateEmailTemplate([FromBody]EmailTemplateAddOrUpdateRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ErrorResponseFactory.Create(ModelState));
             }
 
-            await _emailTemplateService.AddOrUpdateTemplateAsync(emailTemplate);
+            await _emailTemplateService.AddOrUpdateTemplateAsync(request.EmailTemplate, request.Username);
 
             return Ok();
         }
@@ -95,6 +95,17 @@ namespace Lykke.Service.IcoCommon.Controllers
             [FromRoute]string templateId)
         {
             return new EmailTemplateModel(await _emailTemplateService.GetTemplateAsync(campaignId, templateId));
+        }
+
+        [HttpGet("templates/{campaignId}/{templateId}/history")]
+        [SwaggerOperation(nameof(GetEmailTemplateHistory))]
+        public async Task<EmailTemplateHistoryItemModel[]> GetEmailTemplateHistory(
+            [FromRoute]string campaignId,
+            [FromRoute]string templateId)
+        {
+            return (await _emailTemplateService.GetHistoryAsync(campaignId, templateId))
+                .Select(hi => new EmailTemplateHistoryItemModel(hi))
+                .ToArray();
         }
 
         [HttpDelete("templates/{campaignId}/{templateId}")]

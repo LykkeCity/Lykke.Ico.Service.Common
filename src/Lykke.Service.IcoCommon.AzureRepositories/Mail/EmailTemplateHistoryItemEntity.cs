@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Lykke.AzureStorage.Tables;
 using Lykke.AzureStorage.Tables.Entity.Annotation;
 using Lykke.AzureStorage.Tables.Entity.ValueTypesMerging;
@@ -11,19 +9,26 @@ using Microsoft.WindowsAzure.Storage.Table;
 namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
 {
     [ValueTypeMergingStrategy(ValueTypeMergingStrategy.UpdateAlways)]
-    public class EmailTemplateHistoryEntity : AzureTableEntity, IEmailTemplate
+    public class EmailTemplateHistoryItemEntity : AzureTableEntity, IEmailTemplateHistoryItem
     {
-        public EmailTemplateHistoryEntity()
+        public EmailTemplateHistoryItemEntity()
         {
         }
 
-        public EmailTemplateHistoryEntity(IEmailTemplate emailTemplate)
+        public EmailTemplateHistoryItemEntity(IEmailTemplate emailTemplate, string username)
         {
             CampaignId = emailTemplate.CampaignId;
             TemplateId = emailTemplate.TemplateId;
             Body = emailTemplate.Body;
             Subject = emailTemplate.Subject;
             IsLayout = emailTemplate.IsLayout;
+            Username = username;
+        }
+
+        [IgnoreProperty]
+        public DateTime ChangedUtc
+        {
+            get => DateTime.ParseExact(RowKey, "O", CultureInfo.InvariantCulture);
         }
 
         public string CampaignId { get; set; }
@@ -31,5 +36,6 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
         public string Subject { get; set; }
         public string Body { get; set; }
         public bool IsLayout { get; set; }
+        public string Username { get; set; }
     }
 }

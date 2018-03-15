@@ -50,9 +50,9 @@ namespace Lykke.Service.IcoCommon.Client
             await _api.DeleteSentEmailsAsync(to, campaignId);
         }
 
-        public async Task AddOrUpdateEmailTemplateAsync(EmailTemplateModel emailTemplate)
+        public async Task AddOrUpdateEmailTemplateAsync(EmailTemplateAddOrUpdateRequest request)
         {
-            await _api.AddOrUpdateEmailTemplateAsync(emailTemplate);
+            await _api.AddOrUpdateEmailTemplateAsync(request);
         }
 
         public async Task<IList<EmailTemplateModel>> GetAllEmailTemplatesAsync()
@@ -63,6 +63,11 @@ namespace Lykke.Service.IcoCommon.Client
         public async Task<IList<EmailTemplateModel>> GetCampaignEmailTemplatesAsync(string campaignId)
         {
             return await _api.GetCampaignEmailTemplatesAsync(campaignId);
+        }
+
+        public async Task<IList<EmailTemplateHistoryItemModel>> GetEmailTemplateHistoryAsync(string campaignId, string templateId)
+        {
+            return await _api.GetEmailTemplateHistoryAsync(campaignId, templateId);
         }
 
         public async Task<EmailTemplateModel> GetEmailTemplateAsync(string campaignId, string templateId)

@@ -8,3 +8,5 @@
 
 # Run this file if your use Execute as Script command of Visual Studio's PowerShell Tools extension
 autorest --input-file=http://localhost:5000/swagger/v1/swagger.json --csharp --output-folder=./client/Lykke.Service.IcoCommon.Client --namespace=Lykke.Service.IcoCommon.Client
+
+# Important!!!!: type of TransactionModel.Amount must be changed to decimal after generation

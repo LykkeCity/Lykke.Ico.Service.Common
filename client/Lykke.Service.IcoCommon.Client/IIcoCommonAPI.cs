@@ -120,7 +120,7 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse<IList<EmailTemplateModel>>> GetAllEmailTemplatesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
-        /// <param name='emailTemplate'>
+        /// <param name='request'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -128,7 +128,7 @@ namespace Lykke.Service.IcoCommon.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> AddOrUpdateEmailTemplateWithHttpMessagesAsync(EmailTemplateModel emailTemplate = default(EmailTemplateModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> AddOrUpdateEmailTemplateWithHttpMessagesAsync(EmailTemplateAddOrUpdateRequest request = default(EmailTemplateAddOrUpdateRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='campaignId'>
         /// </param>
@@ -163,6 +163,18 @@ namespace Lykke.Service.IcoCommon.Client
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> DeleteEmailTemplateWithHttpMessagesAsync(string campaignId, string templateId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <param name='campaignId'>
+        /// </param>
+        /// <param name='templateId'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IList<EmailTemplateHistoryItemModel>>> GetEmailTemplateHistoryWithHttpMessagesAsync(string campaignId, string templateId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='transactions'>
         /// </param>
