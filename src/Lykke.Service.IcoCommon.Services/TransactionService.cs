@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Common;
+using Common.Log;
 using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
 using Lykke.Service.IcoCommon.Core.Domain.Transactions;
 using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Core.Settings.ServiceSettings;
 using Lykke.SettingsReader;
-using Common.Log;
 
 namespace Lykke.Service.IcoCommon.Services
 {
@@ -58,7 +59,11 @@ namespace Lykke.Service.IcoCommon.Services
                         $"Configuration for campaign \"{payInAddress.CampaignId}\" not found");
                 }
 
-                await _transactionRepository.EnqueueTransactionAsync(tx, payInAddress, campaignSettings.ConnectionString);
+                await _transactionRepository.EnqueueTransactionAsync(tx, payInAddress, campaignSettings.TransactionQueueSasUrl);
+
+                await _log.WriteInfoAsync(nameof(HandleTransactionsAsync),
+                    $"Transaction={tx.ToJson()}", 
+                    $"Transaction sent to {payInAddress.CampaignId} queue");
 
                 count++;
             }
