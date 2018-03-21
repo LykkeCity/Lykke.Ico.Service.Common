@@ -24,5 +24,9 @@ namespace Lykke.Service.IcoCommon.Client
         Task<EmailTemplateModel> GetEmailTemplateAsync(string campaignId, string templateId);
 
         Task<int> HandleTransactionsAsync(IList<TransactionModel> transactions);
+
+        Task<CampaignSettingsModel> GetCampaignSettingsAsync(string campaignId);
+
+        Task CreateOrUpdateCampaignSettingsAsync(string campaignId, CampaignSettingsModel campaignSettings);
     }
 }

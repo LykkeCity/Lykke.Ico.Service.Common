@@ -34,6 +34,9 @@ namespace Lykke.Service.IcoCommon.Client
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Adds pay-in address info for subsequent transaction check
+        /// </summary>
         /// <param name='payInAddress'>
         /// </param>
         /// <param name='customHeaders'>
@@ -44,6 +47,9 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse> AddPayInAddressWithHttpMessagesAsync(PayInAddressModel payInAddress = default(PayInAddressModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Deletes specific pay-in address info
+        /// </summary>
         /// <param name='address'>
         /// </param>
         /// <param name='currency'>
@@ -57,7 +63,42 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse> DeletePayInAddressWithHttpMessagesAsync(string address, CurrencyType currency, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Returns common campaign settings
+        /// </summary>
         /// <param name='campaignId'>
+        /// Campaign identitfier
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<CampaignSettingsModel>> GetCampaignSettingsWithHttpMessagesAsync(string campaignId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Creates or updates common campaign settings
+        /// </summary>
+        /// <param name='campaignId'>
+        /// Campaign identitfier
+        /// </param>
+        /// <param name='campaignSettings'>
+        /// Common campaign settings
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> CreateOrUpdateCampaignSettingsWithHttpMessagesAsync(string campaignId, CampaignSettingsModel campaignSettings = default(CampaignSettingsModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Deletes all campaign data (emails, templates, addresses, settings)
+        /// </summary>
+        /// <param name='campaignId'>
+        /// Campaign identitfier
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -78,7 +119,11 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse<object>> IsAliveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Adds email request into queue for subsequent sending
+        /// </summary>
         /// <param name='emailData'>
+        /// Email data
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -88,6 +133,9 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse> SendEmailWithHttpMessagesAsync(EmailDataModel emailData = default(EmailDataModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Returns sent emails
+        /// </summary>
         /// <param name='to'>
         /// </param>
         /// <param name='campaignId'>
@@ -100,6 +148,9 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse<IList<EmailModel>>> GetSentEmailsWithHttpMessagesAsync(string to, string campaignId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Deletes sent emails
+        /// </summary>
         /// <param name='to'>
         /// </param>
         /// <param name='campaignId'>
@@ -112,6 +163,9 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse> DeleteSentEmailsWithHttpMessagesAsync(string to, string campaignId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Return all email templates of all campaigns
+        /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -120,6 +174,9 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse<IList<EmailTemplateModel>>> GetAllEmailTemplatesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Creates or updates email template
+        /// </summary>
         /// <param name='request'>
         /// </param>
         /// <param name='customHeaders'>
@@ -130,6 +187,9 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse> AddOrUpdateEmailTemplateWithHttpMessagesAsync(EmailTemplateAddOrUpdateRequest request = default(EmailTemplateAddOrUpdateRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Returns email templates of specified campaign
+        /// </summary>
         /// <param name='campaignId'>
         /// </param>
         /// <param name='customHeaders'>
@@ -140,6 +200,9 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse<IList<EmailTemplateModel>>> GetCampaignEmailTemplatesWithHttpMessagesAsync(string campaignId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Returns specific email template
+        /// </summary>
         /// <param name='campaignId'>
         /// </param>
         /// <param name='templateId'>
@@ -152,6 +215,9 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse<EmailTemplateModel>> GetEmailTemplateWithHttpMessagesAsync(string campaignId, string templateId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Deletes specific email template
+        /// </summary>
         /// <param name='campaignId'>
         /// </param>
         /// <param name='templateId'>
@@ -164,6 +230,9 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse> DeleteEmailTemplateWithHttpMessagesAsync(string campaignId, string templateId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Returns history of changes of specific email template
+        /// </summary>
         /// <param name='campaignId'>
         /// </param>
         /// <param name='templateId'>
@@ -176,7 +245,12 @@ namespace Lykke.Service.IcoCommon.Client
         /// </param>
         Task<HttpOperationResponse<IList<EmailTemplateHistoryItemModel>>> GetEmailTemplateHistoryWithHttpMessagesAsync(string campaignId, string templateId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Checks if transaction is an investor transaction and sends data to
+        /// campaign API in this case
+        /// </summary>
         /// <param name='transactions'>
+        /// List of transactions
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.

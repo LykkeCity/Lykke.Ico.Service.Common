@@ -17,6 +17,9 @@ namespace Lykke.Service.IcoCommon.Client
     /// </summary>
     public static partial class IcoCommonAPIExtensions
     {
+            /// <summary>
+            /// Adds pay-in address info for subsequent transaction check
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -27,6 +30,9 @@ namespace Lykke.Service.IcoCommon.Client
                 operations.AddPayInAddressAsync(payInAddress).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Adds pay-in address info for subsequent transaction check
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -40,6 +46,9 @@ namespace Lykke.Service.IcoCommon.Client
                 (await operations.AddPayInAddressWithHttpMessagesAsync(payInAddress, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <summary>
+            /// Deletes specific pay-in address info
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -53,6 +62,9 @@ namespace Lykke.Service.IcoCommon.Client
                 operations.DeletePayInAddressAsync(address, currency).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Deletes specific pay-in address info
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -69,20 +81,99 @@ namespace Lykke.Service.IcoCommon.Client
                 (await operations.DeletePayInAddressWithHttpMessagesAsync(address, currency, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <summary>
+            /// Returns common campaign settings
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='campaignId'>
+            /// Campaign identitfier
+            /// </param>
+            public static CampaignSettingsModel GetCampaignSettings(this IIcoCommonAPI operations, string campaignId)
+            {
+                return operations.GetCampaignSettingsAsync(campaignId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Returns common campaign settings
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='campaignId'>
+            /// Campaign identitfier
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<CampaignSettingsModel> GetCampaignSettingsAsync(this IIcoCommonAPI operations, string campaignId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetCampaignSettingsWithHttpMessagesAsync(campaignId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Creates or updates common campaign settings
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='campaignId'>
+            /// Campaign identitfier
+            /// </param>
+            /// <param name='campaignSettings'>
+            /// Common campaign settings
+            /// </param>
+            public static void CreateOrUpdateCampaignSettings(this IIcoCommonAPI operations, string campaignId, CampaignSettingsModel campaignSettings = default(CampaignSettingsModel))
+            {
+                operations.CreateOrUpdateCampaignSettingsAsync(campaignId, campaignSettings).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Creates or updates common campaign settings
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='campaignId'>
+            /// Campaign identitfier
+            /// </param>
+            /// <param name='campaignSettings'>
+            /// Common campaign settings
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task CreateOrUpdateCampaignSettingsAsync(this IIcoCommonAPI operations, string campaignId, CampaignSettingsModel campaignSettings = default(CampaignSettingsModel), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.CreateOrUpdateCampaignSettingsWithHttpMessagesAsync(campaignId, campaignSettings, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Deletes all campaign data (emails, templates, addresses, settings)
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='campaignId'>
+            /// Campaign identitfier
             /// </param>
             public static void DeleteCampaign(this IIcoCommonAPI operations, string campaignId)
             {
                 operations.DeleteCampaignAsync(campaignId).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Deletes all campaign data (emails, templates, addresses, settings)
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='campaignId'>
+            /// Campaign identitfier
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -120,20 +211,28 @@ namespace Lykke.Service.IcoCommon.Client
                 }
             }
 
+            /// <summary>
+            /// Adds email request into queue for subsequent sending
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='emailData'>
+            /// Email data
             /// </param>
             public static void SendEmail(this IIcoCommonAPI operations, EmailDataModel emailData = default(EmailDataModel))
             {
                 operations.SendEmailAsync(emailData).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Adds email request into queue for subsequent sending
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='emailData'>
+            /// Email data
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -143,6 +242,9 @@ namespace Lykke.Service.IcoCommon.Client
                 (await operations.SendEmailWithHttpMessagesAsync(emailData, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <summary>
+            /// Returns sent emails
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -155,6 +257,9 @@ namespace Lykke.Service.IcoCommon.Client
                 return operations.GetSentEmailsAsync(to, campaignId).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Returns sent emails
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -173,6 +278,9 @@ namespace Lykke.Service.IcoCommon.Client
                 }
             }
 
+            /// <summary>
+            /// Deletes sent emails
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -185,6 +293,9 @@ namespace Lykke.Service.IcoCommon.Client
                 operations.DeleteSentEmailsAsync(to, campaignId).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Deletes sent emails
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -200,6 +311,9 @@ namespace Lykke.Service.IcoCommon.Client
                 (await operations.DeleteSentEmailsWithHttpMessagesAsync(to, campaignId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <summary>
+            /// Return all email templates of all campaigns
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -208,6 +322,9 @@ namespace Lykke.Service.IcoCommon.Client
                 return operations.GetAllEmailTemplatesAsync().GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Return all email templates of all campaigns
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -222,6 +339,9 @@ namespace Lykke.Service.IcoCommon.Client
                 }
             }
 
+            /// <summary>
+            /// Creates or updates email template
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -232,6 +352,9 @@ namespace Lykke.Service.IcoCommon.Client
                 operations.AddOrUpdateEmailTemplateAsync(request).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Creates or updates email template
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -245,6 +368,9 @@ namespace Lykke.Service.IcoCommon.Client
                 (await operations.AddOrUpdateEmailTemplateWithHttpMessagesAsync(request, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <summary>
+            /// Returns email templates of specified campaign
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -255,6 +381,9 @@ namespace Lykke.Service.IcoCommon.Client
                 return operations.GetCampaignEmailTemplatesAsync(campaignId).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Returns email templates of specified campaign
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -271,6 +400,9 @@ namespace Lykke.Service.IcoCommon.Client
                 }
             }
 
+            /// <summary>
+            /// Returns specific email template
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -283,6 +415,9 @@ namespace Lykke.Service.IcoCommon.Client
                 return operations.GetEmailTemplateAsync(campaignId, templateId).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Returns specific email template
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -301,6 +436,9 @@ namespace Lykke.Service.IcoCommon.Client
                 }
             }
 
+            /// <summary>
+            /// Deletes specific email template
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -313,6 +451,9 @@ namespace Lykke.Service.IcoCommon.Client
                 operations.DeleteEmailTemplateAsync(campaignId, templateId).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Deletes specific email template
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -328,6 +469,9 @@ namespace Lykke.Service.IcoCommon.Client
                 (await operations.DeleteEmailTemplateWithHttpMessagesAsync(campaignId, templateId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <summary>
+            /// Returns history of changes of specific email template
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -340,6 +484,9 @@ namespace Lykke.Service.IcoCommon.Client
                 return operations.GetEmailTemplateHistoryAsync(campaignId, templateId).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Returns history of changes of specific email template
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -358,20 +505,30 @@ namespace Lykke.Service.IcoCommon.Client
                 }
             }
 
+            /// <summary>
+            /// Checks if transaction is an investor transaction and sends data to campaign
+            /// API in this case
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='transactions'>
+            /// List of transactions
             /// </param>
             public static int? HandleTransactions(this IIcoCommonAPI operations, IList<TransactionModel> transactions = default(IList<TransactionModel>))
             {
                 return operations.HandleTransactionsAsync(transactions).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Checks if transaction is an investor transaction and sends data to campaign
+            /// API in this case
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='transactions'>
+            /// List of transactions
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.

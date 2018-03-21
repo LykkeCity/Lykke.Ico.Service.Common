@@ -22,6 +22,11 @@ namespace Lykke.Service.IcoCommon.Controllers
             _addressRepository = addressRepository;
         }
 
+        /// <summary>
+        /// Adds pay-in address info for subsequent transaction check
+        /// </summary>
+        /// <param name="payInAddress"></param>
+        /// <returns></returns>
         [HttpPost]
         [SwaggerOperation(nameof(AddPayInAddress))]
         public async Task<IActionResult> AddPayInAddress([FromBody]PayInAddressModel payInAddress)
@@ -44,6 +49,12 @@ namespace Lykke.Service.IcoCommon.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Deletes specific pay-in address info
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="currency"></param>
+        /// <returns></returns>
         [HttpDelete("{address}/{currency}")]
         [SwaggerOperation(nameof(DeletePayInAddress))]
         public async Task<IActionResult> DeletePayInAddress(

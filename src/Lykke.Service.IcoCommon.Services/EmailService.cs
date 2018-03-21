@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Common.Log;
+using Lykke.Service.IcoCommon.Core.Domain.Campaign;
 using Lykke.Service.IcoCommon.Core.Domain.Mail;
 using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Core.Settings.ServiceSettings;
@@ -16,20 +17,20 @@ namespace Lykke.Service.IcoCommon.Services
         private readonly IEmailTemplateService _emailTemplateService;
         private readonly IEmailRepository _emailRepository;
         private readonly ISmtpService _smtpService;
-        private readonly IReloadingManager<Dictionary<string, CampaignSettings>> _settings;
+        private readonly ICampaignSettingsRepository _campaignSettingsRepository;
 
         public EmailService(
             ILog log, 
             IEmailTemplateService emailTemplateService,
             IEmailRepository emailRepository,
             ISmtpService smtpService,
-            IReloadingManager<Dictionary<string, CampaignSettings>> settings)
+            ICampaignSettingsRepository campaignSettingsRepository)
         {
             _log = log;
             _emailTemplateService = emailTemplateService;
             _emailRepository = emailRepository;
             _smtpService = smtpService;
-            _settings = settings;
+            _campaignSettingsRepository = campaignSettingsRepository;
         }
 
         public async Task EnqueueEmailAsync(IEmailData emailData)
@@ -48,14 +49,10 @@ namespace Lykke.Service.IcoCommon.Services
 
         public async Task SendEmailAsync(IEmail email)
         {
-            if (!_settings.CurrentValue.TryGetValue(email.CampaignId, out var campaignSettings) ||
-                campaignSettings.Smtp == null)
-            {
-                await _settings.Reload();
-            }
+            var campaignSettings = await _campaignSettingsRepository.GetCachedAsync(email.CampaignId,
+                reloadIf: x => x?.Smtp == null);
 
-            if (!_settings.CurrentValue.TryGetValue(email.CampaignId, out campaignSettings) ||
-                campaignSettings.Smtp == null)
+            if (campaignSettings?.Smtp == null)
             {
                 await _log.WriteWarningAsync(nameof(SendEmailAsync),
                     $"Campaign: {email.CampaignId}, Template: {email.TemplateId}, To: {email.To}",

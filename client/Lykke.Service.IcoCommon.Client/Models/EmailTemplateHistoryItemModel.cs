@@ -24,7 +24,7 @@ namespace Lykke.Service.IcoCommon.Client.Models
         /// Initializes a new instance of the EmailTemplateHistoryItemModel
         /// class.
         /// </summary>
-        public EmailTemplateHistoryItemModel(bool isLayout, System.DateTime? changedUtc = default(System.DateTime?), string username = default(string), string campaignId = default(string), string templateId = default(string), string body = default(string), string subject = default(string))
+        public EmailTemplateHistoryItemModel(System.DateTime changedUtc, bool isLayout, string username = default(string), string campaignId = default(string), string templateId = default(string), string body = default(string), string subject = default(string))
         {
             ChangedUtc = changedUtc;
             Username = username;
@@ -44,12 +44,12 @@ namespace Lykke.Service.IcoCommon.Client.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "changedUtc")]
-        public System.DateTime? ChangedUtc { get; private set; }
+        public System.DateTime ChangedUtc { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "username")]
-        public string Username { get; private set; }
+        public string Username { get; set; }
 
         /// <summary>
         /// </summary>

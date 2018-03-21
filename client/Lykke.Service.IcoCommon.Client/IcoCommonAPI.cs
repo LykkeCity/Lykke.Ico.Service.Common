@@ -141,6 +141,9 @@ namespace Lykke.Service.IcoCommon.Client
             };
             CustomInitialize();
         }
+        /// <summary>
+        /// Adds pay-in address info for subsequent transaction check
+        /// </summary>
         /// <param name='payInAddress'>
         /// </param>
         /// <param name='customHeaders'>
@@ -250,6 +253,9 @@ namespace Lykke.Service.IcoCommon.Client
             return _result;
         }
 
+        /// <summary>
+        /// Deletes specific pay-in address info
+        /// </summary>
         /// <param name='address'>
         /// </param>
         /// <param name='currency'>
@@ -365,7 +371,274 @@ namespace Lykke.Service.IcoCommon.Client
             return _result;
         }
 
+        /// <summary>
+        /// Returns common campaign settings
+        /// </summary>
         /// <param name='campaignId'>
+        /// Campaign identitfier
+        /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
+        public async Task<HttpOperationResponse<CampaignSettingsModel>> GetCampaignSettingsWithHttpMessagesAsync(string campaignId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (campaignId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "campaignId");
+            }
+            // Tracing
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
+            {
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("campaignId", campaignId);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(_invocationId, this, "GetCampaignSettings", tracingParameters);
+            }
+            // Construct URL
+            var _baseUrl = BaseUri.AbsoluteUri;
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/campaigns/{campaignId}").ToString();
+            _url = _url.Replace("{campaignId}", System.Uri.EscapeDataString(campaignId));
+            // Create HTTP transport objects
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new System.Uri(_url);
+            // Set Headers
+
+
+            if (customHeaders != null)
+            {
+                foreach(var _header in customHeaders)
+                {
+                    if (_httpRequest.Headers.Contains(_header.Key))
+                    {
+                        _httpRequest.Headers.Remove(_header.Key);
+                    }
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                }
+            }
+
+            // Serialize Request
+            string _requestContent = null;
+            // Send Request
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+            }
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
+            if ((int)_statusCode != 200)
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Error(_invocationId, ex);
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+            // Create Result
+            var _result = new HttpOperationResponse<CampaignSettingsModel>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            // Deserialize Response
+            if ((int)_statusCode == 200)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = SafeJsonConvert.DeserializeObject<CampaignSettingsModel>(_responseContent, DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.Exit(_invocationId, _result);
+            }
+            return _result;
+        }
+
+        /// <summary>
+        /// Creates or updates common campaign settings
+        /// </summary>
+        /// <param name='campaignId'>
+        /// Campaign identitfier
+        /// </param>
+        /// <param name='campaignSettings'>
+        /// Common campaign settings
+        /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
+        public async Task<HttpOperationResponse> CreateOrUpdateCampaignSettingsWithHttpMessagesAsync(string campaignId, CampaignSettingsModel campaignSettings = default(CampaignSettingsModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (campaignId == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "campaignId");
+            }
+            if (campaignSettings != null)
+            {
+                campaignSettings.Validate();
+            }
+            // Tracing
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
+            {
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("campaignId", campaignId);
+                tracingParameters.Add("campaignSettings", campaignSettings);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(_invocationId, this, "CreateOrUpdateCampaignSettings", tracingParameters);
+            }
+            // Construct URL
+            var _baseUrl = BaseUri.AbsoluteUri;
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/campaigns/{campaignId}").ToString();
+            _url = _url.Replace("{campaignId}", System.Uri.EscapeDataString(campaignId));
+            // Create HTTP transport objects
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("PUT");
+            _httpRequest.RequestUri = new System.Uri(_url);
+            // Set Headers
+
+
+            if (customHeaders != null)
+            {
+                foreach(var _header in customHeaders)
+                {
+                    if (_httpRequest.Headers.Contains(_header.Key))
+                    {
+                        _httpRequest.Headers.Remove(_header.Key);
+                    }
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                }
+            }
+
+            // Serialize Request
+            string _requestContent = null;
+            if(campaignSettings != null)
+            {
+                _requestContent = SafeJsonConvert.SerializeObject(campaignSettings, SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json; charset=utf-8");
+            }
+            // Send Request
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            _httpResponse = await HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+            }
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
+            if ((int)_statusCode != 200)
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                if (_httpResponse.Content != null) {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                }
+                else {
+                    _responseContent = string.Empty;
+                }
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Error(_invocationId, ex);
+                }
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
+            }
+            // Create Result
+            var _result = new HttpOperationResponse();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.Exit(_invocationId, _result);
+            }
+            return _result;
+        }
+
+        /// <summary>
+        /// Deletes all campaign data (emails, templates, addresses, settings)
+        /// </summary>
+        /// <param name='campaignId'>
+        /// Campaign identitfier
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -404,7 +677,7 @@ namespace Lykke.Service.IcoCommon.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/campaign/{campaignId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/campaigns/{campaignId}").ToString();
             _url = _url.Replace("{campaignId}", System.Uri.EscapeDataString(campaignId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -613,7 +886,11 @@ namespace Lykke.Service.IcoCommon.Client
             return _result;
         }
 
+        /// <summary>
+        /// Adds email request into queue for subsequent sending
+        /// </summary>
         /// <param name='emailData'>
+        /// Email data
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -718,6 +995,9 @@ namespace Lykke.Service.IcoCommon.Client
             return _result;
         }
 
+        /// <summary>
+        /// Returns sent emails
+        /// </summary>
         /// <param name='to'>
         /// </param>
         /// <param name='campaignId'>
@@ -861,6 +1141,9 @@ namespace Lykke.Service.IcoCommon.Client
             return _result;
         }
 
+        /// <summary>
+        /// Deletes sent emails
+        /// </summary>
         /// <param name='to'>
         /// </param>
         /// <param name='campaignId'>
@@ -983,6 +1266,9 @@ namespace Lykke.Service.IcoCommon.Client
             return _result;
         }
 
+        /// <summary>
+        /// Return all email templates of all campaigns
+        /// </summary>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1100,6 +1386,9 @@ namespace Lykke.Service.IcoCommon.Client
             return _result;
         }
 
+        /// <summary>
+        /// Creates or updates email template
+        /// </summary>
         /// <param name='request'>
         /// </param>
         /// <param name='customHeaders'>
@@ -1209,6 +1498,9 @@ namespace Lykke.Service.IcoCommon.Client
             return _result;
         }
 
+        /// <summary>
+        /// Returns email templates of specified campaign
+        /// </summary>
         /// <param name='campaignId'>
         /// </param>
         /// <param name='customHeaders'>
@@ -1340,6 +1632,9 @@ namespace Lykke.Service.IcoCommon.Client
             return _result;
         }
 
+        /// <summary>
+        /// Returns specific email template
+        /// </summary>
         /// <param name='campaignId'>
         /// </param>
         /// <param name='templateId'>
@@ -1479,6 +1774,9 @@ namespace Lykke.Service.IcoCommon.Client
             return _result;
         }
 
+        /// <summary>
+        /// Deletes specific email template
+        /// </summary>
         /// <param name='campaignId'>
         /// </param>
         /// <param name='templateId'>
@@ -1597,6 +1895,9 @@ namespace Lykke.Service.IcoCommon.Client
             return _result;
         }
 
+        /// <summary>
+        /// Returns history of changes of specific email template
+        /// </summary>
         /// <param name='campaignId'>
         /// </param>
         /// <param name='templateId'>
@@ -1736,7 +2037,12 @@ namespace Lykke.Service.IcoCommon.Client
             return _result;
         }
 
+        /// <summary>
+        /// Checks if transaction is an investor transaction and sends data to campaign
+        /// API in this case
+        /// </summary>
         /// <param name='transactions'>
+        /// List of transactions
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.

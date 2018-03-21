@@ -8,18 +8,26 @@ namespace Lykke.Service.IcoCommon.Models.Mail
 {
     public class EmailTemplateHistoryItemModel : EmailTemplateModel, IEmailTemplateHistoryItem
     {
-        public EmailTemplateHistoryItemModel(IEmailTemplateHistoryItem emailTemplateHistoryItem)
+        public static EmailTemplateHistoryItemModel Create(IEmailTemplateHistoryItem emailTemplateHistoryItem)
         {
-            CampaignId = emailTemplateHistoryItem.CampaignId;
-            TemplateId = emailTemplateHistoryItem.TemplateId;
-            Body = emailTemplateHistoryItem.Body;
-            Subject = emailTemplateHistoryItem.Subject;
-            IsLayout = emailTemplateHistoryItem.IsLayout;
-            Username = emailTemplateHistoryItem.Username;
-            ChangedUtc = emailTemplateHistoryItem.ChangedUtc;
+            if (emailTemplateHistoryItem == null)
+            {
+                return null;
+            }
+
+            return new EmailTemplateHistoryItemModel()
+            {
+                CampaignId = emailTemplateHistoryItem.CampaignId,
+                TemplateId = emailTemplateHistoryItem.TemplateId,
+                Body = emailTemplateHistoryItem.Body,
+                Subject = emailTemplateHistoryItem.Subject,
+                IsLayout = emailTemplateHistoryItem.IsLayout,
+                Username = emailTemplateHistoryItem.Username,
+                ChangedUtc = emailTemplateHistoryItem.ChangedUtc
+            };
         }
 
-        public DateTime ChangedUtc { get; }
-        public string Username { get; }
+        public DateTime ChangedUtc { get; set; }
+        public string Username { get; set; }
     }
 }

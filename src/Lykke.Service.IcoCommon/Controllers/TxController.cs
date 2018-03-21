@@ -19,6 +19,11 @@ namespace Lykke.Service.IcoCommon.Controllers
             _transactionService = transactionService;
         }
 
+        /// <summary>
+        /// Checks if transaction is an investor transaction and sends data to campaign API in this case
+        /// </summary>
+        /// <param name="transactions">List of transactions</param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
         [SwaggerOperation(nameof(HandleTransactions))]

@@ -3,9 +3,11 @@ using Autofac.Extensions.DependencyInjection;
 using Common.Log;
 using Lykke.JobTriggers.Extenstions;
 using Lykke.Service.IcoCommon.AzureRepositories;
+using Lykke.Service.IcoCommon.AzureRepositories.Campaign;
 using Lykke.Service.IcoCommon.AzureRepositories.Mail;
 using Lykke.Service.IcoCommon.AzureRepositories.PayInAddresses;
 using Lykke.Service.IcoCommon.AzureRepositories.Transactions;
+using Lykke.Service.IcoCommon.Core.Domain.Campaign;
 using Lykke.Service.IcoCommon.Core.Domain.Mail;
 using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
 using Lykke.Service.IcoCommon.Core.Domain.Transactions;
@@ -56,19 +58,28 @@ namespace Lykke.Service.IcoCommon.Modules
 
             builder.RegisterType<PayInAddressRepository>()
                 .As<IPayInAddressRepository>()
-                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)));
+                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)))
+                .SingleInstance();
 
             builder.RegisterType<EmailRepository>()
                 .As<IEmailRepository>()
-                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)));
+                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)))
+                .SingleInstance();
 
             builder.RegisterType<EmailTemplateRepository>()
                 .As<IEmailTemplateRepository>()
-                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)));
+                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)))
+                .SingleInstance();
 
             builder.RegisterType<TransactionRepository>()
                 .As<ITransactionRepository>()
-                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)));
+                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)))
+                .SingleInstance();
+
+            builder.RegisterType<CampaignSettingsRepository>()
+                .As<ICampaignSettingsRepository>()
+                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Db.DataConnString)))
+                .SingleInstance();
 
             builder.RegisterType<SmtpService>()
                 .As<ISmtpService>()
@@ -79,16 +90,12 @@ namespace Lykke.Service.IcoCommon.Modules
                 .SingleInstance();
 
             builder.RegisterType<EmailService>()
-                .As<IEmailService>()
-                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Campaigns)));
+                .As<IEmailService>();
 
             builder.RegisterType<TransactionService>()
-                .As<ITransactionService>()
-                .WithParameter(TypedParameter.From(_settings.Nested(x => x.Campaigns)));
+                .As<ITransactionService>();
 
             RegisterAzureQueueHandlers(builder);
-
-            // TODO: Add your dependencies here
 
             builder.Populate(_services);
         }

@@ -21,6 +21,11 @@ namespace Lykke.Service.IcoCommon.Controllers
             _emailTemplateService = emailTemplateService;
         }
 
+        /// <summary>
+        /// Adds email request into queue for subsequent sending
+        /// </summary>
+        /// <param name="emailData">Email data</param>
+        /// <returns></returns>
         [HttpPost]
         [SwaggerOperation(nameof(SendEmail))]
         public async Task<IActionResult> SendEmail([FromBody]EmailDataModel emailData)
@@ -35,6 +40,12 @@ namespace Lykke.Service.IcoCommon.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Returns sent emails
+        /// </summary>
+        /// <param name="to"></param>
+        /// <param name="campaignId"></param>
+        /// <returns></returns>
         [HttpGet("{to}")]
         [SwaggerOperation(nameof(GetSentEmails))]
         public async Task<EmailModel[]> GetSentEmails(
@@ -42,10 +53,16 @@ namespace Lykke.Service.IcoCommon.Controllers
             [FromQuery]string campaignId)
         {
             return (await _emailService.GetSentEmailsAsync(to, campaignId))
-                .Select(email => new EmailModel(email))
+                .Select(email => EmailModel.Create(email))
                 .ToArray();
         }
 
+        /// <summary>
+        /// Deletes sent emails
+        /// </summary>
+        /// <param name="to"></param>
+        /// <param name="campaignId"></param>
+        /// <returns></returns>
         [HttpDelete("{to}")]
         [SwaggerOperation(nameof(DeleteSentEmails))]
         public async Task DeleteSentEmails(
@@ -55,6 +72,11 @@ namespace Lykke.Service.IcoCommon.Controllers
             await _emailService.DeleteEmailsAsync(to, campaignId);
         }
 
+        /// <summary>
+        /// Creates or updates email template
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("templates")]
         [SwaggerOperation(nameof(AddOrUpdateEmailTemplate))]
         public async Task<IActionResult> AddOrUpdateEmailTemplate([FromBody]EmailTemplateAddOrUpdateRequest request)
@@ -69,34 +91,55 @@ namespace Lykke.Service.IcoCommon.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Return all email templates of all campaigns
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("templates")]
         [SwaggerOperation(nameof(GetAllEmailTemplates))]
         public async Task<EmailTemplateModel[]> GetAllEmailTemplates()
         {
             return (await _emailTemplateService.GetAllTemplatesAsync())
-                .Select(t => new EmailTemplateModel(t))
+                .Select(t => EmailTemplateModel.Create(t))
                 .ToArray();
         }
 
+        /// <summary>
+        /// Returns email templates of specified campaign
+        /// </summary>
+        /// <param name="campaignId"></param>
+        /// <returns></returns>
         [HttpGet("templates/{campaignId}")]
         [SwaggerOperation(nameof(GetCampaignEmailTemplates))]
         public async Task<EmailTemplateModel[]> GetCampaignEmailTemplates(
             [FromRoute]string campaignId)
         {
             return (await _emailTemplateService.GetCampaignTemplatesAsync(campaignId))
-                .Select(t => new EmailTemplateModel(t))
+                .Select(t => EmailTemplateModel.Create(t))
                 .ToArray();
         }
 
+        /// <summary>
+        /// Returns specific email template
+        /// </summary>
+        /// <param name="campaignId"></param>
+        /// <param name="templateId"></param>
+        /// <returns></returns>
         [HttpGet("templates/{campaignId}/{templateId}")]
         [SwaggerOperation(nameof(GetEmailTemplate))]
         public async Task<EmailTemplateModel> GetEmailTemplate(
             [FromRoute]string campaignId,
             [FromRoute]string templateId)
         {
-            return new EmailTemplateModel(await _emailTemplateService.GetTemplateAsync(campaignId, templateId));
+            return EmailTemplateModel.Create(await _emailTemplateService.GetTemplateAsync(campaignId, templateId));
         }
 
+        /// <summary>
+        /// Returns history of changes of specific email template
+        /// </summary>
+        /// <param name="campaignId"></param>
+        /// <param name="templateId"></param>
+        /// <returns></returns>
         [HttpGet("templates/{campaignId}/{templateId}/history")]
         [SwaggerOperation(nameof(GetEmailTemplateHistory))]
         public async Task<EmailTemplateHistoryItemModel[]> GetEmailTemplateHistory(
@@ -104,10 +147,16 @@ namespace Lykke.Service.IcoCommon.Controllers
             [FromRoute]string templateId)
         {
             return (await _emailTemplateService.GetHistoryAsync(campaignId, templateId))
-                .Select(hi => new EmailTemplateHistoryItemModel(hi))
+                .Select(hi => EmailTemplateHistoryItemModel.Create(hi))
                 .ToArray();
         }
 
+        /// <summary>
+        /// Deletes specific email template
+        /// </summary>
+        /// <param name="campaignId"></param>
+        /// <param name="templateId"></param>
+        /// <returns></returns>
         [HttpDelete("templates/{campaignId}/{templateId}")]
         [SwaggerOperation(nameof(DeleteEmailTemplate))]
         public async Task DeleteEmailTemplate(

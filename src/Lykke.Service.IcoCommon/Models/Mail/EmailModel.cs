@@ -7,19 +7,23 @@ namespace Lykke.Service.IcoCommon.Models.Mail
 {
     public class EmailModel : IEmail
     {
-        public EmailModel()
+        public static EmailModel Create(IEmail email)
         {
-        }
+            if (email == null)
+            {
+                return null;
+            }
 
-        public EmailModel(IEmail email)
-        {
-            CampaignId = email.CampaignId;
-            TemplateId = email.TemplateId;
-            To = email.To;
-            Subject = email.Subject;
-            Body = email.Body;
-            Attachments = email.Attachments;
-            SentUtc = email.SentUtc;
+            return new EmailModel
+            {
+                CampaignId = email.CampaignId,
+                TemplateId = email.TemplateId,
+                To = email.To,
+                Subject = email.Subject,
+                Body = email.Body,
+                Attachments = email.Attachments,
+                SentUtc = email.SentUtc
+            };
         }
 
         public string CampaignId { get; set; }
