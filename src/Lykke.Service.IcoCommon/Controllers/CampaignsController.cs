@@ -36,7 +36,7 @@ namespace Lykke.Service.IcoCommon.Controllers
         /// </summary>
         /// <param name="campaignId">Campaign identitfier</param>
         /// <returns></returns>
-        [HttpGet("{campaignId}")]
+        [HttpGet("{campaignId}/settings")]
         [SwaggerOperation(nameof(GetCampaignSettings))]
         public async Task<CampaignSettingsModel> GetCampaignSettings([FromRoute] string campaignId)
         {
@@ -49,7 +49,7 @@ namespace Lykke.Service.IcoCommon.Controllers
         /// <param name="campaignId">Campaign identitfier</param>
         /// <param name="campaignSettings">Common campaign settings</param>
         /// <returns></returns>
-        [HttpPut("{campaignId}")]
+        [HttpPost("{campaignId}/settings")]
         [SwaggerOperation(nameof(CreateOrUpdateCampaignSettings))]
         public async Task CreateOrUpdateCampaignSettings([FromRoute] string campaignId, [FromBody] CampaignSettingsModel campaignSettings)
         {

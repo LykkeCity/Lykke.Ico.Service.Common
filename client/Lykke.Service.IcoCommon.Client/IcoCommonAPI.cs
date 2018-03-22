@@ -417,7 +417,7 @@ namespace Lykke.Service.IcoCommon.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/campaigns/{campaignId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/campaigns/{campaignId}/settings").ToString();
             _url = _url.Replace("{campaignId}", System.Uri.EscapeDataString(campaignId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -557,12 +557,12 @@ namespace Lykke.Service.IcoCommon.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/campaigns/{campaignId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/campaigns/{campaignId}/settings").ToString();
             _url = _url.Replace("{campaignId}", System.Uri.EscapeDataString(campaignId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new HttpMethod("PUT");
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 
