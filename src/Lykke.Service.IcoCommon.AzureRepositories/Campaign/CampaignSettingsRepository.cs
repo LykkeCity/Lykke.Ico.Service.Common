@@ -8,25 +8,27 @@ using AzureStorage.Tables;
 using Common.Log;
 using Lykke.Service.IcoCommon.Core.Domain.Campaign;
 using Lykke.SettingsReader;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
 {
     public class CampaignSettingsRepository : ICampaignSettingsRepository
     {
         private readonly INoSQLTableStorage<CampaignSettingsEntity> _table;
-        private readonly ConcurrentDictionary<string, CampaignSettingsEntity> _cache = new ConcurrentDictionary<string, CampaignSettingsEntity>();
+        private readonly IMemoryCache _cache;
 
         private static string GetPartitionKey(string campaignId) => campaignId;
         private static string GetRowKey() => string.Empty;
 
-        public CampaignSettingsRepository(IReloadingManager<string> connectionStringManager, ILog log)
+        public CampaignSettingsRepository(IReloadingManager<string> connectionStringManager, ILog log, IMemoryCache cache)
         {
             _table = AzureTableStorage<CampaignSettingsEntity>.Create(connectionStringManager, "Campaigns", log);
+            _cache = cache;
         }
 
         public async Task<ICampaignSettings> GetCachedAsync(string campaignId, Func<ICampaignSettings, bool> reloadIf = null, bool doubleCheck = false)
         {
-            if (!_cache.TryGetValue(campaignId, out var value) || (reloadIf != null && reloadIf(value)))
+            if (!_cache.TryGetValue(campaignId, out CampaignSettingsEntity value) || (reloadIf != null && reloadIf(value)))
             {
                 var partitionKey = GetPartitionKey(campaignId);
                 var rowKey = GetRowKey();
@@ -42,7 +44,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
 
                 if (value != null)
                 {
-                    _cache[campaignId] = value;
+                    _cache.Set(campaignId, value);
                 }
             }
 
@@ -57,7 +59,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
 
             await _table.InsertOrReplaceAsync(entity);
 
-            _cache[campaignId] = entity;
+            _cache.Set(campaignId, entity);
         }
 
         public async Task DeleteAsync(string campaignId)
@@ -66,6 +68,8 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
             var rowKey = GetRowKey();
 
             await _table.DeleteIfExistAsync(partitionKey, rowKey);
+
+            _cache.Remove(campaignId);
         }
     }
 }

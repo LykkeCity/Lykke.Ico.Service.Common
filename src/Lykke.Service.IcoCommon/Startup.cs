@@ -49,7 +49,9 @@ namespace Lykke.Service.IcoCommon
         {
             try
             {
-                services.AddMvc()
+                services
+                    .AddMemoryCache()
+                    .AddMvc()
                     .AddJsonOptions(options =>
                     {
                         options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

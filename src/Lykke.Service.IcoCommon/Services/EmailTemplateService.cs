@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Lykke.Service.IcoCommon.Core.Domain.Mail;
 using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Models.Mail;
+using Microsoft.Extensions.Caching.Memory;
 using RazorLight;
 
 namespace Lykke.Service.IcoCommon.Services
@@ -11,7 +12,7 @@ namespace Lykke.Service.IcoCommon.Services
     public class EmailTemplateService : IEmailTemplateService
     {
         private readonly IEmailTemplateRepository _templateRepository;
-        private readonly ConcurrentDictionary<string, RazorLightEngine> _razorCache = new ConcurrentDictionary<string, RazorLightEngine>();
+        private readonly IMemoryCache _cache;
 
         public EmailTemplateService(IEmailTemplateRepository templateRepository)
         {
@@ -26,16 +27,11 @@ namespace Lykke.Service.IcoCommon.Services
                 .Build();
         }
 
-        public void ResetCache(string campaignId)
-        {
-            _razorCache.TryRemove(campaignId, out var _);
-        }
-
         public async Task AddOrUpdateTemplateAsync(IEmailTemplate emailTemplate, string username)
         {
             await _templateRepository.UpsertAsync(emailTemplate, username);
 
-            ResetCache(emailTemplate.CampaignId);
+            _cache.Remove(emailTemplate.CampaignId);
         }
 
         public async Task<IEmail> RenderEmailAsync(IEmailData emailData)
@@ -46,7 +42,7 @@ namespace Lykke.Service.IcoCommon.Services
                 TemplateId = emailData.TemplateId,
                 To = emailData.To,
                 Subject = emailData.Subject,
-                Body = await _razorCache.GetOrAdd(emailData.CampaignId, BuildEngine)
+                Body = await _cache.GetOrCreate(emailData.CampaignId, e => BuildEngine(emailData.CampaignId))
                     .CompileRenderAsync(emailData.TemplateId, emailData.Data),
                 Attachments = emailData.Attachments,
             };
@@ -83,14 +79,15 @@ namespace Lykke.Service.IcoCommon.Services
         {
             await _templateRepository.DeleteAsync(campaignId, templateId);
 
-            ResetCache(campaignId);
+            // reset the whole campaign cache due to weird work of RazorLight built-in cache
+            _cache.Remove(campaignId);
         }
 
         public async Task DeleteCampaignTemplatesAsync(string campaignId)
         {
             await _templateRepository.DeleteAsync(campaignId);
 
-            ResetCache(campaignId);
+            _cache.Remove(campaignId);
         }
     }
 }
