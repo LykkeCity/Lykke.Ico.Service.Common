@@ -126,6 +126,8 @@ namespace Lykke.Service.IcoCommon.Controllers
         /// <param name="templateId"></param>
         /// <returns></returns>
         [HttpGet("templates/{campaignId}/{templateId}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(EmailTemplateModel))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [SwaggerOperation(nameof(GetEmailTemplate))]
         public async Task<EmailTemplateModel> GetEmailTemplate(
             [FromRoute]string campaignId,

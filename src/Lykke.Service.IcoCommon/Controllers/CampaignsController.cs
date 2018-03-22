@@ -7,6 +7,7 @@ using Lykke.Service.IcoCommon.Core.Domain.Campaign;
 using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
 using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Models.Campaign;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -37,6 +38,8 @@ namespace Lykke.Service.IcoCommon.Controllers
         /// <param name="campaignId">Campaign identitfier</param>
         /// <returns></returns>
         [HttpGet("{campaignId}/settings")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CampaignSettingsModel))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [SwaggerOperation(nameof(GetCampaignSettings))]
         public async Task<CampaignSettingsModel> GetCampaignSettings([FromRoute] string campaignId)
         {
