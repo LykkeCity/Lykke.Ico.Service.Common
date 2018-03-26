@@ -124,12 +124,11 @@ namespace Lykke.Service.IcoCommon.Client
             /// <param name='campaignId'>
             /// Campaign identitfier
             /// </param>
-            /// <param name='campaignSettings'>
-            /// Common campaign settings
+            /// <param name='request'>
             /// </param>
-            public static void CreateOrUpdateCampaignSettings(this IIcoCommonAPI operations, string campaignId, CampaignSettingsModel campaignSettings = default(CampaignSettingsModel))
+            public static void CreateOrUpdateCampaignSettings(this IIcoCommonAPI operations, string campaignId, CampaignSettingsCreateOrUpdateRequest request = default(CampaignSettingsCreateOrUpdateRequest))
             {
-                operations.CreateOrUpdateCampaignSettingsAsync(campaignId, campaignSettings).GetAwaiter().GetResult();
+                operations.CreateOrUpdateCampaignSettingsAsync(campaignId, request).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -141,15 +140,14 @@ namespace Lykke.Service.IcoCommon.Client
             /// <param name='campaignId'>
             /// Campaign identitfier
             /// </param>
-            /// <param name='campaignSettings'>
-            /// Common campaign settings
+            /// <param name='request'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task CreateOrUpdateCampaignSettingsAsync(this IIcoCommonAPI operations, string campaignId, CampaignSettingsModel campaignSettings = default(CampaignSettingsModel), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task CreateOrUpdateCampaignSettingsAsync(this IIcoCommonAPI operations, string campaignId, CampaignSettingsCreateOrUpdateRequest request = default(CampaignSettingsCreateOrUpdateRequest), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.CreateOrUpdateCampaignSettingsWithHttpMessagesAsync(campaignId, campaignSettings, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.CreateOrUpdateCampaignSettingsWithHttpMessagesAsync(campaignId, request, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>

@@ -150,15 +150,14 @@
             A response object containing the response body and response headers.
             </return>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.CreateOrUpdateCampaignSettingsWithHttpMessagesAsync(System.String,Lykke.Service.IcoCommon.Client.Models.CampaignSettingsModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPI.CreateOrUpdateCampaignSettingsWithHttpMessagesAsync(System.String,Lykke.Service.IcoCommon.Client.Models.CampaignSettingsCreateOrUpdateRequest,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Creates or updates common campaign settings
             </summary>
             <param name='campaignId'>
             Campaign identitfier
             </param>
-            <param name='campaignSettings'>
-            Common campaign settings
+            <param name='request'>
             </param>
             <param name='customHeaders'>
             Headers that will be added to request.
@@ -562,7 +561,7 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.CreateOrUpdateCampaignSettings(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,Lykke.Service.IcoCommon.Client.Models.CampaignSettingsModel)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.CreateOrUpdateCampaignSettings(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,Lykke.Service.IcoCommon.Client.Models.CampaignSettingsCreateOrUpdateRequest)">
             <summary>
             Creates or updates common campaign settings
             </summary>
@@ -572,11 +571,10 @@
             <param name='campaignId'>
             Campaign identitfier
             </param>
-            <param name='campaignSettings'>
-            Common campaign settings
+            <param name='request'>
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.CreateOrUpdateCampaignSettingsAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,Lykke.Service.IcoCommon.Client.Models.CampaignSettingsModel,System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IcoCommonAPIExtensions.CreateOrUpdateCampaignSettingsAsync(Lykke.Service.IcoCommon.Client.IIcoCommonAPI,System.String,Lykke.Service.IcoCommon.Client.Models.CampaignSettingsCreateOrUpdateRequest,System.Threading.CancellationToken)">
             <summary>
             Creates or updates common campaign settings
             </summary>
@@ -586,8 +584,7 @@
             <param name='campaignId'>
             Campaign identitfier
             </param>
-            <param name='campaignSettings'>
-            Common campaign settings
+            <param name='request'>
             </param>
             <param name='cancellationToken'>
             The cancellation token.
@@ -951,15 +948,14 @@
             The cancellation token.
             </param>
         </member>
-        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.CreateOrUpdateCampaignSettingsWithHttpMessagesAsync(System.String,Lykke.Service.IcoCommon.Client.Models.CampaignSettingsModel,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+        <member name="M:Lykke.Service.IcoCommon.Client.IIcoCommonAPI.CreateOrUpdateCampaignSettingsWithHttpMessagesAsync(System.String,Lykke.Service.IcoCommon.Client.Models.CampaignSettingsCreateOrUpdateRequest,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <summary>
             Creates or updates common campaign settings
             </summary>
             <param name='campaignId'>
             Campaign identitfier
             </param>
-            <param name='campaignSettings'>
-            Common campaign settings
+            <param name='request'>
             </param>
             <param name='customHeaders'>
             The headers that will be added to request.
@@ -1133,6 +1129,34 @@
             <param name='cancellationToken'>
             The cancellation token.
             </param>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.CampaignSettingsCreateOrUpdateRequest.#ctor">
+            <summary>
+            Initializes a new instance of the
+            CampaignSettingsCreateOrUpdateRequest class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.CampaignSettingsCreateOrUpdateRequest.#ctor(Lykke.Service.IcoCommon.Client.Models.CampaignSettingsModel,System.String)">
+            <summary>
+            Initializes a new instance of the
+            CampaignSettingsCreateOrUpdateRequest class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.CampaignSettingsCreateOrUpdateRequest.CampaignSettings">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.IcoCommon.Client.Models.CampaignSettingsCreateOrUpdateRequest.Username">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.IcoCommon.Client.Models.CampaignSettingsCreateOrUpdateRequest.Validate">
+            <summary>
+            Validate the object.
+            </summary>
+            <exception cref="T:Microsoft.Rest.ValidationException">
+            Thrown if validation fails
+            </exception>
         </member>
         <member name="M:Lykke.Service.IcoCommon.Client.Models.CampaignSettingsModel.#ctor">
             <summary>

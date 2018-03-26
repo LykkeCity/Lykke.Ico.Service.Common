@@ -83,8 +83,7 @@ namespace Lykke.Service.IcoCommon.Client
         /// <param name='campaignId'>
         /// Campaign identitfier
         /// </param>
-        /// <param name='campaignSettings'>
-        /// Common campaign settings
+        /// <param name='request'>
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -92,7 +91,7 @@ namespace Lykke.Service.IcoCommon.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> CreateOrUpdateCampaignSettingsWithHttpMessagesAsync(string campaignId, CampaignSettingsModel campaignSettings = default(CampaignSettingsModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> CreateOrUpdateCampaignSettingsWithHttpMessagesAsync(string campaignId, CampaignSettingsCreateOrUpdateRequest request = default(CampaignSettingsCreateOrUpdateRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Deletes all campaign data (emails, templates, addresses, settings)

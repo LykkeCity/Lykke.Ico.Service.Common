@@ -512,8 +512,7 @@ namespace Lykke.Service.IcoCommon.Client
         /// <param name='campaignId'>
         /// Campaign identitfier
         /// </param>
-        /// <param name='campaignSettings'>
-        /// Common campaign settings
+        /// <param name='request'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -533,15 +532,15 @@ namespace Lykke.Service.IcoCommon.Client
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> CreateOrUpdateCampaignSettingsWithHttpMessagesAsync(string campaignId, CampaignSettingsModel campaignSettings = default(CampaignSettingsModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> CreateOrUpdateCampaignSettingsWithHttpMessagesAsync(string campaignId, CampaignSettingsCreateOrUpdateRequest request = default(CampaignSettingsCreateOrUpdateRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (campaignId == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "campaignId");
             }
-            if (campaignSettings != null)
+            if (request != null)
             {
-                campaignSettings.Validate();
+                request.Validate();
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -551,7 +550,7 @@ namespace Lykke.Service.IcoCommon.Client
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("campaignId", campaignId);
-                tracingParameters.Add("campaignSettings", campaignSettings);
+                tracingParameters.Add("request", request);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "CreateOrUpdateCampaignSettings", tracingParameters);
             }
@@ -581,9 +580,9 @@ namespace Lykke.Service.IcoCommon.Client
 
             // Serialize Request
             string _requestContent = null;
-            if(campaignSettings != null)
+            if(request != null)
             {
-                _requestContent = SafeJsonConvert.SerializeObject(campaignSettings, SerializationSettings);
+                _requestContent = SafeJsonConvert.SerializeObject(request, SerializationSettings);
                 _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json; charset=utf-8");
             }

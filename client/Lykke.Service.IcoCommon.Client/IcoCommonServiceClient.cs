@@ -85,9 +85,9 @@ namespace Lykke.Service.IcoCommon.Client
             return await _api.GetCampaignSettingsAsync(campaignId);
         }
 
-        public async Task CreateOrUpdateCampaignSettingsAsync(string campaignId, CampaignSettingsModel campaignSettings)
+        public async Task CreateOrUpdateCampaignSettingsAsync(string campaignId, CampaignSettingsCreateOrUpdateRequest request)
         {
-            await _api.CreateOrUpdateCampaignSettingsAsync(campaignId, campaignSettings);
+            await _api.CreateOrUpdateCampaignSettingsAsync(campaignId, request);
         }
     }
 }

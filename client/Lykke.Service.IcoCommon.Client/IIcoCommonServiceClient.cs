@@ -27,6 +27,6 @@ namespace Lykke.Service.IcoCommon.Client
 
         Task<CampaignSettingsModel> GetCampaignSettingsAsync(string campaignId);
 
-        Task CreateOrUpdateCampaignSettingsAsync(string campaignId, CampaignSettingsModel campaignSettings);
+        Task CreateOrUpdateCampaignSettingsAsync(string campaignId, CampaignSettingsCreateOrUpdateRequest request);
     }
 }
