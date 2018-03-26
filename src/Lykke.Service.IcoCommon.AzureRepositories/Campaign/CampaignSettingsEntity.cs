@@ -3,7 +3,6 @@ using Lykke.AzureStorage.Tables.Entity.Annotation;
 using Lykke.AzureStorage.Tables.Entity.ValueTypesMerging;
 using Lykke.Service.IcoCommon.Core.Domain.Campaign;
 using Lykke.Service.IcoCommon.Core.Settings.ServiceSettings;
-using Microsoft.WindowsAzure.Storage.Table;
 
 namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
 {
@@ -22,7 +21,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
 
         public string TransactionQueueSasUrl { get; set; }
 
-        [JsonValueSerializer]
+        [ValueSerializer(typeof(SmtpSettingsSerializer))]
         public SmtpSettings Smtp { get; set; }
     }
 }

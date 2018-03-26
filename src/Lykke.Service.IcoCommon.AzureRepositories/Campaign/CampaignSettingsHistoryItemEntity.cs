@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Lykke.AzureStorage.Tables;
 using Lykke.AzureStorage.Tables.Entity.Annotation;
 using Lykke.AzureStorage.Tables.Entity.ValueTypesMerging;
@@ -31,7 +29,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
             get => DateTime.ParseExact(RowKey, "O", CultureInfo.InvariantCulture);
         }
 
-        [JsonValueSerializer]
+        [ValueSerializer(typeof(SmtpSettingsSerializer))]
         public SmtpSettings Smtp { get; }
 
         public string TransactionQueueSasUrl { get; }
