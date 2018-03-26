@@ -14,9 +14,10 @@ namespace Lykke.Service.IcoCommon.Services
         private readonly IEmailTemplateRepository _templateRepository;
         private readonly IMemoryCache _cache;
 
-        public EmailTemplateService(IEmailTemplateRepository templateRepository)
+        public EmailTemplateService(IEmailTemplateRepository templateRepository, IMemoryCache cache)
         {
             _templateRepository = templateRepository;
+            _cache = cache;
         }     
 
         public RazorLightEngine BuildEngine(string campaignId)
