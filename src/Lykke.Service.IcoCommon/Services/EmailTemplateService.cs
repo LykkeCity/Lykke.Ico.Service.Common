@@ -13,6 +13,7 @@ namespace Lykke.Service.IcoCommon.Services
     {
         private readonly IEmailTemplateRepository _templateRepository;
         private readonly IMemoryCache _cache;
+        private static string CacheKey(string campaignId) => $"RazorLightEngine_{campaignId}";
 
         public EmailTemplateService(IEmailTemplateRepository templateRepository, IMemoryCache cache)
         {
@@ -32,7 +33,7 @@ namespace Lykke.Service.IcoCommon.Services
         {
             await _templateRepository.UpsertAsync(emailTemplate, username);
 
-            _cache.Remove(emailTemplate.CampaignId);
+            _cache.Remove(CacheKey(emailTemplate.CampaignId));
         }
 
         public async Task<IEmail> RenderEmailAsync(IEmailData emailData)
@@ -43,7 +44,7 @@ namespace Lykke.Service.IcoCommon.Services
                 TemplateId = emailData.TemplateId,
                 To = emailData.To,
                 Subject = emailData.Subject,
-                Body = await _cache.GetOrCreate(emailData.CampaignId, e => BuildEngine(emailData.CampaignId))
+                Body = await _cache.GetOrCreate(CacheKey(emailData.CampaignId), e => BuildEngine(emailData.CampaignId))
                     .CompileRenderAsync(emailData.TemplateId, emailData.Data),
                 Attachments = emailData.Attachments,
             };
@@ -81,14 +82,14 @@ namespace Lykke.Service.IcoCommon.Services
             await _templateRepository.DeleteAsync(campaignId, templateId);
 
             // reset the whole campaign cache due to weird work of RazorLight built-in cache
-            _cache.Remove(campaignId);
+            _cache.Remove(CacheKey(campaignId));
         }
 
         public async Task DeleteCampaignTemplatesAsync(string campaignId)
         {
             await _templateRepository.DeleteAsync(campaignId);
 
-            _cache.Remove(campaignId);
+            _cache.Remove(CacheKey(campaignId));
         }
     }
 }

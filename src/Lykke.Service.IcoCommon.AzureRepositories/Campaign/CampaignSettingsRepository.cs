@@ -16,9 +16,8 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
     {
         private readonly INoSQLTableStorage<CampaignSettingsEntity> _table;
         private readonly INoSQLTableStorage<CampaignSettingsHistoryItemEntity> _history;
-
         private readonly IMemoryCache _cache;
-
+        private static string CacheKey(string campaignId) => $"Settings_{campaignId}";
         private static string GetPartitionKey(string campaignId) => campaignId;
         private static string GetRowKey() => string.Empty;
         private static string GetHistoryPartitionKey(string campaignId) => campaignId;
@@ -33,7 +32,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
 
         public async Task<ICampaignSettings> GetCachedAsync(string campaignId, Func<ICampaignSettings, bool> reloadIf = null, bool doubleCheck = false)
         {
-            if (!_cache.TryGetValue(campaignId, out CampaignSettingsEntity value) || (reloadIf != null && reloadIf(value)))
+            if (!_cache.TryGetValue(CacheKey(campaignId), out CampaignSettingsEntity value) || (reloadIf != null && reloadIf(value)))
             {
                 var partitionKey = GetPartitionKey(campaignId);
                 var rowKey = GetRowKey();
@@ -49,7 +48,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
 
                 if (value != null)
                 {
-                    _cache.Set(campaignId, value);
+                    _cache.Set(CacheKey(campaignId), value);
                 }
             }
 
@@ -68,7 +67,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
 
             await _table.InsertOrReplaceAsync(entity);
 
-            _cache.Set(campaignId, entity);
+            _cache.Set(CacheKey(campaignId), entity);
 
             var historyPartitionKey = GetHistoryPartitionKey(campaignId);
             var historyRowKey = GetHistoryRowKey(DateTime.UtcNow);
@@ -88,7 +87,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
 
             await _table.DeleteIfExistAsync(partitionKey, rowKey);
 
-            _cache.Remove(campaignId);
+            _cache.Remove(CacheKey(campaignId));
         }
     }
 }
