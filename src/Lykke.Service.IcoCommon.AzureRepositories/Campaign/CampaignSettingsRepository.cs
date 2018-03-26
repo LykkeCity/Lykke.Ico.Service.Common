@@ -15,14 +15,19 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
     public class CampaignSettingsRepository : ICampaignSettingsRepository
     {
         private readonly INoSQLTableStorage<CampaignSettingsEntity> _table;
+        private readonly INoSQLTableStorage<CampaignSettingsHistoryItemEntity> _history;
+
         private readonly IMemoryCache _cache;
 
         private static string GetPartitionKey(string campaignId) => campaignId;
         private static string GetRowKey() => string.Empty;
+        private static string GetHistoryPartitionKey(string campaignId) => campaignId;
+        private static string GetHistoryRowKey(DateTime changedUtc) => changedUtc.ToString("O");
 
         public CampaignSettingsRepository(IReloadingManager<string> connectionStringManager, ILog log, IMemoryCache cache)
         {
             _table = AzureTableStorage<CampaignSettingsEntity>.Create(connectionStringManager, "Campaigns", log);
+            _history = AzureTableStorage<CampaignSettingsHistoryItemEntity>.Create(connectionStringManager, "CampaignHistory", log);
             _cache = cache;
         }
 
@@ -51,15 +56,29 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
             return value;
         }
 
-        public async Task UpsertAsync(string campaignId, ICampaignSettings campaignSettings)
+        public async Task UpsertAsync(string campaignId, ICampaignSettings campaignSettings, string username)
         {
             var partitionKey = GetPartitionKey(campaignId);
             var rowKey = GetRowKey();
-            var entity = new CampaignSettingsEntity(campaignSettings) { PartitionKey = partitionKey, RowKey = rowKey };
+            var entity = new CampaignSettingsEntity(campaignSettings)
+            {
+                PartitionKey = partitionKey,
+                RowKey = rowKey
+            };
 
             await _table.InsertOrReplaceAsync(entity);
 
             _cache.Set(campaignId, entity);
+
+            var historyPartitionKey = GetHistoryPartitionKey(campaignId);
+            var historyRowKey = GetHistoryRowKey(DateTime.UtcNow);
+            var historyEntity = new CampaignSettingsHistoryItemEntity(campaignSettings, username)
+            {
+                PartitionKey = historyPartitionKey,
+                RowKey = historyRowKey
+            };
+
+            await _history.InsertAsync(historyEntity);
         }
 
         public async Task DeleteAsync(string campaignId)

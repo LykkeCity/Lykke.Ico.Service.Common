@@ -7,7 +7,7 @@
         controllerAs: "vm"
     });
 
-function emailTemplatesController($http) {
+function emailTemplatesController($scope, $http) {
     var vm = this;
     var templatesUrl = "api/mail/templates";
     var editor;
@@ -100,17 +100,24 @@ function emailTemplatesController($http) {
             return;
         }
 
-        vm.template.body = editor.getValue();
+        var body = editor.getValue();
 
-        if (!vm.template.body) {
+        if (!body) {
             alert("Body must not be null or empty");
             return;
         }
 
+        if ($scope.templateForm.$pristine && vm.template.body === body) {
+            alert("There are no changes to save");
+            return;
+        }
+
+        vm.template.body = body;
+
         $http
             .post(templatesUrl, {
                 emailTemplate: vm.template,
-                username: "common"
+                username: "IcoCommonServiceUI"
             })
             .then(
                 function (response) {

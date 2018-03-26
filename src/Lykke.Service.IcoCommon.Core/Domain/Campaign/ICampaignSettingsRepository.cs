@@ -18,7 +18,7 @@ namespace Lykke.Service.IcoCommon.Core.Domain.Campaign
         /// <returns></returns>
         Task<ICampaignSettings> GetCachedAsync(string campaignId, Func<ICampaignSettings, bool> reloadIf = null, bool doubleCheck = false);
 
-        Task UpsertAsync(string campaignId, ICampaignSettings campaignSettings);
+        Task UpsertAsync(string campaignId, ICampaignSettings campaignSettings, string username);
 
         Task DeleteAsync(string campaignId);
     }

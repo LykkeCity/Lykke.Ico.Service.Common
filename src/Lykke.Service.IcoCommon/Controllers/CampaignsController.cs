@@ -54,9 +54,9 @@ namespace Lykke.Service.IcoCommon.Controllers
         /// <returns></returns>
         [HttpPost("{campaignId}/settings")]
         [SwaggerOperation(nameof(CreateOrUpdateCampaignSettings))]
-        public async Task CreateOrUpdateCampaignSettings([FromRoute] string campaignId, [FromBody] CampaignSettingsModel campaignSettings)
+        public async Task CreateOrUpdateCampaignSettings([FromRoute] string campaignId, [FromBody] CampaignSettingsCreateOrUpdateRequest request)
         {
-            await _campaignSettingsRepository.UpsertAsync(campaignId, campaignSettings);
+            await _campaignSettingsRepository.UpsertAsync(campaignId, request.CampaignSettings, request.Username);
         }
 
         /// <summary>
