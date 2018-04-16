@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Lykke.Service.IcoCommon.Core.Domain.Mail;
 using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Core.Settings.ServiceSettings;
@@ -15,17 +12,8 @@ namespace Lykke.Service.IcoCommon.Services
 {
     public class SmtpService : ISmtpService
     {
-        private readonly SmtpSettings _defaultSmtpSettings;
-
-        public SmtpService(SmtpSettings defaultSmtpSettings)
+        public async Task SendAsync(IEmail email, SmtpSettings settings)
         {
-            _defaultSmtpSettings = defaultSmtpSettings;
-        }
-
-        public async Task SendAsync(IEmail email, SmtpSettings smtpSettings = null)
-        {
-            var settings = smtpSettings ?? _defaultSmtpSettings;
-
             MimeEntity messageBody = null;
 
             if (email.Attachments == null)

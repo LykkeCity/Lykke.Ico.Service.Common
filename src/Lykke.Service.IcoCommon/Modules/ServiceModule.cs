@@ -82,8 +82,7 @@ namespace Lykke.Service.IcoCommon.Modules
                 .SingleInstance();
 
             builder.RegisterType<SmtpService>()
-                .As<ISmtpService>()
-                .WithParameter(TypedParameter.From(_settings.CurrentValue.DefaultSmtp));
+                .As<ISmtpService>();
 
             builder.RegisterType<EmailTemplateService>()
                 .As<IEmailTemplateService>()
