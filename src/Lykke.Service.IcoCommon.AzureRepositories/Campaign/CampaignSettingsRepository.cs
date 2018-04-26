@@ -30,7 +30,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
             _cache = cache;
         }
 
-        public async Task<ICampaignSettings> GetCachedAsync(string campaignId, Func<ICampaignSettings, bool> reloadIf = null, bool doubleCheck = false)
+        public async Task<ICampaignSettings> GetCachedAsync(string campaignId, Func<ICampaignSettings, bool> reloadIf = null)
         {
             if (!_cache.TryGetValue(CacheKey(campaignId), out CampaignSettingsEntity value) || (reloadIf != null && reloadIf(value)))
             {
@@ -39,9 +39,9 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
 
                 value = await _table.GetDataAsync(partitionKey, rowKey);
 
-                // return value may be null, so double-check condition must treat nulls properly,
-                // otherwise (if we make double-check on not-null value only) it may lead to NRE in calling code
-                if (doubleCheck && reloadIf != null && reloadIf(value))
+                // return value may be null, so reloadIf condition must treat nulls properly,
+                // otherwise it may lead to NRE in calling code
+                if (reloadIf != null && reloadIf(value))
                 {
                     throw new InvalidOperationException($"Incomplete campaign settings for {campaignId}");
                 }

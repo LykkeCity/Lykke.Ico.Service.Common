@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Common;
 using Common.Log;
 using Lykke.Service.IcoCommon.Core.Domain.Campaign;
 using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
 using Lykke.Service.IcoCommon.Core.Domain.Transactions;
 using Lykke.Service.IcoCommon.Core.Services;
-using Lykke.Service.IcoCommon.Core.Settings.ServiceSettings;
-using Lykke.SettingsReader;
 
 namespace Lykke.Service.IcoCommon.Services
 {
@@ -46,8 +42,7 @@ namespace Lykke.Service.IcoCommon.Services
                 }
 
                 var campaignSettings = await _campaignSettingsRepository.GetCachedAsync(payInAddress.CampaignId, 
-                    reloadIf: x => string.IsNullOrEmpty(x?.TransactionQueueSasUrl),
-                    doubleCheck: true);
+                    reloadIf: x => string.IsNullOrEmpty(x?.TransactionQueueSasUrl));
 
                 await _transactionRepository.EnqueueTransactionAsync(tx, payInAddress, campaignSettings.TransactionQueueSasUrl);
 

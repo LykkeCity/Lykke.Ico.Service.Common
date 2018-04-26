@@ -30,9 +30,9 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
         }
 
         [ValueSerializer(typeof(SmtpSettingsSerializer))]
-        public SmtpSettings Smtp { get; }
+        public SmtpSettings Smtp { get; set; }
 
-        public string TransactionQueueSasUrl { get; }
-        public string Username { get; }
+        public string TransactionQueueSasUrl { get; set; }
+        public string Username { get; set; }
     }
 }

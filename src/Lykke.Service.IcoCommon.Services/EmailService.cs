@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Common.Log;
 using Lykke.Service.IcoCommon.Core.Domain.Campaign;
 using Lykke.Service.IcoCommon.Core.Domain.Mail;
 using Lykke.Service.IcoCommon.Core.Services;
-using Lykke.Service.IcoCommon.Core.Settings.ServiceSettings;
-using Lykke.SettingsReader;
 
 namespace Lykke.Service.IcoCommon.Services
 {
@@ -52,14 +48,7 @@ namespace Lykke.Service.IcoCommon.Services
             var campaignSettings = await _campaignSettingsRepository.GetCachedAsync(email.CampaignId,
                 reloadIf: x => x?.Smtp == null);
 
-            if (campaignSettings?.Smtp == null)
-            {
-                await _log.WriteWarningAsync(nameof(SendEmailAsync),
-                    $"Campaign: {email.CampaignId}, Template: {email.TemplateId}, To: {email.To}",
-                    $"SMTP settings for campaign \"{email.CampaignId}\" not found. Default SMTP settings are used to send the email.");
-            }
-
-            await _smtpService.SendAsync(email, campaignSettings?.Smtp);
+            await _smtpService.SendAsync(email, campaignSettings.Smtp);
 
             await _emailRepository.InsertAsync(email);
 
