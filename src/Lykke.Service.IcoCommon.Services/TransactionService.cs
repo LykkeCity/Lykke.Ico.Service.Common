@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Common;
 using Common.Log;
@@ -31,7 +32,7 @@ namespace Lykke.Service.IcoCommon.Services
         public async Task<int> HandleTransactionsAsync(ITransaction[] transactions)
         {
             await _log.WriteInfoAsync(nameof(HandleTransactionsAsync),
-                $"Blocks: {transactions.GroupBy(t => new { t.BlockId, t.Currency }).Select(g => g.Key).ToJson()}",
+                $"Blocks: {transactions.GroupBy(t => new { t.BlockId, Currency = Enum.GetName(typeof(CurrencyType), t.Currency) }).Select(g => g.Key).ToJson()}",
                 $"Transactions processing started");
 
             var count = 0;
