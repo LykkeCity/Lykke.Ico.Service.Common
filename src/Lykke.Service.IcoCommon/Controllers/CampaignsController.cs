@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 using Common.Log;
 using Lykke.Service.IcoCommon.Core.Domain.Campaign;
 using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
@@ -57,6 +58,10 @@ namespace Lykke.Service.IcoCommon.Controllers
         public async Task CreateOrUpdateCampaignSettings([FromRoute] string campaignId, [FromBody] CampaignSettingsCreateOrUpdateRequest request)
         {
             await _campaignSettingsRepository.UpsertAsync(campaignId, request.CampaignSettings, request.Username);
+
+            await _log.WriteInfoAsync(nameof(CreateOrUpdateCampaignSettings), request.ToJson(),
+                "Campaign updated");
+
         }
 
         /// <summary>
@@ -72,7 +77,8 @@ namespace Lykke.Service.IcoCommon.Controllers
             await _emailTemplateService.DeleteCampaignTemplatesAsync(campaignId);
             await _addressRepository.DeleteAsync(campaignId);
             await _campaignSettingsRepository.DeleteAsync(campaignId);
-            await _log.WriteInfoAsync(nameof(DeleteCampaign), campaignId, "Campaign deleted");
+            await _log.WriteInfoAsync(nameof(DeleteCampaign), campaignId,
+                "Campaign deleted");
         }
     }
 }

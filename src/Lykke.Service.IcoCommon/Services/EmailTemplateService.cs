@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
+using Common.Log;
 using Lykke.Service.IcoCommon.Core.Domain.Mail;
 using Lykke.Service.IcoCommon.Core.Services;
 using Lykke.Service.IcoCommon.Models.Mail;
@@ -11,12 +12,14 @@ namespace Lykke.Service.IcoCommon.Services
 {
     public class EmailTemplateService : IEmailTemplateService
     {
+        private readonly ILog _log;
         private readonly IEmailTemplateRepository _templateRepository;
         private readonly IMemoryCache _cache;
         private static string CacheKey(string campaignId) => $"RazorLightEngine_{campaignId}";
 
-        public EmailTemplateService(IEmailTemplateRepository templateRepository, IMemoryCache cache)
+        public EmailTemplateService(ILog log, IEmailTemplateRepository templateRepository, IMemoryCache cache)
         {
+            _log = log;
             _templateRepository = templateRepository;
             _cache = cache;
         }     
@@ -34,6 +37,9 @@ namespace Lykke.Service.IcoCommon.Services
             await _templateRepository.UpsertAsync(emailTemplate, username);
 
             _cache.Remove(CacheKey(emailTemplate.CampaignId));
+
+            await _log.WriteInfoAsync(nameof(AddOrUpdateTemplateAsync), $"Campaign: {emailTemplate.CampaignId}, TemplateId: {emailTemplate.TemplateId}",
+                "Email template added or updated");
         }
 
         public async Task<IEmail> RenderEmailAsync(IEmailData emailData)
@@ -83,6 +89,9 @@ namespace Lykke.Service.IcoCommon.Services
 
             // reset the whole campaign cache due to weird work of RazorLight built-in cache
             _cache.Remove(CacheKey(campaignId));
+
+            await _log.WriteInfoAsync(nameof(DeleteTemplateAsync), $"Campaign: {campaignId}, TemplateId: {templateId}",
+                "Email template deleted");
         }
 
         public async Task DeleteCampaignTemplatesAsync(string campaignId)
@@ -90,6 +99,9 @@ namespace Lykke.Service.IcoCommon.Services
             await _templateRepository.DeleteAsync(campaignId);
 
             _cache.Remove(CacheKey(campaignId));
+
+            await _log.WriteInfoAsync(nameof(DeleteCampaignTemplatesAsync), $"Campaign: {campaignId}",
+                "Email templates deleted");
         }
     }
 }

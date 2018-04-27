@@ -65,11 +65,18 @@ namespace Lykke.Service.IcoCommon.Services
         public async Task DeleteEmailsAsync(string to, string campaignId = null)
         {
             await _emailRepository.DeleteAsync(to, campaignId);
+
+            await _log.WriteInfoAsync(nameof(DeleteEmailsAsync), $"Campaign: {campaignId}, To: {to}",
+                "Emails deleted");
+
         }
 
         public async Task DeleteCampaignEmailsAsync(string campaignId)
         {
             await _emailRepository.DeleteAsync(campaignId);
+
+            await _log.WriteInfoAsync(nameof(DeleteCampaignEmailsAsync), $"Campaign: {campaignId}",
+                "Emails deleted");
         }
     }
 }

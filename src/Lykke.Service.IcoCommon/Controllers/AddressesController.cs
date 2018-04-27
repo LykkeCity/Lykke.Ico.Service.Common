@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
+using Common.Log;
 using Lykke.Common.Api.Contract.Responses;
 using Lykke.Common.ApiLibrary.Contract;
 using Lykke.Service.IcoCommon.Core.Domain.PayInAddresses;
@@ -15,10 +17,12 @@ namespace Lykke.Service.IcoCommon.Controllers
     [Route("/api/addresses")]
     public class AddressesController : Controller
     {
+        private readonly ILog _log;
         private IPayInAddressRepository _addressRepository;
 
-        public AddressesController(IPayInAddressRepository addressRepository)
+        public AddressesController(ILog log, IPayInAddressRepository addressRepository)
         {
+            _log = log;
             _addressRepository = addressRepository;
         }
 
@@ -46,6 +50,9 @@ namespace Lykke.Service.IcoCommon.Controllers
 
             await _addressRepository.InsertAsync(payInAddress);
 
+            await _log.WriteInfoAsync(nameof(AddPayInAddress), payInAddress.ToJson(), 
+                "Pay-in address added");
+
             return Ok();
         }
 
@@ -67,6 +74,9 @@ namespace Lykke.Service.IcoCommon.Controllers
             }
 
             await _addressRepository.DeleteAsync(address, currency);
+
+            await _log.WriteInfoAsync(nameof(AddPayInAddress), $"Address: {address}, Currency: {Enum.GetName(typeof(CurrencyType), currency)}", 
+                "Pay-in address deleted");
 
             return Ok();
         }
