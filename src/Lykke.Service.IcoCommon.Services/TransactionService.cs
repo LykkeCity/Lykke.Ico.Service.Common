@@ -31,8 +31,12 @@ namespace Lykke.Service.IcoCommon.Services
 
         public async Task<int> HandleTransactionsAsync(ITransaction[] transactions)
         {
+            var blocks = transactions
+                .GroupBy(t => new { t.BlockId, Currency = Enum.GetName(typeof(CurrencyType), t.Currency) })
+                .Select(g => g.Key);
+
             await _log.WriteInfoAsync(nameof(HandleTransactionsAsync),
-                $"Blocks: {transactions.GroupBy(t => new { t.BlockId, Currency = Enum.GetName(typeof(CurrencyType), t.Currency) }).Select(g => g.Key).ToJson()}",
+                $"Transactions: {transactions.Length}, Blocks: {blocks.ToJson()}",
                 $"Transactions processing started");
 
             var count = 0;
