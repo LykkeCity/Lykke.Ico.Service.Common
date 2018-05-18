@@ -19,6 +19,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
         public CampaignSettingsHistoryItemEntity(ICampaignSettings campaignSettings, string username)
         {
             TransactionQueueSasUrl = campaignSettings.TransactionQueueSasUrl;
+            EmailBlackList = campaignSettings.EmailBlackList;
             Smtp = campaignSettings.Smtp;
             Username = username;
         }
@@ -33,6 +34,7 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
         public SmtpSettings Smtp { get; set; }
 
         public string TransactionQueueSasUrl { get; set; }
+        public string EmailBlackList { get; set; }
         public string Username { get; set; }
     }
 }

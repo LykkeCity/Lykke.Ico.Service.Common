@@ -16,10 +16,12 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Campaign
         public CampaignSettingsEntity(ICampaignSettings campaignSettings)
         {
             TransactionQueueSasUrl = campaignSettings.TransactionQueueSasUrl;
+            EmailBlackList = campaignSettings.EmailBlackList;
             Smtp = campaignSettings.Smtp;
         }
 
         public string TransactionQueueSasUrl { get; set; }
+        public string EmailBlackList { get; set; }
 
         [ValueSerializer(typeof(SmtpSettingsSerializer))]
         public SmtpSettings Smtp { get; set; }

@@ -19,11 +19,13 @@ namespace Lykke.Service.IcoCommon.Models.Campaign
             return new CampaignSettingsModel
             {
                 TransactionQueueSasUrl = settings.TransactionQueueSasUrl,
+                EmailBlackList = settings.EmailBlackList,
                 Smtp = settings.Smtp
             };
         }
 
         public string TransactionQueueSasUrl { get; set; }
+        public string EmailBlackList { get; set; }
         public SmtpSettings Smtp { get; set; }
     }
 }

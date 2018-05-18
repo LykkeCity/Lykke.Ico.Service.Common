@@ -31,16 +31,38 @@ namespace Lykke.Service.IcoCommon.Services
 
         public async Task EnqueueEmailAsync(IEmailData emailData)
         {
-            await _emailRepository.PushToQueueAsync(emailData);
+            var settings = await _campaignSettingsRepository.GetCachedAsync(emailData.CampaignId);
 
-            await _log.WriteInfoAsync(nameof(EnqueueEmailAsync),
-                $"Campaign: {emailData.CampaignId}, Template: {emailData.TemplateId}, To: {emailData.To}",
-                $"Email enqueued");
+            if (settings != null && !string.IsNullOrEmpty(settings.EmailBlackList) && settings.EmailBlackList.Contains(emailData.To))
+            {
+                await _log.WriteWarningAsync(nameof(EnqueueEmailAsync),
+                    $"Campaign: {emailData.CampaignId}, Template: {emailData.TemplateId}, To: {emailData.To}",
+                    $"Black-listed email skipped");
+            }
+            else
+            {
+                await _emailRepository.PushToQueueAsync(emailData);
+
+                await _log.WriteInfoAsync(nameof(EnqueueEmailAsync),
+                    $"Campaign: {emailData.CampaignId}, Template: {emailData.TemplateId}, To: {emailData.To}",
+                    $"Email enqueued");
+            }
         }
 
         public async Task SendEmailAsync(IEmailData emailData)
         {
-            await SendEmailAsync(await _emailTemplateService.RenderEmailAsync(emailData));           
+            var settings = await _campaignSettingsRepository.GetCachedAsync(emailData.CampaignId);
+
+            if (settings != null && !string.IsNullOrEmpty(settings.EmailBlackList) && settings.EmailBlackList.Contains(emailData.To))
+            {
+                await _log.WriteWarningAsync(nameof(SendEmailAsync),
+                    $"Campaign: {emailData.CampaignId}, Template: {emailData.TemplateId}, To: {emailData.To}",
+                    $"Black-listed email skipped");
+            }
+            else
+            {
+                await SendEmailAsync(await _emailTemplateService.RenderEmailAsync(emailData));
+            }
         }
 
         public async Task SendEmailAsync(IEmail email)

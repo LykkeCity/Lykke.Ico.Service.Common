@@ -9,6 +9,8 @@ namespace Lykke.Service.IcoCommon.Core.Domain.Campaign
     {
         string TransactionQueueSasUrl { get; }
 
+        string EmailBlackList { get; }
+
         SmtpSettings Smtp { get; }
     }
 }
