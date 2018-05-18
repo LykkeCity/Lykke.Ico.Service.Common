@@ -84,9 +84,14 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
 
             public object Deserialize(string serialized)
             {
+                return Deserialize(serialized, typeof(Dictionary<string, byte[]>));
+            }
+
+            public object Deserialize(string serialized, Type type)
+            {
                 if (serialized != StubMessage)
                 {
-                    return JsonConvert.DeserializeObject<Dictionary<string, byte[]>>(serialized);
+                    return JsonConvert.DeserializeObject(serialized, type);
                 }
                 else
                 {
@@ -96,7 +101,12 @@ namespace Lykke.Service.IcoCommon.AzureRepositories.Mail
 
             public string Serialize(object value)
             {
-                var json = JsonConvert.SerializeObject(value);
+                return Serialize(value, typeof(Dictionary<string, byte[]>));
+            }
+
+            public string Serialize(object value, Type type)
+            {
+                var json = JsonConvert.SerializeObject(value, type, null);
                 if (json.Length <= MaxStringLength)
                 {
                     return json;
